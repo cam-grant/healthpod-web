@@ -1,7 +1,11 @@
 
+- Error page / Global error handler
+
 - Parse non-Kg/cm values
 - Handle error condition - try again, skip?
+- Clean up view (display values) and wording
 
+- Confirm exit
 - Change returning user screen to touch yes/no buttons
 - Validation (returning user, ...)
 - Clean up consent page (especially the text)

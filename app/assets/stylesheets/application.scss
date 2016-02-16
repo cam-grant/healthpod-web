@@ -14,9 +14,12 @@
  * require_self
  */
 
-* {
-  // cursor: none;
+$border-radius: 5px;
 
+$green: green;
+$dark-green: darken($green, 5%);
+
+* {
   font-family: "Open Sans";
   font-size: 1rem;
   padding: 0;
@@ -42,7 +45,7 @@
   bottom: 0;
   right: 0;
   //height: 10rem;
-  padding: 2rem 3rem 4rem 3rem;
+  padding: 2rem 4rem 4rem 4rem;
   background-color: #eee;
 
   table {
@@ -63,19 +66,28 @@ a.nav, input.nav {
   font-size: 2rem;
   padding: 1.5rem 3rem;
   border: none;
+  border-radius: $border-radius;
 
   &:visited {
    text-decoration: none;
   }
 
   &.exit {
-   background-color: #999;
-   color: #fff;
+    background-color: #808080;
+    color: #fff;
+    border-bottom: solid 4px #555;
+    &:active {
+      background-color: #555;
+    }
   }
 
   &.next {
-   background-color: green;
-   color: #fff;
+    background-color: $green;
+    color: #fff;
+    border-bottom: solid 4px $dark-green;
+    &:active {
+     background-color: $dark-green;
+    }
   }
 
   &.disabled {

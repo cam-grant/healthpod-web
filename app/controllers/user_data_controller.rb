@@ -36,8 +36,14 @@ class UserDataController < ApplicationController
   end
 
   def bmi_read
-    ReadBmiScalesJob.reset_scales
-    ReadBmiScalesJob.perform_now @user_data
+    if Rails.env.production?
+      ReadBmiScalesJob.reset_scales
+      ReadBmiScalesJob.perform_now @user_data
+    else
+      # Simulate pause and data
+      # sleep 5
+      @user_data.update_attributes weight: 75.2, height: 175, bmi: 24.5, bmi_recorded_at: Time.now
+    end
 
     if @user_data.bmi.blank?
       render :status => 400
