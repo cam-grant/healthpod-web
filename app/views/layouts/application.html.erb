@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HealthPod</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="header">
+
+  </div>
+  <div id="main">
+    <%= yield %>
+    <%#= render :partial => 'partials/user_data' %>
+  </div>
+  <div id="footer">
+    <table>
+      <tr>
+        <td><%= yield :footer_left %></td>
+        <td style="text-align: right;"><%= yield :footer_right %></td>
+      </tr>
+    </table>
+    </div>
+  </div>
+</body>
+</html>

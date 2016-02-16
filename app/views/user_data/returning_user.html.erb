@@ -1,0 +1,23 @@
+<h1 class="center">Have you used this Health Pod before?</h1>
+
+<%= form_tag returning_user_path, { :id => "form" } do |f| %>
+  <table class="two-col-centered">
+    <tr>
+      <td>
+        <%= radio_button 'user_data', 'returning_user', 'true' %>
+        <%= label :user_data, :returning_user, "Yes", value: "true" %>
+      </td>
+      <td>
+        <%= radio_button 'user_data', 'returning_user', 'false' %>
+        <%= label :user_data, :returning_user, "No", value: "false" %>
+      </td>
+    </tr>
+  </table>
+<% end %>
+
+<% content_for :footer_left do %>
+  <%= link_to "Exit", root_url, class: "nav exit" %>
+<% end %>
+<% content_for :footer_right do %>
+  <%= link_to "Next", "#", class: "nav next", onclick: "$('#form').submit();return false;" %>
+<% end %>

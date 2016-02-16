@@ -1,0 +1,33 @@
+<h1 class="center">Please stand on the scales</h1>
+<p>
+  Stand on the scales and wait for the BEEP...
+</p>
+<div id="bmi"></div>
+
+<% content_for :footer_left do %>
+  <%= link_to "Exit", root_url, class: 'nav exit' %>
+<% end %>
+<% content_for :footer_right do %>
+  <a id="next" href="#" class="nav next disabled">Next</a>
+<% end %>
+
+<script>
+$(document).ready(function() {
+  ajax_url = '<%= bmi_read_url %>';
+  next_url = '<%= full_name_url %>'
+
+  $.ajax({
+    url: ajax_url,
+    success: function (data) {
+        html =  '<p>Your weight is ' + data.weight + ' Kg</p>'
+        html += '<p>Your height is ' + data.height + ' cm</p>'
+        html += '<p>Your BMI is ' + data.bmi + '</p>'
+        $('#bmi').html(html);
+        $('#next').removeClass('disabled').attr('href', next_url);
+    },
+    error: function () {
+      alert('Error');
+    }
+  });
+});
+</script>

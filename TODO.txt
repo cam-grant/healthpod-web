@@ -1,0 +1,38 @@
+
+- Parse non-Kg/cm values
+- Change returning user screen to touch yes/no buttons
+- Validation (returning user, ...)
+- Clean up consent page (especially the text)
+- Move BMI read timeout to app setting
+- Hide cursor for prod
+- Run in production
+
+
+
+DoctorID:   00??
+PatientID:  0000000000
+Weight:         89.00 Kg
+Height:           188 cm
+BMI:             25.2
+D&T:  17/02/2016 04:28
+
+DoctorID:   00000
+PatientID:  0000000000
+Weight:         196.2 Lb
+Height:          73.5 Inches
+BMI:             25.5
+D&T:  17/02/2016 04:28
+
+DoctorID:   00000
+PatientID:  0000000000
+Weight:   196 Lb    3 Oz
+Height:     6 Ft  1.5 Inches
+BMI:             25.5
+D&T:  17/02/2016 04:29
+
+DoctorID:   00000
+PatientID:  0000000000
+Weight:         88.95 Kg
+Height:           188 cm
+BMI:             25.2
+D&T:  17/02/2016 04:30

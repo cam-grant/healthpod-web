@@ -1,0 +1,18 @@
+<h2>Date of birth</h2>
+
+<%= form_for @user_data do |f| %>
+  <%= hidden_field_tag 'next_step', '0006' %>
+  <%= f.text_field :date_of_birth %>
+
+  <h2>Gender</h2>
+  <%= radio_button 'user_data', 'gender', 'Male' %>
+  <%= label :user_data, :gender, 'Male', value: 'Male' %>
+  <%= radio_button 'user_data', 'gender', 'Female' %>
+  <%= label :user_data, :gender, 'Female', value: 'Female' %>
+  <%= radio_button 'user_data', 'gender', 'Neither' %>
+  <%= label :user_data, :gender, 'Neither male or female', value: 'Neither' %>
+  <%= radio_button 'user_data', 'gender', 'No answer' %>
+  <%= label :user_data, :gender, 'I do not wish to answer', value: nil %>
+
+  <%= f.button :submit %>
+<% end %>
