@@ -35,6 +35,8 @@ class ReadBmiScalesJob < ActiveJob::Base
     # Encoding.default_external = Encoding::UTF_8
     # Encoding.default_internal = Encoding::UTF_8
 
+    user_data.update_attributes weight: nil, height: nil, bmi: nil, bmi_recorded_at: nil
+
     start_time = Time.now
     buffer = ""
     keep_reading = true

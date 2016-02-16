@@ -1,5 +1,7 @@
 
 - Parse non-Kg/cm values
+- Handle error condition - try again, skip?
+
 - Change returning user screen to touch yes/no buttons
 - Validation (returning user, ...)
 - Clean up consent page (especially the text)
