@@ -19,6 +19,11 @@ $light-border: solid 1px #ddd;
 
 $green: green;
 $dark-green: darken($green, 5%);
+$yellow: #FAD57E;
+$orange: #EE9E35;
+$dark-teal: #A2C2B1;
+$purple: #9999B0;
+$dark-purple: #888494;
 
 * {
   font-family: "Open Sans";
@@ -28,7 +33,7 @@ $dark-green: darken($green, 5%);
 }
 
 #main {
-  padding: 2rem 4rem;
+  padding: 4rem 4rem 2rem 4rem;
 }
 
 #header {
@@ -36,7 +41,8 @@ $dark-green: darken($green, 5%);
   left: 0;
   right: 0;
   height: 5rem;
-  background-color: #eee;
+  background-color: #fff;
+  border-bottom: $light-border;
   padding: 1rem 4rem 0rem 4rem;
 }
 
@@ -97,6 +103,19 @@ a.nav, input.nav {
   }
 }
 
+div.title {
+  font-size: 4rem;
+  font-weight: 700;
+  color: $dark-purple;
+}
+
+div.sub-title {
+  font-size: 2rem;
+  font-weight: normal;
+  color: $purple;
+  margin: 0;
+}
+
 h1 {
   font-size: 2rem;
   font-weight: 700;
@@ -120,7 +139,7 @@ p {
 div.info {
   margin: 1rem 0;
   padding: 2rem;
-  background-color: #eee;
+  background-color: $yellow;
   border-radius: $border-radius;
 
   font-size: 1.25rem;
@@ -136,6 +155,10 @@ table.two-col {
     width: 50%;
     text-align: left;
     vertical-align: top;
+
+    &.right {
+      text-align: right;
+    }
   }
   td+td {
     padding: 0 0 0 2rem;

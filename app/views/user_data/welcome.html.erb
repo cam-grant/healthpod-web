@@ -1,10 +1,14 @@
-<h1>Welcome</h1>
-<p>
-  Introductory text...
-</p>
-<p>
-  Press to start to begin
-</p>
+<table class="two-col" style="margin-top: 15rem;">
+  <tr>
+    <td class="right" style="vertical-align: middle;">
+      <%= image_tag "logo.svg", style: "height: 180px;" %>
+    </td>
+    <td style="white-space: nowrap;border: none;padding: 0 21rem 0 5rem;vertical-align: middle;">
+      <div class="title">Welcome</div>
+      <div class="sub-title">Press start to begin</div>
+    </td>
+  </tr>
+</table>
 
 <% content_for :footer_right do %>
   <%= link_to "Start", consent_path, class: "nav next" %>
