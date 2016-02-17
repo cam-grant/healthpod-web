@@ -15,6 +15,7 @@
  */
 
 $border-radius: 5px;
+$light-border: solid 1px #ddd;
 
 $green: green;
 $dark-green: darken($green, 5%);
@@ -107,6 +108,32 @@ h1 {
 p {
   margin: 1rem 0;
   font-size: 1.25rem;
+}
+
+div.info {
+  margin: 1rem 0;
+  padding: 2rem;
+  background-color: #eee;
+  border-radius: $border-radius;
+
+  font-size: 1.25rem;
+  * { font-size: 1.25rem; }
+}
+
+table.two-col {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0 auto;
+  td {
+    padding: 0 2rem 0 0;
+    width: 50%;
+    text-align: left;
+    vertical-align: top;
+  }
+  td+td {
+    padding: 0 0 0 2rem;
+    border-left: $light-border;
+  }
 }
 
 table.two-col-centered {

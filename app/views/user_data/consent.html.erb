@@ -1,8 +1,20 @@
-<h1>Consent</h1>
-<p>PURPOSE: This purpose built Health Pod is designed to collect some key health information from you and provide you with an easy way to keep track of your personal health. After answering some short questions and automatically measuring your height and weight, you will receive a personalised health report card that you can take home with you or discuss these results with your health professional at your next appointment. You are welcome to return to the Pod at any time to add additional information and update your report card. Returning users can also share their experience using the Health Pod via a short survey.</p>
-<p>CONFIDENTIALITY: Information collected will be kept strictly private and confidential. Your report card will be personalised but does not contain any details on it that will identify you. This study is being conducted by the Health Research Institute at the University of Canberra in collaboration with Ochre Health. If you have further questions about this research please contact the Chief Investigator: Dr Paresh Dawda, Ochre Health, Bruce.</p>
-<p>Ethics approval has been granted by University of Canberra Human Research Ethics Committee Project number 15-188.</p>
-<p>CONSENT: I am aged over 18 years and a patient at Ochre Health GP Clinic, Bruce. I have read and understood the above information.</p>
+<h1>Welcome and consent</h1>
+<table class="two-col">
+  <tr>
+    <td>
+      <p>This purpose built Health Pod is designed to collect some key health information from you and provide you with an easy way to keep track of your personal health. After answering some short questions and automatically measuring your height and weight, you will receive a personalised health report card that you can take home with you or discuss these results with your health professional at your next appointment. You are welcome to return to the Pod at any time to add additional information and update your report card. Returning users can also share their experience using the Health Pod via a short survey.</p>
+    </td>
+    <td>
+      <p>Information collected will be kept strictly private and confidential. Your report card will be personalised but does not contain any details on it that will identify you. This study is being conducted by the Health Research Institute at the University of Canberra in collaboration with Ochre Health. If you have further questions about this research please contact the Chief Investigator: Dr Paresh Dawda, Ochre Health, Bruce.</p>
+      <p>Ethics approval has been granted by University of Canberra Human Research Ethics Committee Project number 15-188.</p>
+    </td>
+  </tr>
+</table>
+
+<div class="info">
+  <b>Consent:</b> 
+  I am aged over 18 years and a patient at Ochre Health GP Clinic, Bruce. I have read and understood the above information.
+</div>
 
 <%= form_tag consent_path, { :id => "form" } do |f| %>
   <%= hidden_field_tag 'consent', '' %>
