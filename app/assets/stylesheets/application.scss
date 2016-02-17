@@ -37,7 +37,7 @@ $dark-green: darken($green, 5%);
   right: 0;
   height: 5rem;
   background-color: #eee;
-
+  padding: 1rem 4rem 0rem 4rem;
 }
 
 #footer {
@@ -99,10 +99,17 @@ a.nav, input.nav {
 
 h1 {
   font-size: 2rem;
+  font-weight: 700;
 
   &.center {
     text-align: center;
   }
+}
+
+h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 1rem 0;
 }
 
 p {
