@@ -27,7 +27,7 @@ $dark-purple: #888494;
 
 * {
   font-family: "Open Sans";
-  font-size: 1rem;
+  font-size: 1.25rem;
   padding: 0;
   margin: 0;
 }
@@ -52,7 +52,7 @@ $dark-purple: #888494;
   bottom: 0;
   right: 0;
   //height: 10rem;
-  padding: 2rem 4rem 4rem 4rem;
+  padding: 1rem 4rem 3rem 4rem;
   background-color: #eee;
 
   table {
@@ -70,7 +70,7 @@ a.nav, input.nav {
   font-weight: 600;
   display: inline-block;
   text-decoration: none;
-  font-size: 2rem;
+  font-size: 1.5rem;
   padding: 1.5rem 3rem;
   border: none;
   border-radius: $border-radius;
@@ -117,8 +117,9 @@ div.sub-title {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
+  margin: 0 0 2rem 0;
 
   &.center {
     text-align: center;
@@ -128,17 +129,16 @@ h1 {
 h2 {
   font-size: 1.3rem;
   font-weight: 600;
-  margin: 1rem 0;
+  margin: 0 0 1rem 0;
 }
 
 p {
   margin: 1rem 0;
-  font-size: 1.25rem;
 }
 
 div.info {
   margin: 1rem 0;
-  padding: 2rem;
+  padding: 1rem 1.5rem !important;
   background-color: $yellow;
   border-radius: $border-radius;
 
@@ -146,12 +146,18 @@ div.info {
   * { font-size: 1.25rem; }
 }
 
+.width-75 {
+    width: 75% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
 table.two-col {
   border-collapse: collapse;
   width: 100%;
   margin: 0 auto;
   td {
-    padding: 0 2rem 0 0;
+    padding: 0 3rem 0 0;
     width: 50%;
     text-align: left;
     vertical-align: top;
@@ -161,7 +167,7 @@ table.two-col {
     }
   }
   td+td {
-    padding: 0 0 0 2rem;
+    padding: 0 0 0 3rem;
     border-left: $light-border;
   }
 }
