@@ -5,13 +5,15 @@
 - Handle error condition - try again, skip?
 - Clean up view (display values) and wording
 
+- Virtual keyboard on full name
+- Branch on returning user to sub-survey
 - Confirm exit
 - Change returning user screen to touch yes/no buttons
 - Validation (returning user, ...)
 - Clean up consent page (especially the text)
 - Move BMI read timeout to app setting
 - Hide cursor for prod
-- Run in production
+- Run in production - start/recover rails with at boot with launchd?
 
 
 

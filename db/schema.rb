@@ -20,12 +20,15 @@ ActiveRecord::Schema.define(version: 20160128044057) do
     t.date     "date_of_birth"
     t.string   "gender"
     t.string   "suburb"
+    t.string   "country_of_birth"
+    t.string   "ethnicity"
+    t.string   "diabetes"
     t.decimal  "weight"
     t.decimal  "height"
     t.decimal  "bmi"
     t.datetime "bmi_recorded_at"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
 end

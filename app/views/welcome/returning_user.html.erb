@@ -1,0 +1,38 @@
+<h1 class="center">Have you used this Health Pod before?</h1>
+
+<table class="two-col" data-option-group="user_data_returning_user" data-callback="returningUserChange" style="margin-top: 10rem;">
+  <tr>
+    <td style="text-align: right;">
+      <div class="option large" data-value="1">Yes</div>
+    </td>
+    <td>
+      <div class="option large" data-value="0">No</div>
+    </td>
+  </tr>
+</table>
+<!--
+<%= form_for @user_data, url: '/' do |f| %>
+<%= f.hidden_field :returning_user %>
+<% end %> -->
+
+<%= form_tag returning_user_path, { :id => "form", :autocomplete => "off" } do |f| %>
+  <%= hidden_field_tag 'user_data[returning_user]', '' %>
+<% end %>
+
+<script>
+
+function returningUserChange(val) {
+  $('#next').removeClass('disabled');
+}
+
+</script>
+
+<% content_for :footer_left do %>
+  <%= link_to "Exit", root_url, class: "nav exit" %>
+<% end %>
+<% content_for :footer_center do %>
+  <%= progress_bar(@percent_complete, @minutes_remaining) %>
+<% end %>
+<% content_for :footer_right do %>
+  <%= next_button "$('#form').submit();" %>
+<% end %>

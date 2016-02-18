@@ -1,18 +1,42 @@
 Rails.application.routes.draw do
 
-  get   'consent' => 'user_data#consent'
-  post  'consent' => 'user_data#consent'
+  get   'consent' => 'welcome#consent'
+  post  'consent' => 'welcome#consent'
 
-  get   'returning-user' => 'user_data#returning_user'
-  post  'returning-user' => 'user_data#returning_user'
+  get   'returning-user' => 'welcome#returning_user'
+  post  'returning-user' => 'welcome#returning_user'
 
-  get   'full-name' => 'user_data#full_name'
-  post  'full-name' => 'user_data#full_name'
+  ####  Demographics
 
-  get   'bmi' => 'user_data#bmi'
-  get   'bmi-read' => 'user_data#bmi_read'
+  get   'full-name' => 'demographics#full_name'
+  post  'full-name' => 'demographics#full_name'
 
-  root  'user_data#welcome'
+  get   'date-of-birth-and-gender' => 'demographics#date_of_birth_and_gender'
+  post  'date-of-birth-and-gender' => 'demographics#date_of_birth_and_gender'
+
+  get   'suburb' => 'demographics#suburb'
+  post  'suburb' => 'demographics#suburb'
+
+  get   'country-of-birth' => 'demographics#country_of_birth'
+  post  'country-of-birth' => 'demographics#country_of_birth'
+
+  get   'ethnicity' => 'demographics#ethnicity'
+  post  'ethnicity' => 'demographics#ethnicity'
+
+  get   'diabetes' => 'demographics#diabetes'
+  post  'diabetes' => 'demographics#diabetes'
+
+  ####  Allergies
+
+  get   'allergies' => 'allergies#allergies'
+  post  'allergies' => 'allergies#allergies'
+
+  ####  BMI
+
+  get   'bmi' => 'bmi#bmi'
+  get   'bmi-read' => 'bmi#bmi_read'
+
+  root  'welcome#welcome'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

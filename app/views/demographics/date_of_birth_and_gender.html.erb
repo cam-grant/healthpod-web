@@ -1,0 +1,45 @@
+<table class="two-col">
+  <tr>
+    <td>
+      <h1 class="center">Date of birth</h1>
+    </td>
+    <td>
+      <h1 class="center">Gender</h1>
+    </td>
+  </tr>
+</table>
+
+<table class="two-col border">
+  <tr>
+    <td>
+
+    </td>
+    <td>
+      <ul class="options" data-option-group="user_data_gender" data-callback="validateForm">
+        <li class="option" data-value="Male">Male</li>
+        <li class="option" data-value="Female">Female</li>
+        <li class="option" data-value="Neither">Neither male nor female</li>
+        <li class="option" data-value="No answer">Prefer not to answer</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<%= form_tag date_of_birth_and_gender_path, { :id => "form", :autocomplete => "off" } do |f| %>
+  <%= hidden_field_tag 'user_data[gender]', '' %>
+<% end %>
+
+<script>
+
+function validateForm(val) {
+  $('#next').removeClass('disabled');
+}
+
+</script>
+
+<% content_for :footer_left do %>
+  <%= link_to "Exit", root_url, class: "nav exit" %>
+<% end %>
+<% content_for :footer_right do %>
+  <%= next_button "$('#form').submit();" %>
+<% end %>

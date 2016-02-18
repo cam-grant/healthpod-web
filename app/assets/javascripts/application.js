@@ -14,3 +14,25 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function () {
+  $('[data-option-group]').each(function(i, group) {
+    group = $(group);
+    field = $('#' + group.attr('data-option-group'));
+    options = group.find('.option');
+    callback = group.attr('data-callback');
+
+    options.each(function(i, option) {
+      option = $(option);
+      option.click(function() {
+        options.each(function(i, o) { $(o).removeClass('selected'); })
+        option.addClass('selected');
+        val = option.attr('data-value');
+        if (field) field.val(val);
+        if (callback) {
+          eval(callback + '("' + val + '")');
+        }
+      });
+    });
+  });
+});

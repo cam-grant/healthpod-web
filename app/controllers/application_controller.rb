@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
 
 protected
 
+  def user_data_params
+    params.require(:user_data).permit!
+  end
+
   def set_user_data
     unless session[:user_data_id].nil? || !UserData.exists?(session[:user_data_id])
       @user_data = UserData.find(session[:user_data_id])

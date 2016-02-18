@@ -1,0 +1,21 @@
+<h1 class="center">Which suburb do you live in?</h1>
+
+<%= form_tag suburb_path, { :id => "form", :autocomplete => "off" } do |f| %>
+  <%= hidden_field_tag 'user_data[suburb]', '' %>
+<% end %>
+
+<script>
+$(document).ready(function() {
+  $('#next').removeClass('disabled');
+});
+</script>
+
+<% content_for :footer_left do %>
+  <%= link_to "Exit", root_url, class: "nav exit" %>
+<% end %>
+<% content_for :footer_center do %>
+  <%# progress_bar(@percent_complete, @minutes_remaining) %>
+<% end %>
+<% content_for :footer_right do %>
+  <%= next_button "$('#form').submit();" %>
+<% end %>
