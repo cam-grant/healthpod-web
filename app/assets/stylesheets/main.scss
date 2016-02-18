@@ -1,0 +1,333 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Open Sans";
+  font-size: 1.6rem;
+  color: $fore-color;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#main {
+  padding: 6rem $margin 2rem $margin;
+}
+
+#footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  //height: 10rem;
+  padding: 1rem $margin $margin $margin;
+  background-color: #eee;
+
+  table {
+    border-collapse: collapse;
+    border: none;
+    width: 100%;
+    td {
+      padding: 0;
+    }
+  }
+}
+
+a.nav, input.nav, label.nav, .btn {
+
+  font-weight: 600;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 1.8rem;
+  padding: 1.5rem 3rem;
+  border: none;
+  border-radius: $border-radius;
+
+  &:visited {
+   text-decoration: none;
+  }
+
+  &.exit {
+    $tint: darken($dark-purple, 10%);
+    background-color: $dark-purple;
+    color: #fff;
+    border-bottom: solid 4px $tint;
+    &:active {
+      background-color: $tint;
+    }
+  }
+
+  &.next {
+    background-color: $green;
+    color: #fff;
+    border-bottom: solid 4px $dark-green;
+    &:active {
+     background-color: $dark-green;
+    }
+
+    &.disabled {
+      $color: transparentize($green, 0.8);
+      background-color: $color;
+      border-bottom-color: $color;
+      cursor: default;
+    }
+  }
+
+  &.print {
+    $tint: darken($very-dark-blue, 10%);
+    background-color: $very-dark-blue;
+    color: #fff;
+    border-bottom: solid 4px $tint;
+    &:active {
+      background-color: $tint;
+    }
+  }
+
+  img {
+    height: 2rem;
+    vertical-align: middle;
+    margin: 0 1rem 0 0;
+    position: relative;
+    top: -0.1rem;
+  }
+}
+
+.btn-primary {
+  $tint: darken($very-dark-blue, 10%);
+  background-color: $very-dark-blue;
+  color: #fff;
+  border-bottom: solid 4px $tint;
+  &:active {
+    background-color: $tint;
+  }
+}
+
+.btn-secondary {
+  $tint: darken($dark-purple, 10%);
+  background-color: $dark-purple;
+  color: #fff;
+  border-bottom: solid 4px $tint;
+  &:active {
+    background-color: $tint;
+  }
+}
+
+div.title {
+  font-size: 4rem;
+  font-weight: 700;
+  color: $very-dark-purple;
+  margin: 0;
+}
+
+div.sub-title {
+  font-size: 2.03rem;
+  font-weight: normal;
+  color: $purple;
+  margin: 0;
+}
+
+h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin: 0 0 2rem 0;
+
+  &.center {
+    text-align: center;
+  }
+
+  img {
+    vertical-align: middle;
+    position: relative;
+    top: -0.25rem;
+    margin: 0 1rem 0 0;
+  }
+}
+
+h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 2.5rem 0 1rem 0;
+
+  &.first {
+    margin-top: 0;
+  }
+}
+
+p {
+  margin: 1rem 0;
+}
+
+ul {
+  margin: 0 0 0 1rem;
+}
+
+div.info {
+  margin: 1rem 0;
+  padding: 2rem 3rem !important;
+  background-color: $light-yellow;
+  border-radius: $border-radius;
+
+  ul {
+    li+li {
+      margin-top: 0.6rem;
+    }
+  }
+}
+
+.width-75 {
+    width: 75% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+table.two-col {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0 auto;
+  td {
+    padding: 0 4rem 0 0;
+    width: 50%;
+    text-align: left;
+    vertical-align: top;
+
+    &.right {
+      text-align: right;
+    }
+  }
+  td+td {
+    padding: 0 0 0 4rem;
+  }
+
+  &.border {
+    td+td {
+      border-left: $light-border;
+    }
+  }
+}
+
+/////////////////////////////////////////
+
+a.survey-link {
+  display: block;
+  text-decoration: none;
+  color: $fore-color;
+  padding: 2rem 0;
+  margin: 0;
+
+  img {
+    vertical-align: middle;
+  }
+
+  div {
+    display: inline-block;
+    margin: 0 0 0 1rem;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  &:active {
+    color: $orange;
+  }
+}
+
+a.survey-link+a.survey-link {
+  //border-top: $light-border;
+}
+
+/////////////////////////////////////////
+
+div#progress {
+
+  .total {
+    margin: 1rem auto 0.8rem auto;
+    display: block;
+    width: 600px;
+    height: 1rem;
+    background-color: #d0d0d0;
+    border-radius: 3px;
+  }
+
+  .current {
+    display: block;
+    height: 1rem;
+    background-color: $dark-purple;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+
+  div {
+    font-size: 1.4rem;
+    color: $very-dark-purple;
+  }
+
+}
+
+
+/////////////////////////////////////////
+
+input[type=text] {
+  font-size: 2.5rem;
+  padding: 1rem;
+  border: $light-border;
+  border-width: 0.25rem;
+  width: 100%;
+  outline: none;
+  border-radius: $border-radius;
+}
+
+.option {
+  font-size: 2rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: $border-radius;
+  display: inline-block;
+  cursor: pointer;
+  border: solid 0.5rem transparent;
+
+  &.large {
+    font-size: 3rem;
+  }
+
+  &.selected {
+    border-color: $orange;
+    color: #000;
+  }
+}
+
+ul.options {
+  list-style: none;
+
+  li.option {
+    display: block;
+    border: none;
+    margin-bottom: 1rem;
+
+    span {
+      $size: 1rem;
+      display: inline-block;
+      width: $size;
+      height: $size;
+      border-radius: $size;
+      background-color: #eee;
+      border: solid 0.5rem #eee;
+      margin: 0 1rem 0 0;
+      position: relative;
+      top: 0.25rem;
+    }
+
+    &.selected {
+      color: darken($orange, 10%);
+      span {
+        background-color: $orange;
+      }
+    }
+  }
+}
+
+/////////////////////////////////////////
+
+#report {
+  background-color: desaturate(lighten($yellow, 20%), 20%);
+  padding: 2rem;
+  border-radius: $border-radius;
+}

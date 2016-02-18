@@ -11,10 +11,11 @@ $(document).ready(function() {
 </script>
 
 <% content_for :footer_left do %>
-  <%= link_to "Exit", root_url, class: "nav exit" %>
+  <label class="nav exit" for="exit-modal">Exit</label>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
 <% end %>
 <% content_for :footer_center do %>
-  <%# progress_bar(@percent_complete, @minutes_remaining) %>
+  <%= progress_bar %>
 <% end %>
 <% content_for :footer_right do %>
   <%= next_button "$('#form').submit();" %>

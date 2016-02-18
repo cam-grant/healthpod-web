@@ -1,0 +1,17 @@
+<h1>Your report is printing...</h1>
+<p>Thank you for using the Health Pod.</p>
+<p>Please visit again and update your report.</p>
+<p>&nbsp;</p>
+<%= link_to "Exit", root_url, class: "nav exit" %>
+
+<script>
+$(document).ready(function() {
+  $('#footer').hide();
+  $(document).click(function() { home() });
+  setTimeout(function() { home(); }, 5000);
+
+  function home() {
+    window.location = '<%= root_url %>';
+  }
+});
+</script>

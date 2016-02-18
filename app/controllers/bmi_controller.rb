@@ -1,6 +1,7 @@
 class BmiController < ApplicationController
 
   def bmi
+    @current_step = 9
     # Render "Stand on the scales..." screen
   end
 

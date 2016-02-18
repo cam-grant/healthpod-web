@@ -10,8 +10,12 @@ class CreateUserData < ActiveRecord::Migration
       t.string :gender
       t.string :suburb
       t.string :country_of_birth
-      t.string :ethnicity
-      t.string :diabetes
+      t.boolean :aboriginal
+      t.string :has_diabetes
+
+      # Allergies
+      t.boolean :has_allergies
+      t.string :allergy_list
 
       # BMI
       t.decimal :weight

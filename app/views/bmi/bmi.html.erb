@@ -1,17 +1,17 @@
-<h1 class="center">Please stand on the scales</h1>
+<h1 class="center">Height and weight</h1>
 
 <table class="two-col border" style="width: 75%; margin-left: auto; margin-right: auto;">
   <tr>
     <td style="text-align: center;vertical-align: middle;">
       <br /><br /><br /><br /><br />
-      [Image of patient on scales]
+      [Illustration]
       <br /><br /><br /><br /><br /><br />
     </td>
     <td style="vertical-align: middle;">
       <div id="instructions">
-        <p>Stand up straight on the scales.</p>
-        <p>Listen for a "beep".</p>
-        <p>The scales will measure your height and weight.</p>
+        <p>1. Stand on the scales</p>
+        <p>2. Stand up straight</p>
+        <p>3. Listen for a "beep"</p>
       </div>
       <div id="bmi"></div>
     </td>
@@ -20,16 +20,20 @@
 
 
 <% content_for :footer_left do %>
-  <%= link_to "Exit", root_url, class: 'nav exit' %>
+  <label class="nav exit" for="exit-modal">Exit</label>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
+<% end %>
+<% content_for :footer_center do %>
+  <%= progress_bar %>
 <% end %>
 <% content_for :footer_right do %>
-  <%= next_button nil, full_name_url %>
+  <%= next_button nil, hub_url %>
 <% end %>
 
 <script>
 $(document).ready(function() {
   ajax_url = '<%= bmi_read_url %>';
-  next_url = '<%= full_name_url %>'
+  next_url = '<%= hub_url %>'
 
   $.ajax({
     url: ajax_url,

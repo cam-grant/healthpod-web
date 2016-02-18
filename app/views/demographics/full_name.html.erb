@@ -3,7 +3,7 @@
 <%= form_tag full_name_path, { :id => "form", :autocomplete => "off" } do |f| %>
 
   <div style="text-align: center; width: 75%; margin-left: auto; margin-right: auto;">
-      <%= text_field_tag 'user_data[full_name]', nil, id: 'full_name' %>
+      <%= text_field_tag 'user_data[full_name]', 'Jane Citizen', id: 'full_name' %>
   </div>
 
 <% end %>
@@ -11,6 +11,7 @@
 <script>
 $(document).ready(function() {
   full_name = $('#full_name');
+
   full_name.on('input', function() {
     if (full_name.val().trim().length > 2) {
       $('#next').removeClass('disabled');
@@ -18,11 +19,17 @@ $(document).ready(function() {
       $('#next').addClass('disabled');
     }
   });
+  $('#next').removeClass('disabled');
+  full_name.focus();
 });
 </script>
 
 <% content_for :footer_left do %>
-  <%= link_to "Exit", root_url, class: "nav exit" %>
+  <label class="nav exit" for="exit-modal">Exit</label>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
+<% end %>
+<% content_for :footer_center do %>
+  <%= progress_bar %>
 <% end %>
 <% content_for :footer_right do %>
   <%= next_button "$('#form').submit();" %>

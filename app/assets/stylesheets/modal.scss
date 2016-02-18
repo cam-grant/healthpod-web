@@ -1,0 +1,81 @@
+.modal {
+  $medium-screen: 30em !default;
+  $large-screen: 50em !default;
+
+  label {
+    cursor: pointer;
+    font-weight: normal;
+    margin-bottom: 0;
+  }
+
+  .modal-state {
+    display: none;
+  }
+
+  .modal-fade-screen {
+    // overlay
+
+    // @include position(fixed, 0 0 0 0);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-color: rgba(0, 0, 0, 0.85);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    visibility: hidden;
+    z-index: 99999;
+  }
+
+  .modal-bg {
+    // @include position(absolute, 0 0 0 0);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    cursor: pointer;
+  }
+
+  .modal-close {
+    cursor: pointer;
+  }
+
+  .modal-inner {
+    background-color: #fff;
+    margin: auto;
+    overflow: auto;
+    position: relative;
+    top: 20rem;
+    transition: opacity 0.25s ease;
+    padding: 3rem;
+    max-height: 50%;
+    width: 40%;
+    border-radius: $border-radius;
+
+    // @include media($medium-screen) {
+    //   max-height: 70%;
+    //   width: 60%;
+    // }
+
+    // @include media($large-screen) {
+    //   width: 50%;
+    // }
+  }
+
+  .modal-state:checked + .modal-fade-screen {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.modal-closed {
+  overflow: auto;
+}

@@ -21,12 +21,19 @@ class WelcomeController < ApplicationController
   end
 
   def returning_user
-    @percent_complete = 20
-    @minutes_remaining = 5
+    session[:total_steps] = 9
+    session[:current_step] = 1
     if request.post?
       @user_data.update_attributes(user_data_params) unless params[:user_data].blank?
+      session[:current_step] += 1
       redirect_to full_name_url
     end
+  end
+
+  def hub
+  end
+
+  def print
   end
 
 end

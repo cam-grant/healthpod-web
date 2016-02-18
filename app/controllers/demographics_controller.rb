@@ -3,6 +3,7 @@ class DemographicsController < ApplicationController
   def full_name
     if request.post?
       @user_data.update_attributes(user_data_params) unless params[:user_data].blank?
+      session[:current_step] += 1
       redirect_to date_of_birth_and_gender_url
     end
   end
@@ -10,6 +11,7 @@ class DemographicsController < ApplicationController
   def date_of_birth_and_gender
     if request.post?
       @user_data.update_attributes(user_data_params) unless params[:user_data].blank?
+      session[:current_step] += 1
       redirect_to suburb_url
     end
   end
@@ -17,6 +19,7 @@ class DemographicsController < ApplicationController
   def suburb
     if request.post?
       @user_data.update_attributes(user_data_params) unless params[:user_data].blank?
+      session[:current_step] += 1
       redirect_to country_of_birth_url
     end
   end
@@ -24,21 +27,24 @@ class DemographicsController < ApplicationController
   def country_of_birth
     if request.post?
       @user_data.update_attributes(user_data_params) unless params[:user_data].blank?
-      redirect_to ethnicity_url
+      session[:current_step] += 1
+      redirect_to aboriginal_url
     end
   end
 
-  def ethnicity
+  def aboriginal
     if request.post?
       @user_data.update_attributes(user_data_params) unless params[:user_data].blank?
-      redirect_to diabetes_url
+      session[:current_step] += 1
+      redirect_to has_diabetes_url
     end
   end
 
-  def diabetes
+  def has_diabetes
     if request.post?
       @user_data.update_attributes(user_data_params) unless params[:user_data].blank?
-      redirect_to allergies_path
+      session[:current_step] += 1
+      redirect_to has_allergies_path
     end
   end
 

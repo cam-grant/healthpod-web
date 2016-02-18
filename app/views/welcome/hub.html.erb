@@ -1,0 +1,43 @@
+<table class="two-col">
+  <tr>
+    <td style="width: 60%;">
+      <h1>Health check complete</h1>
+      <div id="report">
+        <table style="width: 100%;">
+          <div style="height: 36rem;" />
+          <tr>
+            <td><%= link_to "Exit", root_url, class: "nav exit" %></td>
+            <td style="text-align: right;border: none;"><%= link_to "Print report", print_url, class: "nav print" %></td>
+          </tr>
+        </table>
+      </div>
+    </td>
+    <td>
+      <h1>More health checks</h1>
+      <%= link_to diabetes_url, class: "survey-link" do %>
+        <%= image_tag "diabetes.svg", style: "height: 100px;" %>
+        <div>
+          Check your diabetes risk
+        </div>
+      <% end %>
+      <%= link_to physical_url, class: "survey-link" do %>
+        <%= image_tag "physical.svg", style: "height: 100px;" %>
+        <div>
+          Check your physical activity
+        </div>
+      <% end %>
+      <%= link_to alcohol_url, class: "survey-link" do %>
+        <%= image_tag "alcohol.svg", style: "height: 100px;" %>
+        <div>
+          Check your alcohol consumption
+        </div>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<script>
+$(document).ready(function() {
+  $('#footer').hide();
+});
+</script>

@@ -1,10 +1,13 @@
 module ApplicationHelper
 
-  def progress_bar(percent_complete, minutes_remaining)
-    complete_width = 400 * (percent_complete / 100.to_f)
+  def progress_bar()
+    return if session[:current_step].blank?
+    percent_complete = session[:current_step].fdiv(session[:total_steps])
+
+    complete_width = 600 * percent_complete
     html =  "<div id='progress'>"
     html << "<div class='total'><div class='current' style='width: #{complete_width}px;'></div></div>"
-    html << "<div>About #{pluralize(minutes_remaining, 'minute')} remaining</div>"
+    html << "<div>Step #{session[:current_step]} / #{session[:total_steps]}</div>"
     html << "</div>"
     html.html_safe
   end

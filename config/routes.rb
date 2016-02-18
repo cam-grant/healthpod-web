@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
 
+  ####  Welcome / hub
+
+  root  'welcome#welcome'
+
   get   'consent' => 'welcome#consent'
   post  'consent' => 'welcome#consent'
 
   get   'returning-user' => 'welcome#returning_user'
   post  'returning-user' => 'welcome#returning_user'
+
+  get   'hub' => 'welcome#hub'
+
+  get   'print' => 'welcome#print'
 
   ####  Demographics
 
@@ -20,23 +28,37 @@ Rails.application.routes.draw do
   get   'country-of-birth' => 'demographics#country_of_birth'
   post  'country-of-birth' => 'demographics#country_of_birth'
 
-  get   'ethnicity' => 'demographics#ethnicity'
-  post  'ethnicity' => 'demographics#ethnicity'
+  get   'aboriginal' => 'demographics#aboriginal'
+  post  'aboriginal' => 'demographics#aboriginal'
 
-  get   'diabetes' => 'demographics#diabetes'
-  post  'diabetes' => 'demographics#diabetes'
+  get   'has_diabetes' => 'demographics#has_diabetes'
+  post  'has_diabetes' => 'demographics#has_diabetes'
 
   ####  Allergies
 
-  get   'allergies' => 'allergies#allergies'
-  post  'allergies' => 'allergies#allergies'
+  get   'has-allergies' => 'allergies#has_allergies'
+  post  'has-allergies' => 'allergies#has_allergies'
+
+  get   'allergy-list' => 'allergies#allergy_list'
+  post  'allergy-list' => 'allergies#allergy_list'
 
   ####  BMI
 
   get   'bmi' => 'bmi#bmi'
   get   'bmi-read' => 'bmi#bmi_read'
 
-  root  'welcome#welcome'
+  ####  Diabetes
+
+  get   'diabetes' => 'diabetes#welcome'
+
+  ####  Physical
+
+  get   'physical' => 'physical#welcome'
+
+  ####  Alcohol
+
+  get   'alcohol' => 'alcohol#welcome'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

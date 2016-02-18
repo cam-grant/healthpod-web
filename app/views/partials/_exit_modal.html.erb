@@ -1,0 +1,44 @@
+<div class="modal">
+  <input class="modal-state" id="exit-modal" type="checkbox" />
+  <div class="modal-fade-screen">
+    <div class="modal-inner">
+      <div class="modal-content">
+        <h1 class="center" style="margin-bottom: 5rem;">Are you sure you want to exit?</h1>
+        <table class="two-col" style="width: 30rem;">
+          <tr>
+            <td><button type="button" class="btn btn-primary" onclick="exit();return false;">Yes</button></td>
+            <td style="text-align: right;"><button type="button" class="btn btn-secondary modal-close" for="exit-modal">No</button></td>
+          </tr>
+        </table>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+function exit() {
+  window.location = '<%= exit_url %>';
+}
+
+$(function() {
+  $("#exit-modal").on("change", function() {
+    if ($(this).is(":checked")) {
+      $("body").addClass("modal-open");
+    } else {
+      $("body").removeClass("modal-open");
+    }
+  });
+
+  $(".modal-fade-screen, .modal-close").on("click", function() {
+    $(".modal-state:checked").prop("checked", false).change();
+  });
+
+  $(".modal-inner").on("click", function(e) {
+    e.stopPropagation();
+  });
+});
+
+</script>
