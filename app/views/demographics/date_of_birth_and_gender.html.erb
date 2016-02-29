@@ -5,14 +5,14 @@
     <td>
       <h1 class="center">Date of birth</h1>
     </td>
-    <td>
+    <td style="text-align: center;">
       <h1 class="center">Gender</h1>
-      <ul class="options" data-option-group="user_data_gender" data-callback="validateForm" style="margin: 6rem 2rem;">
-        <li class="option" data-value="Male"><span></span>Male</li>
-        <li class="option" data-value="Female"><span></span>Female</li>
-        <li class="option" data-value="Neither"><span></span>Neither male nor female</li>
-        <li class="option" data-value="No answer"><span></span>Prefer not to answer</li>
-      </ul>
+      <div class="options" data-option-group="user_data_gender" data-callback="validateForm" style="margin: 6rem auto;text-align: center;">
+        <div class="option option-float" style="margin-right: 10rem; margin-bottom: 5rem;" data-value="Male"><%= image_tag "male.svg", style: "height: 200px;" %></div>
+        <div class="option option-float" style="margin-bottom: 5rem;" data-value="Female"><%= image_tag "female.svg", style: "height: 200px;" %></div>
+        <div style="clear: both;"></div>
+        <div class="option" style="display: inline-block;" data-value="No answer">Prefer not to answer</div>
+      </div>
     </td>
   </tr>
 </table>

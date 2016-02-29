@@ -6,7 +6,9 @@
 <div style="text-align: center; width: 38rem; margin: 6rem auto;">
   <ul class="options" data-option-group="user_data_has_diabetes" data-callback="validateForm" style="text-align: left;">
     <li class="option" data-value="Yes"><span></span>Yes</li>
+    <% if @user_data.female? %>
     <li class="option" data-value="Yes, only during pregnancy"><span></span>Yes, but only during pregnancy</li>
+    <% end %>
     <li class="option" data-value="No"><span></span>No</li>
     <li class="option" data-value="Don’t know"><span></span>Don’t know</li>
   </ul>

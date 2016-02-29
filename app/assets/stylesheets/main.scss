@@ -301,9 +301,24 @@ input[type=text] {
     }
   }
 
+  &.option-float {
+    display: inline-block;
+  }
+
+  img {
+    //border: solid 0.5rem transparent;
+    //border-radius: $border-radius;
+    //padding: 1rem;
+  }
+
   &.selected {
     border-color: $orange;
     color: #000;
+
+    img {
+      border-color: $orange;
+      fill: red;
+    }
   }
 }
 

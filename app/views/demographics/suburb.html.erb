@@ -1,7 +1,14 @@
-<h1 class="center">Which suburb do you live in?</h1>
+<h1 class="center">Where do you live?</h1>
 
 <%= form_tag suburb_path, { :id => "form", :autocomplete => "off" } do |f| %>
   <%= hidden_field_tag 'user_data[suburb]', '' %>
+
+  <ul class="options" data-option-group="user_data_has_diabetes" data-callback="validateForm" style="text-align: left;">
+    <li class="option" data-value="Yes"><span></span>I live inside the ACT</li>
+    <li class="option" data-value="Don’t know"><span></span>I live outside the ACT</li>
+  </ul>
+
+
 <% end %>
 
 <script>

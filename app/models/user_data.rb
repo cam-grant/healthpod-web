@@ -1,8 +1,8 @@
 class UserData < ActiveRecord::Base
 
-  # :used_kiosk_before,
-  # :full_name
-  # :dob
+  def female?
+    self.gender && self.gender.downcase == "female" ? true : false
+  end
 
   def to_csv
     attributes = %w{full_name dob}
