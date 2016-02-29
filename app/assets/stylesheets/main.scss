@@ -114,16 +114,16 @@ a.nav, input.nav, label.nav, .btn {
 }
 
 div.title {
-  font-size: 4rem;
+  font-size: 6rem;
   font-weight: 700;
   color: $very-dark-purple;
   margin: 0;
 }
 
 div.sub-title {
-  font-size: 2.03rem;
+  font-size: 3.03rem;
   font-weight: normal;
-  color: $purple;
+  color: $dark-purple;
   margin: 0;
 }
 
@@ -288,6 +288,19 @@ input[type=text] {
     font-size: 3rem;
   }
 
+  &.option-btn {
+    background-color: lighten($light-yellow, 10%);
+    padding: 1rem 0.5rem 1.25rem 0.5rem;
+    min-width: 10rem;
+    text-align: center;
+    border-bottom: solid 0.5rem lighten($light-yellow, 5%);
+
+    &:active {
+      border-color: $orange;
+      color: #000;
+    }
+  }
+
   &.selected {
     border-color: $orange;
     color: #000;
@@ -303,16 +316,16 @@ ul.options {
     margin-bottom: 1rem;
 
     span {
-      $size: 1rem;
+      $size: 2rem;
       display: inline-block;
       width: $size;
       height: $size;
       border-radius: $size;
-      background-color: #eee;
-      border: solid 0.5rem #eee;
+      background-color: #ddd;
+      border: solid 0.5rem #ddd;
       margin: 0 1rem 0 0;
       position: relative;
-      top: 0.25rem;
+      top: 0.75rem;
     }
 
     &.selected {

@@ -12,7 +12,7 @@ module ApplicationHelper
     html.html_safe
   end
 
-  def next_button(action, href = "#")
+  def next_button(action, href = "#", label = "Next")
     btn = '<a href="'
     btn << href
     btn << '" '
@@ -20,7 +20,7 @@ module ApplicationHelper
     btn << 'onclick="if ($(this).hasClass(\'disabled\')) return false;'
     btn << action unless action.blank?
     btn << ';return false;' if href == "#"
-    btn << '">Next</a>'
+    btn << "\">#{label}</a>"
     btn.html_safe
   end
 

@@ -31,5 +31,5 @@ $very-dark-purple: darken($dark-purple, 20%);
 $dark-blue: #90BEC5;
 $very-dark-blue: darken($dark-blue, 15%);
 
-@import 'main';
-@import 'modal';
+@import './main';
+@import './modal';

@@ -3,7 +3,7 @@
 <%= form_tag full_name_path, { :id => "form", :autocomplete => "off" } do |f| %>
 
   <div style="text-align: center; width: 75%; margin-left: auto; margin-right: auto;">
-      <%= text_field_tag 'user_data[full_name]', 'Jane Citizen', id: 'full_name' %>
+      <%= text_field_tag 'user_data[full_name]', 'Jane Citizen', id: 'full_name', placeholder: "Example: Jane Citizen" %>
   </div>
 
 <% end %>
