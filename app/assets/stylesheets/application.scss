@@ -21,15 +21,19 @@ $fore-color: #111;
 
 $green: green;
 $dark-green: darken($green, 5%);
-$light-yellow: #FAD57E;
 $yellow: #E3C170;
+$light-yellow: #FAD57E;
 $orange: #EE9E35;
+$teal: #B2D8C4;
 $dark-teal: #A2C2B1;
 $purple: #9999B0;
 $dark-purple: #888494;
 $very-dark-purple: darken($dark-purple, 20%);
+$blue: #9FD5DC;
 $dark-blue: #90BEC5;
 $very-dark-blue: darken($dark-blue, 15%);
+$red: #EA9185;
+$dark-red: #D98377;
 
 @import './main';
 @import './modal';

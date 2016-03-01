@@ -276,56 +276,49 @@ input[type=text] {
   border-radius: $border-radius;
 }
 
-.option {
-  font-size: 2rem;
-  padding: 0.5rem 1.5rem;
-  border-radius: $border-radius;
-  display: inline-block;
-  cursor: pointer;
-  border: solid 0.5rem transparent;
+.options {
+  list-style: none;
 
-  &.large {
-    font-size: 3rem;
+  .option {
+    display: inline-block;
+    font-size: 2rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: $border-radius;
+    display: inline-block;
+    cursor: pointer;
+    border: solid 0.5rem transparent;
+
+    &.large {
+      font-size: 3rem;
+    }
   }
 
-  &.option-btn {
-    background-color: lighten($light-yellow, 10%);
+  div.option {
+    &.selected {
+      border-color: $orange;
+    }
+  }
+
+  .btn-option {
+    display: inline-block;
     padding: 1rem 0.5rem 1.25rem 0.5rem;
     min-width: 10rem;
     text-align: center;
-    border-bottom: solid 0.5rem lighten($light-yellow, 5%);
+
+    $tint: darken($blue, 5%);
+    background-color: lighten($blue, 5%);
+    border-bottom: solid 0.5rem $tint;
 
     &:active {
-      border-color: $orange;
-      color: #000;
+      background-color: $tint;
+    }
+
+    &.selected {
+      border-color: transparent !important;
     }
   }
 
-  &.option-float {
-    display: inline-block;
-  }
-
-  img {
-    //border: solid 0.5rem transparent;
-    //border-radius: $border-radius;
-    //padding: 1rem;
-  }
-
-  &.selected {
-    border-color: $orange;
-    color: #000;
-
-    img {
-      border-color: $orange;
-      fill: red;
-    }
-  }
-}
-
-ul.options {
-  list-style: none;
-
-  li.option {
+  li.option, .list-option {
     display: block;
     border: none;
     margin-bottom: 1rem;

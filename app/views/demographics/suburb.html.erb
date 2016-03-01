@@ -3,10 +3,12 @@
 <%= form_tag suburb_path, { :id => "form", :autocomplete => "off" } do |f| %>
   <%= hidden_field_tag 'user_data[suburb]', '' %>
 
-  <ul class="options" data-option-group="user_data_has_diabetes" data-callback="validateForm" style="text-align: left;">
-    <li class="option" data-value="Yes"><span></span>I live inside the ACT</li>
-    <li class="option" data-value="Don’t know"><span></span>I live outside the ACT</li>
-  </ul>
+  <table class="two-col options" style="width: 100%;" class="options" data-option-group="user_data_has_diabetes" data-callback="validateForm">
+    <tr>
+      <td><div class="option list-option" data-value="Yes"><span></span>Inside the ACT</div></td>
+      <td><div class="option list-option" data-value="Don’t know"><span></span>Outside the ACT</div></td>
+    </tr>
+  </table>
 
 
 <% end %>
