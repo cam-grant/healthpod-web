@@ -14,7 +14,7 @@
 		float: left;
 		width: 5.81395349%;
 		height: 3em;
-		margin: 0 0.726744186% 5px 0;
+		margin: 0 0.726744186% 8px 0;
 		line-height: 3em;
 		text-align: center;
 		list-style-type: none;
@@ -109,13 +109,13 @@
 	min-width: 500px;
 	max-width: 1200px;
 	background: #fff;
-	border-radius: 2px;
+	border-radius: 5px;
 	// box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 #osk-container > li {
 	background: #DDD;
-	border-radius: 2px;
+	border-radius: 5px;
 	-moz-transition: 0.5s;
 }
 
@@ -126,7 +126,7 @@
 
 #osk-container > .osk-disabled {
 	background: #E5E5E5;
-	color: #CCC;
+	color: #E5E5E5;
 }
 
 .osk-focused {

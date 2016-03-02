@@ -32,6 +32,7 @@
 		var $returnKey = $keyboard.children('li.osk-return');
 		var $tabKey = $keyboard.children('li.osk-tab');
     var $capsLockKey = $keyboard.children('li.osk-capslock');
+		var $hideKey = $keyboard.children('li.osk-hide');
 		var shift = false;
 		var capslock = false;
 		var inputOptions = [];
@@ -58,6 +59,7 @@
 					$returnKey.addClass('osk-disabled');
 				}
         $capsLockKey.addClass('osk-disabled');
+				$hideKey.addClass('osk-disabled');
 			}
 			// $input.addClass('osk-focused').focus();
 		}
