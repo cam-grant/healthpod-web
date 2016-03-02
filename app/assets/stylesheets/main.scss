@@ -88,6 +88,12 @@ a.nav, input.nav, label.nav, .btn {
     }
   }
 
+  &.large {
+    font-size: 3rem;
+    min-width: 8rem;
+    text-align: center;
+  }
+
   img {
     height: 2rem;
     vertical-align: middle;
@@ -479,7 +485,7 @@ h1.done {
 }
 
 table.hub {
-  width: 80%;
+  width: 100%;
   margin: 0 auto 2rem auto;
 
   td {
@@ -506,11 +512,9 @@ table.hub {
 }
 
 .report-card {
-  $card-color: lighten($purple, 25%);
-
   display: block;
-  height: 15rem;
-  background-color: #fcfcfc;
+  height: 18rem;
+  background-color: #fff;
   padding: 2rem;
   border: dotted 0.5rem #e9e9e9;
   border-radius: 1rem;
@@ -533,27 +537,47 @@ table.hub {
   }
 
   &.basic {
+    $card-color: lighten($purple, 25%);
     background-image: image-url("basic_health.svg");
+    background-color: $card-color;
+    border-color: $card-color;
+    border-style: solid;
   }
 
   &.diabetes {
     background-image: image-url("diabetes_grey.svg");
+    &.available {
+      $card-color: lighten($red, 20%);
+      background-image: image-url("diabetes.svg");
+      background-color: #fff;// $card-color;
+      //border-color: $card-color;
+      //border-style: solid;
+    }
   }
 
   &.physical {
     background-image: image-url("physical_grey.svg");
+    &.available {
+      $card-color: lighten($teal, 15%);
+      background-image: image-url("physical.svg");
+      background-color: #fff;// $card-color;
+      //border-color: $card-color;
+      //border-style: solid;
+    }
   }
 
   &.alcohol {
     background-image: image-url("alcohol_grey.svg");
+    &.available {
+      $card-color: lighten($yellow, 20%);
+      background-image: image-url("alcohol.svg");
+      background-color: #fff;// $card-color;
+      //border-color: $card-color;
+      //border-style: solid;
+    }
   }
 
-  &.complete {
-    background-color: $card-color;
-    border-color: $card-color;
-    border-style: solid;
-    //box-shadow: 6px 6px 6px 0px rgba(0,0,0,0.2);
-
+  &.available, &.complete {
     h1 {
       color: #111;
     }

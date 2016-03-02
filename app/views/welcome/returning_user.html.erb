@@ -1,12 +1,12 @@
 <h1 class="center">Have you used this Health Pod before?</h1>
 
-<table class="two-col options" data-option-group="user_data_returning_user" data-callback="validateForm" style="margin-top: 10rem;">
+<table class="two-col"style="margin-top: 10rem;">
   <tr>
     <td style="text-align: right;">
-      <div class="option btn-option large" data-value="1">Yes</div>
+      <div class="btn btn-secondary large" onclick="submit(1)">Yes</div>
     </td>
     <td>
-      <div class="option btn-option large" data-value="0">No</div>
+      <div class="btn btn-secondary large"  onclick="submit(0)">No</div>
     </td>
   </tr>
 </table>
@@ -16,15 +16,15 @@
 <% end %>
 
 <script>
-function validateForm(val) {
+function submit(val) {
+  $('#user_data_returning_user').val(val);
   $('#form').submit();
-  // $('#next').removeClass('disabled');
 }
 </script>
 
 <% content_for :footer_left do %>
   <label class="nav exit" for="exit-modal">Exit</label>
-  <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: hub_url } %>
 <% end %>
 <% content_for :footer_center do %>
   <%= progress_bar %>

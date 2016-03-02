@@ -1,43 +1,66 @@
-<h1 class="center done"><div class="">Your health report
+<% available = @user_data.basic_complete ? "available" : "" %>
 
-</div></h1>
 <table class="hub">
   <tr>
     <td>
       <div class="report-card basic complete">
         <h1>Basic health check</h1>
+        <% if @user_data.basic_complete %>
+          <%= image_tag "check.svg", style: "height: 4.5rem; float: right" %>
+        <% else %>
+        <div style="margin: 4rem auto; text-align: center;">
+          <%= link_to "Start", returning_user_url, class: "btn next" %>
+        </div>
+        <% end %>
       </div>
     </td>
     <td>
-      <%= link_to diabetes_url, class: "report-card diabetes" do %>
-        <%#= image_tag "diabetes.svg", style: "height: 100px;" %>
+      <div class="report-card diabetes <%= available %>">
         <h1>Diabetes risk</h1>
-        <div class="check-now">Check now</div>
-      <% end %>
+        <% if @user_data.basic_complete %>
+        <div style="margin: 4rem auto; text-align: center;">
+          <%= link_to "Start", diabetes_url, class: "btn btn-secondary" %>
+        </div>
+        <% end %>
+      </div>
     </td>
   </tr>
   <tr>
     <td>
-      <%= link_to physical_url, class: "report-card physical" do %>
+      <div class="report-card physical <%= available %>">
         <h1>Physical activity</h1>
-        <div class="check-now">Check now</div>
-      <% end %>
+        <% if @user_data.basic_complete %>
+        <div style="margin: 4rem auto; text-align: center;">
+          <%= link_to "Start", physical_url, class: "btn btn-secondary" %>
+        </div>
+        <% end %>
+      </div>
     </td>
     <td>
-      <%= link_to alcohol_url, class: "report-card alcohol" do %>
+      <div class="report-card alcohol <%= available %>">
         <h1>Alcohol consumption</h1>
-        <div class="check-now">Check now</div>
-      <% end %>
+        <% if @user_data.basic_complete %>
+        <div style="margin: 4rem auto; text-align: center;">
+          <%= link_to "Start", alcohol_url, class: "btn btn-secondary" %>
+        </div>
+        <% end %>
+      </div>
     </td>
-  </tr>
-  <tr>
-    <td><%= link_to "Exit", root_url, class: "nav exit" %></td>
-    <td style="text-align: right;"><%= link_to "Print and Exit", print_url, class: "nav next" %></td>
   </tr>
 </table>
 
 <script>
 $(document).ready(function() {
-  $('#footer').hide();
+  //$('#footer').hide();
 });
 </script>
+
+<% content_for :footer_left do %>
+  <label class="nav exit" for="exit-modal">Exit</label>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
+<% end %>
+<% content_for :footer_right do %>
+  <% if @user_data.basic_complete %>
+    <%= link_to "Print and Exit", print_url, class: "nav next" %>
+  <% end %>
+<% end %>

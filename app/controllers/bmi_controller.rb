@@ -18,6 +18,9 @@ class BmiController < ApplicationController
     if @user_data.bmi.blank?
       render :status => 400
     else
+
+      @user_data.update_attributes basic_complete: true
+
       render :json => {
         :weight => @user_data.weight,
         :height => @user_data.height,

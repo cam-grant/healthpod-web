@@ -1,4 +1,4 @@
-<h1 class="center">Enter your other allergies</h1>
+<h1 class="center">Other allergies</h1>
 
 <%= form_tag other_allergies_path, { :id => "form", :autocomplete => "off" } do |f| %>
 
@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 <% content_for :footer_left do %>
   <label class="nav exit" for="exit-modal">Exit</label>
-  <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: hub_url } %>
 <% end %>
 <% content_for :footer_center do %>
   <%= progress_bar %>

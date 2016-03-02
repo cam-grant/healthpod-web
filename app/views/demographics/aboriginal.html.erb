@@ -1,12 +1,12 @@
 <h1 class="center">Are you of Aboriginal, Torres Strait Islander,<br />Pacific Islander or Maori descent?</h1>
 
-<table class="two-col options" data-option-group="user_data_aboriginal" data-callback="validateForm" style="margin-top: 10rem;">
+<table class="two-col"style="margin-top: 10rem;">
   <tr>
     <td style="text-align: right;">
-      <div class="option large btn-option" data-value="1">Yes</div>
+      <div class="btn btn-secondary large" onclick="submit(1)">Yes</div>
     </td>
     <td>
-      <div class="option large btn-option" data-value="0">No</div>
+      <div class="btn btn-secondary large"  onclick="submit(0)">No</div>
     </td>
   </tr>
 </table>
@@ -16,15 +16,15 @@
 <% end %>
 
 <script>
-function validateForm(val) {
-  // $('#next').removeClass('disabled');
+function submit(val) {
+  $('#user_data_aboriginal').val(val);
   $('#form').submit();
 }
 </script>
 
 <% content_for :footer_left do %>
   <label class="nav exit" for="exit-modal">Exit</label>
-  <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: hub_url } %>
 <% end %>
 <% content_for :footer_center do %>
   <%= progress_bar %>
