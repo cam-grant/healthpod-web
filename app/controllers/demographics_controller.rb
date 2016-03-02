@@ -52,7 +52,7 @@ class DemographicsController < ApplicationController
     if request.post?
       @user_data.update_attributes(user_data_params) unless params[:user_data].blank?
       session[:current_step] += 1
-      redirect_to has_allergies_path
+      redirect_to allergies_path
     end
   end
 

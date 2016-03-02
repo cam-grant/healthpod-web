@@ -1,10 +1,15 @@
 class UserData < ActiveRecord::Base
 
-  # enum gender: [ :male, :female, :prefer_not_to_answer ]
+  def male?
+    self.gender && self.gender == UserData::GENDERS[0][:id] ? true : false
+  end
 
   def female?
-    # self.gender && self.gender.downcase == "female" ? true : false
-    self.gender && self.gender == 1 ? true : false
+    self.gender && self.gender == UserData::GENDERS[1][:id] ? true : false
+  end
+
+  def has_other_allergies?
+    self.allergies && self.allergies.include?("Other") ? true : false
   end
 
   def to_csv
@@ -42,6 +47,27 @@ class UserData < ActiveRecord::Base
     {id: 0, name: "No, I have never smoked", value: nil},
     {id: 1, name: "No, but I used to smoke before", value: nil},
     {id: 2, name: "Yes", value: nil}
+  ]
+
+  FOOD_ALLERGIES = [
+    "Peanut",
+    "Tree nuts",
+    "Milk",
+    "Egg",
+    "Wheat",
+    "Soy",
+    "Fish",
+    "Shellfish"
+  ]
+
+  DRUG_ALLERGIES = [
+    "Amoxicillin",
+    "Ampicillin",
+    "Penicillin",
+    "Tetracycline",
+    "Ibuprofen", # (Advil, Motrin, Nuprin)",
+    "Naproxen", # (Aleve, Anaprox)",
+    "Aspirin"
   ]
 
   SUBURBS = [

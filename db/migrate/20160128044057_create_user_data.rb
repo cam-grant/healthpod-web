@@ -15,8 +15,8 @@ class CreateUserData < ActiveRecord::Migration
       t.integer :smoking
 
       # Allergies
-      t.boolean :has_allergies
-      t.string :allergy_list
+      t.string :allergies
+      t.string :other_allergies
 
       # BMI
       t.decimal :weight

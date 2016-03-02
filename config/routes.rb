@@ -39,11 +39,11 @@ Rails.application.routes.draw do
 
   ####  Allergies
 
-  get   'has-allergies' => 'allergies#has_allergies'
-  post  'has-allergies' => 'allergies#has_allergies'
+  get   'allergies' => 'allergies#allergies'
+  post  'allergies' => 'allergies#allergies'
 
-  get   'allergy-list' => 'allergies#allergy_list'
-  post  'allergy-list' => 'allergies#allergy_list'
+  get   'other-allergies' => 'allergies#other_allergies'
+  post  'other-allergies' => 'allergies#other_allergies'
 
   ####  BMI
 

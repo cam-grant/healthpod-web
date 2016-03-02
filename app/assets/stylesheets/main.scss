@@ -210,6 +210,31 @@ table.two-col {
   }
 }
 
+table.three-col {
+  border-collapse: collapse;
+  // width: 100%;
+  margin: 0 auto;
+  td {
+    padding: 0 5rem 0 0;
+    //width: 33.33333%;
+    text-align: left;
+    vertical-align: top;
+
+    &.right {
+      text-align: right;
+    }
+  }
+  td+td {
+    padding: 0 5rem;
+  }
+
+  &.border {
+    td+td {
+      border-left: $light-border;
+    }
+  }
+}
+
 /////////////////////////////////////////
 
 a.survey-link {
@@ -280,6 +305,34 @@ input[type=text] {
   border-radius: $border-radius;
 }
 
+.checkbox-options {
+  .option {
+    display: block;
+    font-size: 2rem;
+    padding: 0.5rem 1.5rem;
+
+    span {
+      $size: 1.5rem;
+      display: inline-block;
+      width: $size;
+      height: $size;
+      border-radius: 0.25rem;
+      background-color: #ddd;
+      border: solid 0.5rem #ddd;
+      margin: 0 1rem 0 0;
+      position: relative;
+      top: 0.5rem;
+    }
+
+    &.selected {
+      color: darken($orange, 10%);
+      span {
+        background-color: $orange;
+      }
+    }
+  }
+}
+
 .options {
   list-style: none;
 
@@ -288,7 +341,6 @@ input[type=text] {
     font-size: 2rem;
     padding: 0.5rem 1.5rem;
     border-radius: $border-radius;
-    display: inline-block;
     cursor: pointer;
     border: solid 0.5rem transparent;
 

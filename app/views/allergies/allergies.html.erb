@@ -1,0 +1,44 @@
+
+<h1 class="center">Are you allergic to any of the following?</h1>
+
+<table class="three-col border checkbox-options" style="margin-top: 1rem;" data-field="user_data_allergies">
+  <tr>
+    <td>
+      <h2>Food</h2>
+      <% UserData::FOOD_ALLERGIES.each do |a| %>
+      <div class="option" data-value="<%= a %>"><span></span><%= a %></div>
+      <% end %>
+    </td>
+    <td>
+      <h2>Drugs</h2>
+      <% UserData::DRUG_ALLERGIES.each do |a| %>
+      <div class="option" data-value="<%= a %>"><span></span><%= a %></div>
+      <% end %>
+    </td>
+    <td>
+      <h2>Other</h2>
+      <div class="option" data-value="Other"><span></span>Other</div>
+    </td>
+  </tr>
+</table>
+
+<%= form_tag allergies_path, { :id => "form", :autocomplete => "off" } do |f| %>
+  <%= hidden_field_tag 'user_data[allergies]', '' %>
+<% end %>
+
+<script>
+$(document).ready(function() {
+  $('#next').removeClass('disabled');
+});
+</script>
+
+<% content_for :footer_left do %>
+  <label class="nav exit" for="exit-modal">Exit</label>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
+<% end %>
+<% content_for :footer_center do %>
+  <%= progress_bar %>
+<% end %>
+<% content_for :footer_right do %>
+  <%= next_button "$('#form').submit();" %>
+<% end %>

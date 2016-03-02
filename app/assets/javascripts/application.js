@@ -16,6 +16,7 @@
 //= require_tree .
 
 $(document).ready(function () {
+
   $('[data-option-group]').each(function(i, group) {
     group = $(group);
     field = $('#' + group.attr('data-option-group'));
@@ -35,4 +36,32 @@ $(document).ready(function () {
       });
     });
   });
+
+  $(".checkbox-options").each(function(i, group) {
+    group = $(group);
+    field = $('#' + group.attr('data-field'));
+    options = group.find('.option');
+    callback = group.attr('data-callback');
+
+    options.each(function(i, option) {
+      option = $(option);
+      option.click(function() {
+        if (option.hasClass('selected')) { option.removeClass('selected'); }
+        else { option.addClass('selected') }
+
+        // Concatenate all selected values
+        var values = new Array();
+        options.each(function(i2, option2) {
+          option2 = $(option2);
+          if (option2.hasClass('selected')) {
+            values.push(option2.attr('data-value'));
+          }
+        });
+        if (field) {
+          field.val(values);
+        }
+      });
+    });
+  });
+
 });
