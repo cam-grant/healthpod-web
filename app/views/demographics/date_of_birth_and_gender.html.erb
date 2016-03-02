@@ -1,15 +1,129 @@
 
 
+<script>
+
+var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+var START_YEAR = 1900;
+var REPEAT_SPEED = 333;
+var datePickerRepeat= 0;
+
+var day = 1;
+var month = 1;
+var year = 1970;
+
+function init() {
+
+  $('.datepicker-btn-day-add').mousedown(function() { addDay(); render(); datePickerRepeat = setInterval(function(){ addDay(); render(); }, REPEAT_SPEED); return false; })
+  $('.datepicker-btn-day-minus').mousedown(function() {  minusDay(); render(); datePickerRepeat = setInterval(function(){ minusDay(); render(); }, REPEAT_SPEED); return false; })
+
+  $('.datepicker-btn-month-add').mousedown(function() { addMonth(); render(); datePickerRepeat = setInterval(function(){ addMonth(); render(); }, REPEAT_SPEED); return false; })
+  $('.datepicker-btn-month-minus').mousedown(function() { minusMonth(); render(); datePickerRepeat = setInterval(function(){ minusMonth(); render(); }, REPEAT_SPEED); return false; })
+
+  $('.datepicker-btn-year-add').mousedown(function() { addYear(); render(); datePickerRepeat = setInterval(function(){ addYear(); render(); }, REPEAT_SPEED); return false; })
+  $('.datepicker-btn-year-minus').mousedown(function() { minusYear(); render(); datePickerRepeat = setInterval(function(){ minusYear(); render(); }, REPEAT_SPEED); return false; })
+
+  $('.datepicker-value-day').click(function() { highlight('day') });
+  $('.datepicker-value-month').click(function() { highlight('month') });
+  $('.datepicker-value-year').click(function() { highlight('year') });
+  highlight('day');
+
+  $(document).mouseup(function(){
+    clearInterval(datePickerRepeat);
+    return false;
+  });
+}
+
+function render() {
+  $(".datepicker-value-day").text(day);
+  $(".datepicker-value-month").text(MONTHS[month - 1]);
+  $(".datepicker-value-year").text(year);
+  $("#user_data_date_of_birth").val(year + '-' + month + '-' + day);
+}
+
+function highlight(field) {
+  $(".datepicker-value").removeClass("selected");
+  $(".datepicker-value-" + field).addClass("selected");
+}
+
+function addDay() {
+  day++;
+  if (day > 31) day = 1;
+  highlight('day');
+  render();
+}
+
+function minusDay() {
+  day--;
+  if (day < 1) day = 31;
+  highlight('day');
+  render();
+}
+
+function addMonth() {
+  month++;
+  if (month > 12) month = 1;
+  highlight('month');
+  render();
+}
+
+function minusMonth() {
+  month--;
+  if (month < 1) month = 12;
+  highlight('month');
+  render();
+}
+
+function addYear() {
+  year++;
+  if (year > (new Date().getFullYear())) year = 1;
+  highlight('year');
+  render();
+}
+
+function minusYear() {
+  year--;
+  if (year < START_YEAR) year = START_YEAR;
+  highlight('year');
+  render();
+}
+
+$(document).ready(function() { init(); });
+
+</script>
+
+
 <table class="two-col border">
   <tr>
     <td>
       <h1 class="center">Date of birth</h1>
+      <% arrow_fill = "#bbb" %>
+      <table class="datepicker">
+        <tr>
+          <td class="datepicker-btn-day-add"><%= svg_use "#icon-arrow-up", style: "fill: #{arrow_fill}; width: 5rem;" %></td>
+          <td class="datepicker-btn-month-add"><%= svg_use "#icon-arrow-up", style: "fill: #{arrow_fill}; width: 5rem;" %></td>
+          <td class="datepicker-btn-year-add"><%= svg_use "#icon-arrow-up", style: "fill: #{arrow_fill}; width: 5rem;" %></td>
+        </tr>
+        <tr>
+          <td><div class="datepicker-value datepicker-value-day">1</div></td>
+          <td><div class="datepicker-value datepicker-value-month">Jan</div></td>
+          <td><div class="datepicker-value datepicker-value-year">1970</div></td>
+        </tr>
+        <tr>
+          <td class="datepicker-btn-day-minus"><%= svg_use "#icon-arrow-down", style: "fill: #{arrow_fill}; width: 5rem;" %></td>
+          <td class="datepicker-btn-month-minus"><%= svg_use "#icon-arrow-down", style: "fill: #{arrow_fill}; width: 5rem;" %></td>
+          <td class="datepicker-btn-year-minus"><%= svg_use "#icon-arrow-down", style: "fill: #{arrow_fill}; width: 5rem;" %></td>
+        </tr>
+      </table>
     </td>
     <td style="text-align: center;">
       <h1 class="center">Gender</h1>
       <div class="options" data-option-group="user_data_gender" data-callback="validateForm" style="margin: 6rem auto;text-align: center;">
-        <div class="option" style="margin-right: 10rem; margin-bottom: 5rem;" data-value="Male"><%= image_tag "male.svg", style: "height: 200px;" %></div>
-        <div class="option" style="margin-bottom: 5rem;" data-value="Female"><%= image_tag "female.svg", style: "height: 200px;" %></div>
+        <div class="option" style="margin-right: 10rem; margin-bottom: 5rem;" data-value="Male">
+          <%= svg_use "#icon-male", style: "fill: #111; width: 8rem; height: 16rem;" %>
+        </div>
+        <div class="option" style="margin-bottom: 5rem;" data-value="Female">
+          <%= svg_use "#icon-female", style: "fill: #111; width: 9rem; height: 16rem;" %>
+        </div>
         <div style="clear: both;"></div>
         <div class="option" style="display: inline-block;" data-value="No answer">Prefer not to answer</div>
       </div>
@@ -18,6 +132,7 @@
 </table>
 
 <%= form_tag date_of_birth_and_gender_path, { :id => "form", :autocomplete => "off" } do |f| %>
+  <%= hidden_field_tag 'user_data[date_of_birth]', '' %>
   <%= hidden_field_tag 'user_data[gender]', '' %>
 <% end %>
 

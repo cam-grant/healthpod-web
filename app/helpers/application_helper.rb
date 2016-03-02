@@ -24,4 +24,12 @@ module ApplicationHelper
     btn.html_safe
   end
 
+  def svg_use(img, options = nil)
+    svg = "<svg preserveAspectRatio='xMinYMin meet'"
+    svg << " class='#{options[:class]}'" if options && options[:class].present?
+    svg << " style='#{options[:style]}'" if options && options[:style].present?
+    svg << "><use xlink:href='#{img}'></use></svg>"
+    svg.html_safe
+  end
+
 end

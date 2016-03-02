@@ -12,12 +12,9 @@
   <% end %>
 </head>
 <body>
-  <!-- <div id="header">
-    <%= image_tag "logo.svg", style: "height: 60px;" %>
-  </div> -->
+  <%= render :partial => 'partials/svg_icons' %>
   <div id="main">
     <%= yield %>
-    <%#= render :partial => 'partials/user_data' %>
   </div>
   <div id="footer">
     <table>

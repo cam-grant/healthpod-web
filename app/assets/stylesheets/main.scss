@@ -1,4 +1,4 @@
-* {
+  * {
   padding: 0;
   margin: 0;
 }
@@ -305,9 +305,10 @@ input[type=text] {
     min-width: 10rem;
     text-align: center;
 
-    $tint: darken($blue, 5%);
-    background-color: lighten($blue, 5%);
+    $tint: darken($dark-purple, 10%);
+    background-color: $dark-purple; // lighten($blue, 5%);
     border-bottom: solid 0.5rem $tint;
+    color: #fff;
 
     &:active {
       background-color: $tint;
@@ -341,6 +342,35 @@ input[type=text] {
       span {
         background-color: $orange;
       }
+    }
+  }
+}
+
+table.datepicker {
+  border: none;
+  border-collapse: collapse;
+  width: auto;
+  margin: 0 auto;
+
+  td {
+    width: 33%;
+    padding: 0 !important;
+    border: none !important;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .datepicker-value {
+    //min-width: 10rem;
+    text-align: center;
+    border: solid 0.5rem transparent;
+    border-radius: $border-radius;
+    font-size: 4rem;
+    font-weight: 700;
+    padding: 1rem 1rem 1.25rem 1rem;
+
+    &.selected {
+      border-color: $orange;
     }
   }
 }
