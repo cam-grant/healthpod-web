@@ -25,12 +25,14 @@ function init() {
   $('.datepicker-value-day').click(function() { highlight('day') });
   $('.datepicker-value-month').click(function() { highlight('month') });
   $('.datepicker-value-year').click(function() { highlight('year') });
-  highlight('day');
 
   $(document).mouseup(function(){
     clearInterval(datePickerRepeat);
     return false;
   });
+
+  highlight('day');
+  render();
 }
 
 function render() {
