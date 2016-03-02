@@ -7,11 +7,12 @@ class CreateUserData < ActiveRecord::Migration
       # Demographics
       t.string :full_name
       t.date :date_of_birth
-      t.string :gender
+      t.integer :gender
       t.string :suburb
-      t.string :country_of_birth
+      t.integer :country_of_birth
       t.boolean :aboriginal
-      t.string :has_diabetes
+      t.integer :has_diabetes
+      t.integer :smoking
 
       # Allergies
       t.boolean :has_allergies

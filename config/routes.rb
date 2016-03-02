@@ -34,6 +34,9 @@ Rails.application.routes.draw do
   get   'has_diabetes' => 'demographics#has_diabetes'
   post  'has_diabetes' => 'demographics#has_diabetes'
 
+  get   'smoking' => 'demographics#smoking'
+  post  'smoking' => 'demographics#smoking'
+
   ####  Allergies
 
   get   'has-allergies' => 'allergies#has_allergies'

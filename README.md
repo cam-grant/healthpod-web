@@ -61,3 +61,8 @@ $ cd ~/healthpod-web
 $ rake db:migrate RAILS_ENV=production
 $ rails s -e production
 ```
+
+
+## Javascript and jQuery plug-ins
+
+https://github.com/davetayls/jquery.kinetic

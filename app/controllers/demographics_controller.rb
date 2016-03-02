@@ -44,6 +44,14 @@ class DemographicsController < ApplicationController
     if request.post?
       @user_data.update_attributes(user_data_params) unless params[:user_data].blank?
       session[:current_step] += 1
+      redirect_to smoking_path
+    end
+  end
+
+  def smoking
+    if request.post?
+      @user_data.update_attributes(user_data_params) unless params[:user_data].blank?
+      session[:current_step] += 1
       redirect_to has_allergies_path
     end
   end

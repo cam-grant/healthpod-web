@@ -1,13 +1,23 @@
 <h1 class="center">Country of birth</h1>
 
+<div style="text-align: center; width: 45rem; margin: 3rem auto;">
+  <ul class="options" data-option-group="user_data_country_of_birth" data-callback="validateForm" style="text-align: left;">
+    <% UserData::REGIONS.each do |r| %>
+    <li class="option" data-value="<%= r[:id] %>"><span></span><%= r[:name] %></li>
+    <% end %>
+  </ul>
+</div>
+
 <%= form_tag country_of_birth_path, { :id => "form", :autocomplete => "off" } do |f| %>
   <%= hidden_field_tag 'user_data[country_of_birth]', '' %>
 <% end %>
 
 <script>
-$(document).ready(function() {
+
+function validateForm(val) {
   $('#next').removeClass('disabled');
-});
+}
+
 </script>
 
 <% content_for :footer_left do %>

@@ -1,0 +1,32 @@
+<h1 class="center">Do you currently smoke cigarettes or any<br />other tobacco products on a daily basis?</h1>
+
+<div style="text-align: center; width: 38rem; margin: 6rem auto;">
+  <ul class="options" data-option-group="user_data_smoking" data-callback="validateForm" style="text-align: left;">
+    <% UserData::SMOKING.each do |s| %>
+    <li class="option" data-value="<%= s[:id] %>"><span></span><%= s[:name] %></li>
+    <% end %>
+  </ul>
+</div>
+
+<%= form_tag smoking_path, { :id => "form", :autocomplete => "off" } do |f| %>
+  <%= hidden_field_tag 'user_data[smoking]', '' %>
+<% end %>
+
+<script>
+
+function validateForm(val) {
+  $('#next').removeClass('disabled');
+}
+
+</script>
+
+<% content_for :footer_left do %>
+  <label class="nav exit" for="exit-modal">Exit</label>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
+<% end %>
+<% content_for :footer_center do %>
+  <%= progress_bar %>
+<% end %>
+<% content_for :footer_right do %>
+  <%= next_button "$('#form').submit();" %>
+<% end %>

@@ -1,6 +1,10 @@
-  * {
+* {
   padding: 0;
   margin: 0;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -373,6 +377,37 @@ table.datepicker {
       border-color: $orange;
     }
   }
+}
+
+.scroll-list {
+  $border: solid 0.2rem #ddd;
+  margin: 0.25rem auto 1rem auto;
+  height: 31rem;
+  padding: 0 1rem;
+  overflow: auto;
+  border-top: $border;
+  border-bottom: $border;
+
+  // cursor: none !important;
+  // * { cursor: none !important; }
+
+  li {
+    margin: 0 !important;
+    padding: 0;
+
+    &.option-sep {
+      padding-bottom: 1.3rem !important;
+      border-bottom: $border;
+      border-width: 1px;
+      border-radius: 0;
+    }
+  }
+
+}
+
+.scroll-btn {
+  margin: 0 auto;
+  padding: 0;
 }
 
 /////////////////////////////////////////

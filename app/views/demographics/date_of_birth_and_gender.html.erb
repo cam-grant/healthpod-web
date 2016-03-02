@@ -118,14 +118,14 @@ $(document).ready(function() { init(); });
     <td style="text-align: center;">
       <h1 class="center">Gender</h1>
       <div class="options" data-option-group="user_data_gender" data-callback="validateForm" style="margin: 6rem auto;text-align: center;">
-        <div class="option" style="margin-right: 10rem; margin-bottom: 5rem;" data-value="Male">
+        <div class="option" style="margin-right: 10rem; margin-bottom: 5rem;" data-value="<%= UserData::GENDERS[0][:id] %>">
           <%= svg_use "#icon-male", style: "fill: #111; width: 8rem; height: 16rem;" %>
         </div>
-        <div class="option" style="margin-bottom: 5rem;" data-value="Female">
+        <div class="option" style="margin-bottom: 5rem;" data-value="<%= UserData::GENDERS[1][:id] %>">
           <%= svg_use "#icon-female", style: "fill: #111; width: 9rem; height: 16rem;" %>
         </div>
         <div style="clear: both;"></div>
-        <div class="option" style="display: inline-block;" data-value="No answer">Prefer not to answer</div>
+        <div class="option" style="display: inline-block;" data-value="<%= UserData::GENDERS[2][:id] %>"><%= UserData::GENDERS[2][:name] %></div>
       </div>
     </td>
   </tr>

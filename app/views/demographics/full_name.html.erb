@@ -3,7 +3,8 @@
 <%= form_tag full_name_path, { :id => "form", :autocomplete => "off" } do |f| %>
 
   <div style="text-align: center; width: 75%; margin-left: auto; margin-right: auto;">
-      <%= text_field_tag 'user_data[full_name]', 'Jane Citizen', id: 'full_name', placeholder: "Example: Jane Citizen" %>
+      <%= text_field_tag 'user_data[full_name]', '', id: 'full_name',
+        placeholder: "Example: Jane Citizen", "data-osk-options": "disableReturn disableTab disableSymbols" %>
   </div>
 
 <% end %>
@@ -12,15 +13,18 @@
 $(document).ready(function() {
   full_name = $('#full_name');
 
-  full_name.on('input', function() {
+  full_name.on('keyup', function() {
     if (full_name.val().trim().length > 2) {
       $('#next').removeClass('disabled');
     } else {
       $('#next').addClass('disabled');
     }
   });
-  $('#next').removeClass('disabled');
+
+  full_name.onScreenKeyboard({ topPosition: '28%', leftPosition: '19%'});
+  full_name.click();
   full_name.focus();
+
 });
 </script>
 
