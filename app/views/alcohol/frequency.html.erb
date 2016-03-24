@@ -1,0 +1,32 @@
+<h1 class="center">How often did you have a drink containing alcohol?</h1>
+
+<div style="text-align: center; width: 30rem; margin: 3rem auto;">
+  <ul class="options" data-option-group="user_data_alcohol_frequency" data-callback="validateForm" style="text-align: left;">
+    <% UserData::ALCOHOL_FREQUENCY.each do |r| %>
+    <li class="option" data-value="<%= r[:id] %>"><span></span><%= r[:name] %></li>
+    <% end %>
+  </ul>
+</div>
+
+<%= form_tag alcohol_frequency_path, { :id => "form", :autocomplete => "off" } do |f| %>
+  <%= hidden_field_tag 'user_data[alcohol_frequency]', '' %>
+<% end %>
+
+<script>
+
+function validateForm(val) {
+  $('#next').removeClass('disabled');
+}
+
+</script>
+
+<% content_for :footer_left do %>
+  <label class="nav exit" for="exit-modal">Exit</label>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: hub_url } %>
+<% end %>
+<% content_for :footer_center do %>
+  <%= progress_bar %>
+<% end %>
+<% content_for :footer_right do %>
+  <%= next_button "$('#form').submit();" %>
+<% end %>

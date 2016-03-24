@@ -70,6 +70,30 @@ class UserData < ActiveRecord::Base
     "Aspirin"
   ]
 
+  ALCOHOL_FREQUENCY = [
+    {id: 0, name: "Never", value: 0},
+    {id: 1, name: "Monthly", value: 1},
+    {id: 2, name: "Weekly", value: 2},
+    {id: 3, name: "Some days each week ", value: 3},
+    {id: 4, name: "Most days each week", value: 4}
+  ]
+
+  ALCOHOL_NUM_DRINKS = [
+    {id: 0, name: "1 or 2", value: 0},
+    {id: 1, name: "3 or 4", value: 1},
+    {id: 2, name: "5 or 6", value: 2},
+    {id: 3, name: "7 or 9 ", value: 3},
+    {id: 4, name: "More than 10", value: 4}
+  ]
+
+  ALCOHOL_FREQUENCY_SIX_OR_MORE = [
+    {id: 0, name: "Never", value: 0},
+    {id: 1, name: "Monthly", value: 1},
+    {id: 2, name: "Weekly", value: 2},
+    {id: 3, name: "Some days each week ", value: 3},
+    {id: 4, name: "Most days each week", value: 4}
+  ]
+
   SUBURBS = [
     "Acton",
     "Ainslie",

@@ -15,34 +15,49 @@
       </div>
     </td>
     <td>
-      <div class="report-card diabetes <%= available %>">
-        <h1>Diabetes risk</h1>
-        <% if @user_data.basic_complete %>
-        <div style="margin: 4rem auto; text-align: center;">
-          <%= link_to "Start", diabetes_url, class: "btn btn-secondary" %>
-        </div>
+      <% complete = @user_data.diabetes_complete ? "complete" : "" %>
+      <div class="report-card diabetes <%= available %> <%= complete %>">
+        <%= link_to diabetes_welcome_url do %>
+          <h1>Diabetes risk</h1>
+        <% end %>
+        <% if @user_data.basic_complete && !@user_data.diabetes_complete %>
+          <div style="margin: 4rem auto; text-align: center;">
+            <%= link_to "Start", diabetes_welcome_url, class: "btn btn-secondary" %>
+          </div>
+        <% elsif @user_data.diabetes_complete %>
+           <%= image_tag "check.svg", style: "height: 4.5rem; float: right" %>
         <% end %>
       </div>
     </td>
   </tr>
   <tr>
     <td>
-      <div class="report-card physical <%= available %>">
-        <h1>Physical activity</h1>
-        <% if @user_data.basic_complete %>
-        <div style="margin: 4rem auto; text-align: center;">
-          <%= link_to "Start", physical_url, class: "btn btn-secondary" %>
-        </div>
+      <% complete = @user_data.physical_complete ? "complete" : "" %>
+      <div class="report-card physical <%= available %> <%= complete %>">
+        <%= link_to physical_welcome_url do %>
+          <h1>Physical activity</h1>
+        <% end %>
+        <% if @user_data.basic_complete && !@user_data.physical_complete %>
+          <div style="margin: 4rem auto; text-align: center;">
+            <%= link_to "Start", physical_welcome_url, class: "btn btn-secondary" %>
+          </div>
+        <% elsif @user_data.physical_complete %>
+           <%= image_tag "check.svg", style: "height: 4.5rem; float: right" %>
         <% end %>
       </div>
     </td>
     <td>
-      <div class="report-card alcohol <%= available %>">
-        <h1>Alcohol consumption</h1>
-        <% if @user_data.basic_complete %>
-        <div style="margin: 4rem auto; text-align: center;">
-          <%= link_to "Start", alcohol_url, class: "btn btn-secondary" %>
-        </div>
+      <% complete = @user_data.alcohol_complete ? "complete" : "" %>
+      <div class="report-card alcohol <%= available %> <%= complete %>">
+        <%= link_to alcohol_welcome_url do %>
+          <h1>Alcohol consumption</h1>
+        <% end %>
+        <% if @user_data.basic_complete && !@user_data.alcohol_complete %>
+          <div style="margin: 4rem auto; text-align: center;">
+            <%= link_to "Start", alcohol_welcome_url, class: "btn btn-secondary" %>
+          </div>
+        <% elsif @user_data.alcohol_complete %>
+           <%= image_tag "check.svg", style: "height: 4.5rem; float: right" %>
         <% end %>
       </div>
     </td>

@@ -1,11 +1,14 @@
-<h1>
-  <%= image_tag "alcohol.svg", style: "height: 100px;" %>
-  Check your alcohol consumption
+<h1 class="center">
+  Alcohol consumption
 </h1>
 
-<p>This survey will help you to assess your alcohol consumption.</p>
-<p>It will take about 2 minutes to complete.</p>
-<p>Press start to begin.</p>
+<p style='text-align: center;'>
+  Standard drink sizes
+</p>
+
+<div style="text-align: center; margin: 5rem auto;">
+  <%= image_tag "drink_sizes.svg", style: "width: 58rem;" %>
+</div>
 
 <% content_for :footer_left do %>
   <%= link_to hub_url, class: "nav exit" do %>
@@ -17,5 +20,5 @@
   <%#= progress_bar(@percent_complete, @minutes_remaining) %>
 <% end %>
 <% content_for :footer_right do %>
-  <%= link_to "Start", "#", class: "nav next" %>
+  <%= link_to "Next", alcohol_frequency_path, class: "nav next" %>
 <% end %>

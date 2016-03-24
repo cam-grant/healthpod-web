@@ -1,3 +1,5 @@
+@import 'variables';
+
 * {
   padding: 0;
   margin: 0;
@@ -438,7 +440,7 @@ table.datepicker {
 }
 
 .scroll-list {
-  $border: solid 0.2rem #ddd;
+  $border: solid 0.2rem #eee;
   margin: 0.25rem auto 1rem auto;
   height: 31rem;
   padding: 0 1rem;
@@ -547,33 +549,42 @@ table.hub {
   &.diabetes {
     background-image: image-url("diabetes_grey.svg");
     &.available {
+      background-image: image-url("diabetes.svg");
+    }
+    &.complete {
       $card-color: lighten($red, 20%);
       background-image: image-url("diabetes.svg");
-      background-color: #fff;// $card-color;
-      //border-color: $card-color;
-      //border-style: solid;
+      background-color: $card-color;
+      border-color: $card-color;
+      border-style: solid;
     }
   }
 
   &.physical {
     background-image: image-url("physical_grey.svg");
     &.available {
+      background-image: image-url("physical.svg");
+    }
+    &.complete {
       $card-color: lighten($teal, 15%);
       background-image: image-url("physical.svg");
-      background-color: #fff;// $card-color;
-      //border-color: $card-color;
-      //border-style: solid;
+      background-color: $card-color;
+      border-color: $card-color;
+      border-style: solid;
     }
   }
 
   &.alcohol {
     background-image: image-url("alcohol_grey.svg");
     &.available {
+      background-image: image-url("alcohol.svg");
+    }
+    &.complete {
       $card-color: lighten($yellow, 20%);
       background-image: image-url("alcohol.svg");
-      background-color: #fff;// $card-color;
-      //border-color: $card-color;
-      //border-style: solid;
+      background-color: $card-color;
+      border-color: $card-color;
+      border-style: solid;
     }
   }
 

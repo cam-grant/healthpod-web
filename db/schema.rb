@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 20160128044057) do
   create_table "user_data", force: :cascade do |t|
     t.boolean  "consent"
     t.boolean  "returning_user"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.boolean  "basic_complete"
     t.boolean  "diabetes_complete"
     t.boolean  "physical_complete"
@@ -34,8 +36,9 @@ ActiveRecord::Schema.define(version: 20160128044057) do
     t.decimal  "height"
     t.decimal  "bmi"
     t.datetime "bmi_recorded_at"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "alcohol_frequency"
+    t.integer  "alcohol_num_drinks"
+    t.integer  "alcohol_frequency_six_or_more"
   end
 
 end

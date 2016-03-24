@@ -15,7 +15,7 @@
   </ul>
 </div>
 
-<%= form_tag has_diabetes_path, { :id => "form", :autocomplete => "off" } do |f| %>
+<%= form_tag has_diabetes_url, { :id => "form", :autocomplete => "off" } do |f| %>
   <%= hidden_field_tag 'user_data[has_diabetes]', '' %>
 <% end %>
 
@@ -35,5 +35,5 @@ function validateForm(val) {
   <%= progress_bar %>
 <% end %>
 <% content_for :footer_right do %>
-  <%= next_button "$('#form').submit();" %>
+  <%= next_button "$('#form').submit();", "#", "Finish" %>
 <% end %>

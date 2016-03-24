@@ -15,7 +15,7 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).ready(function () {
+function initPage() {
 
   $('[data-option-group]').each(function(i, group) {
     group = $(group);
@@ -64,4 +64,4 @@ $(document).ready(function () {
     });
   });
 
-});
+}

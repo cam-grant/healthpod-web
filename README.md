@@ -68,3 +68,13 @@ $ rails s -e production
 https://github.com/davetayls/jquery.kinetic
 
 https://github.com/chriscook/on-screen-keyboard
+
+
+
+## Rails commands
+
+rake db:drop RAILS_ENV=production
+rake db:create RAILS_ENV=production
+rake db:migrate RAILS_ENV=production
+
+rails s -e production

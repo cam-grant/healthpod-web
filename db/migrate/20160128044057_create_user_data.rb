@@ -3,6 +3,7 @@ class CreateUserData < ActiveRecord::Migration
     create_table :user_data do |t|
       t.boolean :consent
       t.boolean :returning_user
+      t.timestamps null: false
 
       # Survey status
       t.boolean :basic_complete
@@ -30,7 +31,11 @@ class CreateUserData < ActiveRecord::Migration
       t.decimal :bmi
       t.datetime :bmi_recorded_at
 
-      t.timestamps null: false
+      # Alcohol
+      t.integer :alcohol_frequency
+      t.integer :alcohol_num_drinks
+      t.integer :alcohol_frequency_six_or_more
+
     end
   end
 end

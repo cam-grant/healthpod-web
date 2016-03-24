@@ -14,53 +14,64 @@ Rails.application.routes.draw do
 
   get   'print' => 'welcome#print'
 
-  ####  Demographics
+  ####  Basic health check
 
-  get   'full-name' => 'demographics#full_name'
-  post  'full-name' => 'demographics#full_name'
+  get   'full-name' => 'basic#full_name'
+  post  'full-name' => 'basic#full_name'
 
-  get   'date-of-birth-and-gender' => 'demographics#date_of_birth_and_gender'
-  post  'date-of-birth-and-gender' => 'demographics#date_of_birth_and_gender'
+  get   'date-of-birth-and-gender' => 'basic#date_of_birth_and_gender'
+  post  'date-of-birth-and-gender' => 'basic#date_of_birth_and_gender'
 
-  get   'suburb' => 'demographics#suburb'
-  post  'suburb' => 'demographics#suburb'
+  get   'suburb' => 'basic#suburb'
+  post  'suburb' => 'basic#suburb'
 
-  get   'country-of-birth' => 'demographics#country_of_birth'
-  post  'country-of-birth' => 'demographics#country_of_birth'
+  get   'country-of-birth' => 'basic#country_of_birth'
+  post  'country-of-birth' => 'basic#country_of_birth'
 
-  get   'aboriginal' => 'demographics#aboriginal'
-  post  'aboriginal' => 'demographics#aboriginal'
+  get   'aboriginal' => 'basic#aboriginal'
+  post  'aboriginal' => 'basic#aboriginal'
 
-  get   'has_diabetes' => 'demographics#has_diabetes'
-  post  'has_diabetes' => 'demographics#has_diabetes'
+  get   'smoking' => 'basic#smoking'
+  post  'smoking' => 'basic#smoking'
 
-  get   'smoking' => 'demographics#smoking'
-  post  'smoking' => 'demographics#smoking'
+  get   'allergies' => 'basic#allergies'
+  post  'allergies' => 'basic#allergies'
 
-  ####  Allergies
+  get   'other-allergies' => 'basic#other_allergies'
+  post  'other-allergies' => 'basic#other_allergies'
 
-  get   'allergies' => 'allergies#allergies'
-  post  'allergies' => 'allergies#allergies'
+  get   'bmi' => 'basic#bmi'
+  get   'bmi-read' => 'basic#bmi_read'
 
-  get   'other-allergies' => 'allergies#other_allergies'
-  post  'other-allergies' => 'allergies#other_allergies'
-
-  ####  BMI
-
-  get   'bmi' => 'bmi#bmi'
-  get   'bmi-read' => 'bmi#bmi_read'
+  get   'has_diabetes' => 'basic#has_diabetes'
+  post  'has_diabetes' => 'basic#has_diabetes'
 
   ####  Diabetes
 
-  get   'diabetes' => 'diabetes#welcome'
+  get   'diabetes-welcome' => 'diabetes#welcome'
+
+  get   'diabetes-survey' => 'diabetes#survey'
+  post  'diabetes-survey' => 'diabetes#survey'
 
   ####  Physical
 
-  get   'physical' => 'physical#welcome'
+  get   'physical-welcome' => 'physical#welcome'
+
+  get   'physical-survey' => 'physical#survey'
+  post  'physical-survey' => 'physical#survey'
 
   ####  Alcohol
 
-  get   'alcohol' => 'alcohol#welcome'
+  get   'alcohol-welcome' => 'alcohol#welcome'
+
+  get   'alcohol-frequency' => 'alcohol#frequency'
+  post  'alcohol-frequency' => 'alcohol#frequency'
+
+  get   'alcohol-num-drinks' => 'alcohol#num_drinks'
+  post  'alcohol-num-drinks' => 'alcohol#num_drinks'
+
+  get   'alcohol-frequency-six-or-more' => 'alcohol#frequency_six_or_more'
+  post  'alcohol-frequency-six-or-more' => 'alcohol#frequency_six_or_more'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,11 +1,7 @@
-<h1>
+<h1 class="center">
   <%= image_tag "physical.svg", style: "height: 100px;" %>
   Check your physical activity
 </h1>
-
-<p>This survey will help you to assess your level of physical activity.</p>
-<p>It will take about 2 minutes to complete.</p>
-<p>Press start to begin.</p>
 
 <% content_for :footer_left do %>
   <%= link_to hub_url, class: "nav exit" do %>
@@ -17,5 +13,5 @@
   <%#= progress_bar(@percent_complete, @minutes_remaining) %>
 <% end %>
 <% content_for :footer_right do %>
-  <%= link_to "Start", "#", class: "nav next" %>
+  <%= link_to "Start", physical_survey_url, class: "nav next" %>
 <% end %>

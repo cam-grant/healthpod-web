@@ -26,13 +26,13 @@
   <%= progress_bar %>
 <% end %>
 <% content_for :footer_right do %>
-  <%= next_button nil, hub_url, "Finish" %>
+  <%= next_button nil, has_diabetes_url, "Next" %>
 <% end %>
 
 <script>
 $(document).ready(function() {
   ajax_url = '<%= bmi_read_url %>';
-  next_url = '<%= hub_url %>'
+  next_url = '<%= has_diabetes_url %>'
 
   $.ajax({
     url: ajax_url,

@@ -1,0 +1,88 @@
+<%
+  slices = UserData::SUBURBS.in_groups(4, false).to_a
+  arrow_fill = "#bbb"
+%>
+<h1 class="center">Where do you live?</h1>
+
+<!-- <div style="width: 30rem;margin: 0 auto; text-align: center;" data-option-group="user_data_suburb" data-callback="validateForm"> -->
+<div style="margin: 0 auto; text-align: center;" data-option-group="user_data_suburb" data-callback="validateForm">
+  <div class="scroll-btn" onmousedown="scrollUp()"><%= svg_use "#icon-arrow-up", style: "fill: #{arrow_fill}; height: 3rem;" %></div>
+  <div id="suburbs-list" class="scroll-list" style="text-align: left;">
+    <table>
+      <tr>
+        <td style="width: 25%; vertical-align: top;">
+          <ul class="options">
+            <li class="option" data-value="Outside the ACT"><span></span>Outside the ACT</li>
+            <li class="option" data-value="Other ACT suburb"><span></span>Other ACT suburb</li>
+            <% slices[0].each do |s| %>
+              <li class="option" data-value="<%= s %>"><span></span><%= s %></li>
+            <% end %>
+          </ul>
+        </td>
+        <td style="width: 25%; vertical-align: top;">
+          <ul class="options">
+            <% slices[1].each do |s| %>
+              <li class="option" data-value="<%= s %>"><span></span><%= s %></li>
+            <% end %>
+          </ul>
+        </td>
+        <td style="width: 25%; vertical-align: top;">
+          <ul class="options">
+            <% slices[2].each do |s| %>
+              <li class="option" data-value="<%= s %>"><span></span><%= s %></li>
+            <% end %>
+          </ul>
+        </td>
+        <td style="width: 25%; vertical-align: top;">
+          <ul class="options">
+            <% slices[3].each do |s| %>
+              <li class="option" data-value="<%= s %>"><span></span><%= s %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="scroll-btn" onmousedown="scrollDown()"><%= svg_use "#icon-arrow-down", style: "fill: #{arrow_fill}; height: 3rem;" %></div>
+</div>
+
+
+
+
+
+<%= form_tag suburb_path, { :id => "form", :autocomplete => "off" } do |f| %>
+  <%= hidden_field_tag 'user_data[suburb]', '' %>
+<% end %>
+
+<script>
+
+$(document).ready(function() {
+  var $scroller = $('#suburbs-list').kinetic();
+}).mouseup(function() {
+  $('#suburbs-list').kinetic('end');
+});
+
+function scrollUp() {
+  $('#suburbs-list').kinetic('start', { velocityY: -10 });
+}
+
+function scrollDown() {
+  $('#suburbs-list').kinetic('start', { velocityY: 10 });
+}
+
+function validateForm() {
+  $('#next').removeClass('disabled');
+}
+
+</script>
+
+<% content_for :footer_left do %>
+  <label class="nav exit" for="exit-modal">Exit</label>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: hub_url } %>
+<% end %>
+<% content_for :footer_center do %>
+  <%= progress_bar %>
+<% end %>
+<% content_for :footer_right do %>
+  <%= next_button "$('#form').submit();" %>
+<% end %>

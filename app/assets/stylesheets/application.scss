@@ -10,31 +10,8 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- * require_tree .
- * require_self
  */
 
-$border-radius: 5px;
-$light-border: solid 1px #ddd;
-$margin: 6rem;
-$fore-color: #111;
-
-$green: green;
-$dark-green: darken($green, 5%);
-$yellow: #E3C170;
-$light-yellow: #FAD57E;
-$orange: #EE9E35;
-$teal: #B2D8C4;
-$dark-teal: #A2C2B1;
-$purple: #9999B0;
-$dark-purple: #888494;
-$very-dark-purple: darken($dark-purple, 20%);
-$blue: #9FD5DC;
-$dark-blue: #90BEC5;
-$very-dark-blue: darken($dark-blue, 15%);
-$red: #EA9185;
-$dark-red: #D98377;
-
-@import './main';
-@import './modal';
-@import './keyboard';
+@import 'main';
+@import 'modal';
+@import 'keyboard';
