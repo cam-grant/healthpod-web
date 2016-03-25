@@ -539,7 +539,7 @@ table.hub {
   }
 
   &.basic {
-    $card-color: lighten($purple, 25%);
+    $card-color: $light-blue; // lighten($purple, 25%);
     background-image: image-url("basic_health.svg");
     background-color: $card-color;
     border-color: $card-color;

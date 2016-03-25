@@ -14,6 +14,7 @@ $purple: #9999B0;
 $dark-purple: #888494;
 $very-dark-purple: darken($dark-purple, 20%);
 $blue: #9FD5DC;
+$light-blue: desaturate(lighten($blue, 15%), 15%);
 $dark-blue: #90BEC5;
 $very-dark-blue: darken($dark-blue, 15%);
 $red: #EA9185;

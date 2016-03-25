@@ -11,7 +11,7 @@ class CreateUserData < ActiveRecord::Migration
       t.boolean :physical_complete
       t.boolean :alcohol_complete
 
-      # Demographics
+      # Basic health
       t.string :full_name
       t.date :date_of_birth
       t.integer :gender

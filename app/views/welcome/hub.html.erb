@@ -15,23 +15,6 @@
       </div>
     </td>
     <td>
-      <% complete = @user_data.diabetes_complete ? "complete" : "" %>
-      <div class="report-card diabetes <%= available %> <%= complete %>">
-        <%= link_to diabetes_welcome_url do %>
-          <h1>Diabetes risk</h1>
-        <% end %>
-        <% if @user_data.basic_complete && !@user_data.diabetes_complete %>
-          <div style="margin: 4rem auto; text-align: center;">
-            <%= link_to "Start", diabetes_welcome_url, class: "btn btn-secondary" %>
-          </div>
-        <% elsif @user_data.diabetes_complete %>
-           <%= image_tag "check.svg", style: "height: 4.5rem; float: right" %>
-        <% end %>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td>
       <% complete = @user_data.physical_complete ? "complete" : "" %>
       <div class="report-card physical <%= available %> <%= complete %>">
         <%= link_to physical_welcome_url do %>
@@ -42,6 +25,26 @@
             <%= link_to "Start", physical_welcome_url, class: "btn btn-secondary" %>
           </div>
         <% elsif @user_data.physical_complete %>
+           <%= image_tag "check.svg", style: "height: 4.5rem; float: right" %>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%
+        complete = @user_data.diabetes_complete ? "complete" : ""
+        diabetes_available = available && !@user_data.has_diabetes?
+      %>
+      <div class="report-card diabetes <%= diabetes_available %> <%= complete %>">
+        <%= link_to diabetes_welcome_url do %>
+          <h1>Diabetes risk</h1>
+        <% end %>
+        <% if @user_data.basic_complete && !@user_data.diabetes_complete && diabetes_available %>
+          <div style="margin: 4rem auto; text-align: center;">
+            <%= link_to "Start", diabetes_welcome_url, class: "btn btn-secondary" %>
+          </div>
+        <% elsif @user_data.diabetes_complete %>
            <%= image_tag "check.svg", style: "height: 4.5rem; float: right" %>
         <% end %>
       </div>

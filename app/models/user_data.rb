@@ -12,6 +12,10 @@ class UserData < ActiveRecord::Base
     self.allergies && self.allergies.include?("Other") ? true : false
   end
 
+  def has_diabetes?
+    self.has_diabetes && self.has_diabetes == UserData::DIABETES[0][:id] ? true : false
+  end
+
   def to_csv
     attributes = %w{full_name dob}
 
