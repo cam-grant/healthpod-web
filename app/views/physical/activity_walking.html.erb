@@ -1,0 +1,38 @@
+<h1 class="center">During the last week, how much walking did you do?</h1>
+
+<p style="width: 60rem;text-align: left; font-size: 2rem;margin: 4rem auto;">
+  Walking, including walking to work, shopping, for pleasure, etc.
+</p>
+
+<div style="text-align: center; width: 40rem; margin: 4rem auto;">
+  <ul class="options" data-option-group="user_data_physical_activity_walking" data-callback="validateForm" style="text-align: left;">
+    <% UserData::PHYSICAL_AMOUNTS.each do |t| %>
+    <li class="option" data-value="<%= t[:id] %>"><span></span><%= t[:name] %></li>
+    <% end %>
+  </ul>
+</div>
+
+<%= form_tag physical_activity_walking_url, { :id => "form", :autocomplete => "off" } do |f| %>
+  <%= hidden_field_tag 'user_data[physical_activity_walking]', '' %>
+<% end %>
+
+<script>
+
+function validateForm(val) {
+  $('#next').removeClass('disabled');
+}
+
+validateForm('');
+
+</script>
+
+<% content_for :footer_left do %>
+  <label class="nav exit" for="exit-modal">Exit</label>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: hub_url } %>
+<% end %>
+<% content_for :footer_center do %>
+  <%= progress_bar %>
+<% end %>
+<% content_for :footer_right do %>
+  <%= next_button "$('#form').submit();", "#" %>
+<% end %>

@@ -401,6 +401,12 @@ input[type=text] {
       top: 0.75rem;
     }
 
+    div.example {
+      font-size: 1.5rem;
+      color: #808080;
+      margin-left: 4rem;
+    }
+
     &.selected {
       color: darken($orange, 10%);
       span {

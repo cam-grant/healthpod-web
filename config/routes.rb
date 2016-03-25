@@ -57,8 +57,22 @@ Rails.application.routes.draw do
 
   get   'physical-welcome' => 'physical#welcome'
 
-  get   'physical-survey' => 'physical#survey'
-  post  'physical-survey' => 'physical#survey'
+  get   'physical-work-type' => 'physical#work_type'
+  post  'physical-work-type' => 'physical#work_type'
+
+  get   'physical-activity-exercise' => 'physical#activity_exercise'
+  post  'physical-activity-exercise' => 'physical#activity_exercise'
+  get   'physical-activity-cycling' => 'physical#activity_cycling'
+  post  'physical-activity-cycling' => 'physical#activity_cycling'
+  get   'physical-activity-walking' => 'physical#activity_walking'
+  post  'physical-activity-walking' => 'physical#activity_walking'
+  get   'physical-activity-housework' => 'physical#activity_housework'
+  post  'physical-activity-housework' => 'physical#activity_housework'
+  get   'physical-activity-gardening' => 'physical#activity_gardening'
+  post  'physical-activity-gardening' => 'physical#activity_gardening'
+
+  get   'physical-walking-pace' => 'physical#walking_pace'
+  post  'physical-walking-pace' => 'physical#walking_pace'
 
   ####  Alcohol
 

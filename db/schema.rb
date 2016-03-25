@@ -39,6 +39,13 @@ ActiveRecord::Schema.define(version: 20160128044057) do
     t.integer  "alcohol_frequency"
     t.integer  "alcohol_num_drinks"
     t.integer  "alcohol_frequency_six_or_more"
+    t.integer  "physical_work_type"
+    t.integer  "physical_activity_exercise"
+    t.integer  "physical_activity_cycling"
+    t.integer  "physical_activity_walking"
+    t.integer  "physical_activity_housework"
+    t.integer  "physical_activity_gardening"
+    t.integer  "physical_walking_pace"
   end
 
 end

@@ -98,6 +98,28 @@ class UserData < ActiveRecord::Base
     {id: 4, name: "Most days each week", value: 4}
   ]
 
+  PHYSICAL_WORK_TYPES = [
+    {id: 0, name: "I am not in employment", example: "E.g. retired, retired for health reasons, unemployed, full-time carer, etc."},
+    {id: 1, name: "I spend most of my time sitting at work", example: "E.g. office worker.", value: "Mostly sitting"},
+    {id: 2, name: "I spend most of my time standing or walking at work", example: "E.g. shop assistant, hairdresser, security guard, childminder, etc."},
+    {id: 3, name: "My work involves physical effort", example: "E.g. plumber, electrician, carpenter, cleaner, hospital nurse, gardener, etc."},
+    {id: 4, name: "My work involves vigorous physical activity", example: "E.g. scaffolder, construction worker, refuse collector, etc."}
+  ]
+
+  PHYSICAL_AMOUNTS = [
+    {id: 0, name: "None"},
+    {id: 1, name: "Some, but less than 1 hour"},
+    {id: 2, name: "Between 1 and 3 hours"},
+    {id: 3, name: "3 hours or more"},
+  ]
+
+  PHYSICAL_WALKING_PACES = [
+    {id: 0, name: "Slow pace (less than 5 km/h)"},
+    {id: 1, name: "Steady average pace"},
+    {id: 2, name: "Brisk pace"},
+    {id: 3, name: "Fast pace (more than 6 km/h)"},
+  ]
+
   SUBURBS = [
     "Acton",
     "Ainslie",
