@@ -30,7 +30,7 @@ $(document).ready(function() {
 
 <% content_for :footer_left do %>
   <label class="nav exit" for="exit-modal">Exit</label>
-  <%= render :partial => 'partials/exit_modal', locals: { exit_url: hub_url } %>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
 <% end %>
 <% content_for :footer_center do %>
   <%= progress_bar %>

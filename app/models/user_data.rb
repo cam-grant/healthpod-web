@@ -54,7 +54,7 @@ class UserData < ActiveRecord::Base
   ]
 
   FOOD_ALLERGIES = [
-    "Peanut",
+    "Peanuts",
     "Tree nuts",
     "Milk",
     "Egg",

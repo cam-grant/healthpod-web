@@ -5,19 +5,22 @@
   <tr>
     <td>
       <h2>Food</h2>
-      <% UserData::FOOD_ALLERGIES.each do |a| %>
+      <% UserData::FOOD_ALLERGIES.sort_by!{ |a| a.downcase }.each do |a| %>
       <div class="option" data-value="<%= a %>"><span></span><%= a %></div>
       <% end %>
     </td>
     <td>
       <h2>Drugs</h2>
-      <% UserData::DRUG_ALLERGIES.each do |a| %>
+      <% UserData::DRUG_ALLERGIES.sort_by!{ |a| a.downcase }.each do |a| %>
       <div class="option" data-value="<%= a %>"><span></span><%= a %></div>
       <% end %>
     </td>
     <td>
       <h2>Other</h2>
       <div class="option" data-value="Other"><span></span>Other</div>
+
+      <h2>None</h2>
+      <div class="option" data-value=""><span></span>No allergies</div>
     </td>
   </tr>
 </table>
@@ -34,7 +37,7 @@ $(document).ready(function() {
 
 <% content_for :footer_left do %>
   <label class="nav exit" for="exit-modal">Exit</label>
-  <%= render :partial => 'partials/exit_modal', locals: { exit_url: hub_url } %>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
 <% end %>
 <% content_for :footer_center do %>
   <%= progress_bar %>
