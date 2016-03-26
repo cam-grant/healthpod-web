@@ -3,6 +3,10 @@
   Check your physical activity
 </h1>
 
+<p style="text-align: center;margin: 5rem auto;">
+  About <%= UserData::PHYSICAL_SURVEY_ESTIMATE %> to complete this survey
+</p>
+
 <% content_for :footer_left do %>
   <%= link_to hub_url, class: "nav exit" do %>
     <%= image_tag 'chevron-thin-left.svg' %>

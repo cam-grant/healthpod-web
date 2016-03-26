@@ -1,5 +1,9 @@
 class UserData < ActiveRecord::Base
 
+  PHYSICAL_SURVEY_ESTIMATE = "2 minutes"
+  DIABETES_SURVEY_ESTIMATE = "2 minutes"
+  ALCOHOL_SURVEY_ESTIMATE = "2 minutes"
+
   def male?
     self.gender && self.gender == UserData::GENDERS[0][:id] ? true : false
   end
