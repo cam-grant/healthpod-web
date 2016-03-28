@@ -1,15 +1,15 @@
 class UserData < ActiveRecord::Base
 
-  PHYSICAL_SURVEY_ESTIMATE = "2 minutes"
-  DIABETES_SURVEY_ESTIMATE = "2 minutes"
+  PHYSICAL_SURVEY_ESTIMATE = "30 seconds"
+  DIABETES_SURVEY_ESTIMATE = "1 minute"
   ALCOHOL_SURVEY_ESTIMATE = "2 minutes"
 
   def male?
-    self.gender && self.gender == UserData::GENDERS[0][:id] ? true : false
+    self.gender && self.gender == 1 ? true : false
   end
 
   def female?
-    self.gender && self.gender == UserData::GENDERS[1][:id] ? true : false
+    self.gender && self.gender == 2 ? true : false
   end
 
   def has_other_allergies?
@@ -17,44 +17,139 @@ class UserData < ActiveRecord::Base
   end
 
   def has_diabetes?
-    self.has_diabetes && self.has_diabetes == UserData::DIABETES[0][:id] ? true : false
+    self.has_diabetes && self.has_diabetes == 1 ? true : false
   end
 
-  def to_csv
-    attributes = %w{full_name dob}
+  def born_in_asia?
+    self.country_of_birth && self.country_of_birth == 2
+  end
 
-    CSV.generate(headers: true) do |csv|
-      csv << attributes
-      csv << attributes.map{ |attr| self.send(attr) }
+  def asian_or_aboriginal?
+    self.born_in_asia? || self.aboriginal
+  end
+
+  def smokes?
+    self.smoking && self.smoking == 3
+  end
+
+  def calc_physical_score
+    return unless self.physical_work_type && self.physical_activity_exercise
+
+    total_exercise = (self.physical_activity_exercise > self.physical_activity_cycling) ? self.physical_activity_exercise : self.physical_activity_cycling
+    score = 1
+
+    case self.physical_work_type
+    when 1, 2 # Not employed or sedentry
+      score = total_exercise
+
+    when 3 # Standing
+      score = total_exercise + 1
+
+    when 4 # Physical
+      score = total_exercise + 2
+
+    when 5 # Heavy manual
+      score = total_exercise + 3
+
+    end
+
+    score = 4 if score > 4
+    self.update_attributes physical_complete: true, physical_score: score
+
+  end
+
+  def physical_score_name
+    lookup UserData::PHYSICAL_SCORES, self.physical_score
+  end
+
+  def calc_alcohol_score
+
+  end
+
+  def alcohol_score_name
+    "alcohol_score_name"
+  end
+
+  def calc_diabetes_score
+    score = 0
+    score += lookup(UserData::AGE_GROUPS, self.diabetes_age_group, :value)
+    score += 3 if self.male?
+    score += 2 if self.aboriginal
+    score += 2 if self.born_in_asia?
+    score += 3 if self.diabetes_hereditary
+    score += 6 if self.diabetes_high_blood_glucose
+    score += 2 if self.diabetes_hbp_medication
+    score += 2 if self.smokes?
+    score += 1 if (self.diabetes_fruit_and_veg && self.diabetes_fruit_and_veg == 2)
+    score += 2 unless self.diabetes_physical_activity
+    score += lookup(self.waist_size_list, self.diabetes_waist_measurement, :value)
+
+    self.update_attributes diabetes_complete: true, diabetes_score: score
+  end
+
+  def diabetes_score_name
+    case self.diabetes_score
+    when nil, 0..5
+      "Low risk"
+    when 6..11
+      "Intermediate risk"
+    else
+      "High risk"
     end
   end
 
+  def lookup(list, id, attr = :name)
+    items = list.select {|i| i[:id] == id}
+    items[0][attr]
+  end
+
+  def waist_size_list
+    waist_sizes = UserData::WAIST_SIZES_MEN
+    if self.asian_or_aboriginal? && self.male?
+      waist_sizes = UserData::ASIAN_OR_ABORIGINAL_WAIST_SIZES_MEN
+    elsif self.asian_or_aboriginal? && self.female?
+      waist_sizes = UserData::ASIAN_OR_ABORIGINAL_WAIST_SIZES_WOMEN
+    elsif self.female?
+      waist_sizes = UserData::WAIST_SIZES_WOMEN
+    end
+    waist_sizes
+  end
+
+  # def to_csv
+  #   attributes = %w{full_name dob}
+  #
+  #   CSV.generate(headers: true) do |csv|
+  #     csv << attributes
+  #     csv << attributes.map{ |attr| self.send(attr) }
+  #   end
+  # end
+
   GENDERS = [
-    {id: 0, name: "Male", value: nil},
-    {id: 1, name: "Female", value: nil},
-    {id: 2, name: "Prefer not to answer", value: nil}
+    {id: 1, name: "Male", value: nil},
+    {id: 2, name: "Female", value: nil},
+    {id: 3, name: "Prefer not to answer", value: nil}
   ]
 
   REGIONS = [
-    {id: 0, name: "Australia", value: 0},
-    {id: 1, name: "Asia, including the Indian sub-continent", value: 2},
-    {id: 2, name: "Middle east", value: 2},
-    {id: 3, name: "North Africa", value: 2},
-    {id: 4, name: "Southern Europe", value: 2},
-    {id: 5, name: "Other", value: 0}
+    {id: 1, name: "Australia", value: 0},
+    {id: 2, name: "Asia, including the Indian sub-continent", value: 2},
+    {id: 3, name: "Middle east", value: 2},
+    {id: 4, name: "North Africa", value: 2},
+    {id: 5, name: "Southern Europe", value: 2},
+    {id: 6, name: "Other", value: 0}
   ]
 
   DIABETES = [
-      {id: 0, name: "Yes", value: nil},
-      {id: 1, name: "Yes, but only during pregnancy", value: nil, female: true},
-      {id: 2, name: "No", value: nil},
-      {id: 3, name: "Don't know", value: nil}
+      {id: 1, name: "Yes", value: nil},
+      {id: 2, name: "Yes, but only during pregnancy", value: nil, female: true},
+      {id: 3, name: "No", value: nil},
+      {id: 4, name: "Don't know", value: nil}
   ]
 
   SMOKING = [
-    {id: 0, name: "No, I have never smoked", value: nil},
-    {id: 1, name: "No, but I used to smoke before", value: nil},
-    {id: 2, name: "Yes", value: nil}
+    {id: 1, name: "No, I have never smoked", value: nil},
+    {id: 2, name: "No, but I used to smoke before", value: nil},
+    {id: 3, name: "Yes", value: nil}
   ]
 
   FOOD_ALLERGIES = [
@@ -79,49 +174,93 @@ class UserData < ActiveRecord::Base
   ]
 
   ALCOHOL_FREQUENCY = [
-    {id: 0, name: "Never", value: 0},
-    {id: 1, name: "Monthly", value: 1},
-    {id: 2, name: "Weekly", value: 2},
-    {id: 3, name: "Some days each week ", value: 3},
-    {id: 4, name: "Most days each week", value: 4}
+    {id: 1, name: "Never", value: 0},
+    {id: 2, name: "Monthly", value: 1},
+    {id: 3, name: "Weekly", value: 2},
+    {id: 4, name: "Some days each week ", value: 3},
+    {id: 5, name: "Most days each week", value: 4}
   ]
 
   ALCOHOL_NUM_DRINKS = [
-    {id: 0, name: "1 or 2", value: 0},
-    {id: 1, name: "3 or 4", value: 1},
-    {id: 2, name: "5 or 6", value: 2},
-    {id: 3, name: "7 or 9 ", value: 3},
-    {id: 4, name: "More than 10", value: 4}
+    {id: 1, name: "1 or 2", value: 0},
+    {id: 2, name: "3 or 4", value: 1},
+    {id: 3, name: "5 or 6", value: 2},
+    {id: 4, name: "7 or 9 ", value: 3},
+    {id: 5, name: "More than 10", value: 4}
   ]
 
   ALCOHOL_FREQUENCY_SIX_OR_MORE = [
-    {id: 0, name: "Never", value: 0},
-    {id: 1, name: "Monthly", value: 1},
-    {id: 2, name: "Weekly", value: 2},
-    {id: 3, name: "Some days each week ", value: 3},
-    {id: 4, name: "Most days each week", value: 4}
+    {id: 1, name: "Never", value: 0},
+    {id: 2, name: "Monthly", value: 1},
+    {id: 3, name: "Weekly", value: 2},
+    {id: 4, name: "Some days each week ", value: 3},
+    {id: 5, name: "Most days each week", value: 4}
   ]
 
   PHYSICAL_WORK_TYPES = [
-    {id: 0, name: "I am not in employment", example: "E.g. retired, retired for health reasons, unemployed, full-time carer, etc."},
-    {id: 1, name: "I spend most of my time sitting at work", example: "E.g. office worker.", value: "Mostly sitting"},
-    {id: 2, name: "I spend most of my time standing or walking at work", example: "E.g. shop assistant, hairdresser, security guard, childminder, etc."},
-    {id: 3, name: "My work involves physical effort", example: "E.g. plumber, electrician, carpenter, cleaner, hospital nurse, gardener, etc."},
-    {id: 4, name: "My work involves vigorous physical activity", example: "E.g. scaffolder, construction worker, refuse collector, etc."}
+    {id: 1, name: "I am not in employment", example: "E.g. retired, retired for health reasons, unemployed, full-time carer, etc."},
+    {id: 2, name: "I spend most of my time sitting at work", example: "E.g. office worker.", value: "Mostly sitting"},
+    {id: 3, name: "I spend most of my time standing or walking at work", example: "E.g. shop assistant, hairdresser, security guard, childminder, etc."},
+    {id: 4, name: "My work involves physical effort", example: "E.g. plumber, electrician, carpenter, cleaner, hospital nurse, gardener, etc."},
+    {id: 5, name: "My work involves vigorous physical activity", example: "E.g. scaffolder, construction worker, refuse collector, etc."}
   ]
 
   PHYSICAL_AMOUNTS = [
-    {id: 0, name: "None"},
-    {id: 1, name: "Some, but less than 1 hour"},
-    {id: 2, name: "Between 1 and 3 hours"},
-    {id: 3, name: "3 hours or more"},
+    {id: 1, name: "None"},
+    {id: 2, name: "Some, but less than 1 hour"},
+    {id: 3, name: "Between 1 and 3 hours"},
+    {id: 4, name: "3 hours or more"},
   ]
 
   PHYSICAL_WALKING_PACES = [
-    {id: 0, name: "Slow pace (less than 5 km/h)"},
-    {id: 1, name: "Steady average pace"},
-    {id: 2, name: "Brisk pace"},
-    {id: 3, name: "Fast pace (more than 6 km/h)"},
+    {id: 1, name: "Slow pace (less than 5 km/h)"},
+    {id: 2, name: "Steady average pace"},
+    {id: 3, name: "Brisk pace"},
+    {id: 4, name: "Fast pace (more than 6 km/h)"},
+  ]
+
+  PHYSICAL_SCORES = [
+    {id: 1, name: "Inactive"},
+    {id: 2, name: "Moderately inactive"},
+    {id: 3, name: "Moderately active"},
+    {id: 4, name: "Active"},
+  ]
+
+  AGE_GROUPS = [
+    {id: 1, name: "Under 35 years", value: 0},
+    {id: 2, name: "35 - 44 years", value: 2},
+    {id: 3, name: "45 - 54 years", value: 4},
+    {id: 4, name: "55 - 64 years", value: 6},
+    {id: 5, name: "65 years or over", value: 8}
+  ]
+
+  FRUIT_AND_VEG_CONSUMPTION = [
+    {id: 1, name: "Every day", value: 0},
+    {id: 2, name: "Not every day", value: 1}
+  ]
+
+  ASIAN_OR_ABORIGINAL_WAIST_SIZES_MEN = [
+    {id: 1, name: "Less than 90cm", value: 0},
+    {id: 2, name: "90 - 100cm", value: 4},
+    {id: 3, name: "More than 100cm", value: 7}
+  ]
+
+  ASIAN_OR_ABORIGINAL_WAIST_SIZES_WOMEN = [
+    {id: 1, name: "Less than 80cm", value: 0},
+    {id: 2, name: "80 - 90cm", value: 4},
+    {id: 3, name: "More than 90cm", value: 7}
+  ]
+
+  WAIST_SIZES_MEN = [
+    {id: 1, name: "Less than 102cm", value: 0},
+    {id: 2, name: "102 - 110cm", value: 4},
+    {id: 3, name: "More than 110cm", value: 7}
+  ]
+
+  WAIST_SIZES_WOMEN = [
+    {id: 1, name: "Less than 88cm", value: 0},
+    {id: 2, name: "88 - 100cm", value: 4},
+    {id: 3, name: "More than 100cm", value: 7}
   ]
 
   SUBURBS = [

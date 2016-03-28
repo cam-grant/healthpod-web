@@ -1,0 +1,34 @@
+<h1 class="center">Your age group</h1>
+
+<div style="text-align: center; width: 24rem; margin: 6rem auto;">
+  <ul class="options" data-option-group="user_data_diabetes_age_group" data-callback="validateForm" style="text-align: left;">
+    <% UserData::AGE_GROUPS.each do |t| %>
+    <li class="option" data-value="<%= t[:id] %>">
+      <span></span><%= t[:name] %>
+    </li>
+    <% end %>
+  </ul>
+</div>
+
+<%= form_tag diabetes_age_group_url, { :id => "form", :autocomplete => "off" } do |f| %>
+  <%= hidden_field_tag 'user_data[diabetes_age_group]', '' %>
+<% end %>
+
+<script>
+
+function validateForm(val) {
+  $('#next').removeClass('disabled');
+}
+
+</script>
+
+<% content_for :footer_left do %>
+  <label class="nav exit" for="exit-modal">Exit</label>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: hub_url } %>
+<% end %>
+<% content_for :footer_center do %>
+  <%= progress_bar %>
+<% end %>
+<% content_for :footer_right do %>
+  <%= next_button "$('#form').submit();", "#" %>
+<% end %>

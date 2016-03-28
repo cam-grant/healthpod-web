@@ -78,3 +78,8 @@ rake db:create RAILS_ENV=production
 rake db:migrate RAILS_ENV=production
 
 rails s -e production
+
+# ACER Touchscreen
+
+Resolution: 1080p (1920 x 1080).
+Equivalent to approx. 2048 x 1152 on an Apple cinema display.

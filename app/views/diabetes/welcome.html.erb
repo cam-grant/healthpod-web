@@ -4,7 +4,7 @@
 </h1>
 
 <p style="text-align: center;margin: 5rem auto;">
-  About <%= UserData::DIABETES_SURVEY_ESTIMATE %> to complete this survey
+  This survey will take about <%= UserData::DIABETES_SURVEY_ESTIMATE %> to complete
 </p>
 
 <% content_for :footer_left do %>
@@ -17,5 +17,5 @@
   <%#= progress_bar(@percent_complete, @minutes_remaining) %>
 <% end %>
 <% content_for :footer_right do %>
-  <%= link_to "Start", diabetes_survey_url, class: "nav next" %>
+  <%= link_to "Start", diabetes_age_group_url, class: "nav next" %>
 <% end %>

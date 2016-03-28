@@ -42,10 +42,15 @@ ActiveRecord::Schema.define(version: 20160128044057) do
     t.integer  "physical_work_type"
     t.integer  "physical_activity_exercise"
     t.integer  "physical_activity_cycling"
-    t.integer  "physical_activity_walking"
-    t.integer  "physical_activity_housework"
-    t.integer  "physical_activity_gardening"
-    t.integer  "physical_walking_pace"
+    t.integer  "physical_score"
+    t.integer  "diabetes_age_group"
+    t.boolean  "diabetes_hereditary"
+    t.boolean  "diabetes_high_blood_glucose"
+    t.boolean  "diabetes_hbp_medication"
+    t.integer  "diabetes_fruit_and_veg"
+    t.boolean  "diabetes_physical_activity"
+    t.integer  "diabetes_waist_measurement"
+    t.integer  "diabetes_score"
   end
 
 end

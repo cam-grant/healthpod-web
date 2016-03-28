@@ -49,9 +49,27 @@ Rails.application.routes.draw do
   ####  Diabetes
 
   get   'diabetes-welcome' => 'diabetes#welcome'
+  
+  get   'diabetes-age-group' => 'diabetes#age_group'
+  post  'diabetes-age-group' => 'diabetes#age_group'
 
-  get   'diabetes-survey' => 'diabetes#survey'
-  post  'diabetes-survey' => 'diabetes#survey'
+  get   'diabetes-hereditary' => 'diabetes#hereditary'
+  post  'diabetes-hereditary' => 'diabetes#hereditary'
+
+  get   'diabetes-high-blood-glucose' => 'diabetes#high_blood_glucose'
+  post  'diabetes-high-blood-glucose' => 'diabetes#high_blood_glucose'
+
+  get   'diabetes-hbp-medication' => 'diabetes#hbp_medication'
+  post  'diabetes-hbp-medication' => 'diabetes#hbp_medication'
+
+  get   'diabetes-fruit-and-veg' => 'diabetes#fruit_and_veg'
+  post  'diabetes-fruit-and-veg' => 'diabetes#fruit_and_veg'
+
+  get   'diabetes-physical-activity' => 'diabetes#physical_activity'
+  post  'diabetes-physical-activity' => 'diabetes#physical_activity'
+
+  get   'diabetes-waist-measurement' => 'diabetes#waist_measurement'
+  post  'diabetes-waist-measurement' => 'diabetes#waist_measurement'
 
   ####  Physical
 

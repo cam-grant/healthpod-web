@@ -558,7 +558,7 @@ table.hub {
       background-image: image-url("diabetes.svg");
     }
     &.complete {
-      $card-color: lighten($red, 20%);
+      $card-color: lighten($red, 22%);
       background-image: image-url("diabetes.svg");
       background-color: $card-color;
       border-color: $card-color;
@@ -586,7 +586,7 @@ table.hub {
       background-image: image-url("alcohol.svg");
     }
     &.complete {
-      $card-color: lighten($yellow, 20%);
+      $card-color: lighten($yellow, 25%);
       background-image: image-url("alcohol.svg");
       background-color: $card-color;
       border-color: $card-color;
@@ -598,5 +598,19 @@ table.hub {
     h1 {
       color: #111;
     }
+  }
+
+  div.score {
+    margin: 2.5rem auto;
+    padding: 1.5rem;
+    background-color: #fff;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+  }
+
+  p.estimate {
+    color: #999;
   }
 }
