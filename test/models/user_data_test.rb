@@ -1,7 +1,51 @@
 require 'test_helper'
 
 class UserDataTest < ActiveSupport::TestCase
-  test "the truth" do
+
+  test "Alcohol score" do
+
+    # t.integer :alcohol_frequency
+    # t.integer :alcohol_num_drinks
+    # t.integer :alcohol_frequency_six_or_more
+    # t.integer :alcohol_score
+
+    data = []
+
+    #
+    data << [1, nil, nil, 0]
+    data << [1, 1, 1, 0]
+    data << [2, 1, 1, 1]
+    data << [3, 1, 1, 2]
+    data << [4, 1, 1, 3]
+    data << [5, 1, 1, 4]
+
+    data << [2, 2, 1, 1 + 1 + 0]
+    data << [2, 3, 1, 1 + 2 + 0]
+    data << [2, 4, 1, 1 + 3 + 0]
+    data << [2, 5, 1, 1 + 4 + 0]
+
+    data << [2, 1, 1, 1 + 0 + 0]
+    data << [2, 1, 2, 1 + 0 + 1]
+    data << [2, 1, 3, 1 + 0 + 2]
+    data << [2, 1, 4, 1 + 0 + 3]
+    data << [2, 1, 5, 1 + 0 + 4]
+
+    data.each_with_index do |item, i|
+      u = UserData.new consent: true,
+        alcohol_frequency: data[i][0],
+        alcohol_num_drinks: data[i][1],
+        alcohol_frequency_six_or_more: data[i][2]
+      u.save
+      u.calc_alcohol_score
+
+      assert u.alcohol_complete
+      assert_not_nil u.alcohol_score
+      assert u.alcohol_score == data[i][3], "Score mismatch on alcohol test #{i}. Expected #{data[i][3]} got #{u.alcohol_score}"
+    end
+
+  end
+
+  test "Diabetes score" do
 
     # {id: 1, name: "Male", value: nil},
     # {id: 2, name: "Female", value: nil},
@@ -72,9 +116,8 @@ class UserDataTest < ActiveSupport::TestCase
       u.calc_diabetes_score
 
       assert u.diabetes_complete
-      assert_not_nil u.diabetes_complete
+      assert_not_nil u.diabetes_score
       assert u.diabetes_score == data[i][11], "Score mismatch, test #{i}. Expected #{data[i][11]} got #{u.diabetes_score}"
-
     end
 
   end

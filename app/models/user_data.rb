@@ -2,7 +2,7 @@ class UserData < ActiveRecord::Base
 
   PHYSICAL_SURVEY_ESTIMATE = "30 seconds"
   DIABETES_SURVEY_ESTIMATE = "1 minute"
-  ALCOHOL_SURVEY_ESTIMATE = "2 minutes"
+  ALCOHOL_SURVEY_ESTIMATE = "30 seconds"
 
   def male?
     self.gender && self.gender == 1 ? true : false
@@ -32,6 +32,10 @@ class UserData < ActiveRecord::Base
     self.smoking && self.smoking == 3
   end
 
+  def non_drinker?
+    self.alcohol_frequency && self.alcohol_frequency == 1
+  end
+
   def calc_physical_score
     return unless self.physical_work_type && self.physical_activity_exercise
 
@@ -59,20 +63,25 @@ class UserData < ActiveRecord::Base
   end
 
   def physical_score_name
-    lookup UserData::PHYSICAL_SCORES, self.physical_score
+    lookup UserData::PHYSICAL_SCORES, self.physical_score, :name, ""
   end
 
   def calc_alcohol_score
+    score = 0
+    score += lookup(UserData::ALCOHOL_FREQUENCY, self.alcohol_frequency, :value, 0)
+    score += lookup(UserData::ALCOHOL_NUM_DRINKS, self.alcohol_num_drinks, :value, 0)
+    score += lookup(UserData::ALCOHOL_FREQUENCY_SIX_OR_MORE, self.alcohol_frequency_six_or_more, :value, 0)
 
+    self.update_attributes alcohol_complete: true, alcohol_score: score
   end
 
   def alcohol_score_name
-    "alcohol_score_name"
+    self.alcohol_score
   end
 
   def calc_diabetes_score
     score = 0
-    score += lookup(UserData::AGE_GROUPS, self.diabetes_age_group, :value)
+    score += lookup(UserData::AGE_GROUPS, self.diabetes_age_group, :value, 0)
     score += 3 if self.male?
     score += 2 if self.aboriginal
     score += 2 if self.born_in_asia?
@@ -82,7 +91,7 @@ class UserData < ActiveRecord::Base
     score += 2 if self.smokes?
     score += 1 if (self.diabetes_fruit_and_veg && self.diabetes_fruit_and_veg == 2)
     score += 2 unless self.diabetes_physical_activity
-    score += lookup(self.waist_size_list, self.diabetes_waist_measurement, :value)
+    score += lookup(self.waist_size_list, self.diabetes_waist_measurement, :value, 0)
 
     self.update_attributes diabetes_complete: true, diabetes_score: score
   end
@@ -98,9 +107,9 @@ class UserData < ActiveRecord::Base
     end
   end
 
-  def lookup(list, id, attr = :name)
+  def lookup(list, id, attr = :name, default = nil)
     items = list.select {|i| i[:id] == id}
-    items[0][attr]
+    items && items[0] && items[0][attr] ? items[0][attr] : default
   end
 
   def waist_size_list

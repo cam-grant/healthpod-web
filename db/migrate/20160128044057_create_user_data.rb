@@ -35,6 +35,7 @@ class CreateUserData < ActiveRecord::Migration
       t.integer :alcohol_frequency
       t.integer :alcohol_num_drinks
       t.integer :alcohol_frequency_six_or_more
+      t.integer :alcohol_score
 
       # Physical
       t.integer :physical_work_type

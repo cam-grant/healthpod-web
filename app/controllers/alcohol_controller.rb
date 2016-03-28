@@ -8,8 +8,14 @@ class AlcoholController < ApplicationController
   def frequency
     if request.post?
       @user_data.update_attributes(user_data_params) unless params[:user_data].blank?
-      session[:current_step] += 1
-      redirect_to alcohol_num_drinks_url
+
+      if @user_data.non_drinker?
+        @user_data.calc_alcohol_score
+        redirect_to hub_url
+      else
+        session[:current_step] += 1
+        redirect_to alcohol_num_drinks_url
+      end
     end
   end
 
@@ -24,7 +30,7 @@ class AlcoholController < ApplicationController
   def frequency_six_or_more
     if request.post?
       @user_data.update_attributes(user_data_params) unless params[:user_data].blank?
-      @user_data.update_attributes alcohol_complete: true
+      @user_data.calc_alcohol_score
       redirect_to hub_url
     end
   end
