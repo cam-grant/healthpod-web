@@ -1,0 +1,30 @@
+<h1 class="center">Did you do any of the following after using the Health Pod?</h1>
+
+<ul class="checkbox-options" style="text-align: left;margin: 6rem auto;width: 44rem;" data-field="user_data_returning_user_q3">
+  <li class="option" data-value="Engage in additional physical activity"><span></span>Engage in additional physical activity</li>
+  <li class="option" data-value="Decrease alcohol consumption"><span></span>Decrease alcohol consumption</li>
+  <li class="option" data-value="Reduce or attempt to quit smoking"><span></span>Reduce or attempt to quit smoking</li>
+  <li class="option" data-value="Change diet"><span></span>Change diet</li>
+  <li class="option" data-value="Other"><span></span>Other</li>
+</ul>
+
+<%= form_tag returning_user_q3_url, { :id => "form", :autocomplete => "off" } do |f| %>
+  <%= hidden_field_tag 'user_data[returning_user_q3]', '' %>
+<% end %>
+
+<script>
+$(document).ready(function() {
+  $('#next').removeClass('disabled');
+});
+</script>
+
+<% content_for :footer_left do %>
+  <label class="nav exit" for="exit-modal">Exit</label>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
+<% end %>
+<% content_for :footer_center do %>
+  <%= progress_bar %>
+<% end %>
+<% content_for :footer_right do %>
+  <%= next_button "$('#form').submit();" %>
+<% end %>

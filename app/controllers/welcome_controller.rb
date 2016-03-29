@@ -20,16 +20,6 @@ class WelcomeController < ApplicationController
     end
   end
 
-  def returning_user
-    session[:total_steps] = 10
-    session[:current_step] = 1
-    if request.post?
-      @user_data.update_attributes(user_data_params) unless params[:user_data].blank?
-      session[:current_step] += 1
-      redirect_to full_name_url
-    end
-  end
-
   def hub
   end
 

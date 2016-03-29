@@ -15,13 +15,22 @@ ActiveRecord::Schema.define(version: 20160128044057) do
 
   create_table "user_data", force: :cascade do |t|
     t.boolean  "consent"
-    t.boolean  "returning_user"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.boolean  "basic_complete"
     t.boolean  "diabetes_complete"
     t.boolean  "physical_complete"
     t.boolean  "alcohol_complete"
+    t.boolean  "returning_user"
+    t.integer  "returning_user_q1a"
+    t.integer  "returning_user_q1b"
+    t.integer  "returning_user_q1c"
+    t.integer  "returning_user_q1d"
+    t.integer  "returning_user_q1e"
+    t.integer  "returning_user_q2"
+    t.integer  "returning_user_q3"
+    t.integer  "returning_user_q4"
+    t.string   "returning_user_q5"
     t.string   "full_name"
     t.date     "date_of_birth"
     t.integer  "gender"

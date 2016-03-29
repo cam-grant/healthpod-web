@@ -1,0 +1,71 @@
+<h1 class="center">How do feel about the Health Pod?</h1>
+
+
+<table class="likert">
+  <tr class="scale">
+    <td></td>
+    <td>Disagree</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>Agree</td>
+  </tr>
+  <tr id="user_data_returning_user_q1a_group" class="options" data-option-group="user_data_returning_user_q1a" data-callback="validateForm">
+    <th>The Health Pod is easy to use</th>
+    <% UserData::LIKERT.each do |i| %>
+    <td><li class="option" data-value="<%= i[:id] %>"><span></span></li></td>
+    <% end %>
+  </tr>
+  <tr id="user_data_returning_user_q1b_group" class="options" data-option-group="user_data_returning_user_q1b" data-callback="validateForm">
+    <th>I would like to use the Health Pod frequently</th>
+    <% UserData::LIKERT.each do |i| %>
+    <td><li class="option" data-value="<%= i[:id] %>"><span></span></li></td>
+    <% end %>
+  </tr>
+  <tr class="options" data-option-group="user_data_returning_user_q1c" data-callback="validateForm">
+    <th>I feel very confident using the Health Pod</th>
+    <% UserData::LIKERT.each do |i| %>
+    <td><li class="option" data-value="<%= i[:id] %>"><span></span></li></td>
+    <% end %>
+  </tr>
+  <tr class="options" data-option-group="user_data_returning_user_q1d" data-callback="validateForm">
+    <th>The Health Pod increases my awareness of my health</th>
+    <% UserData::LIKERT.each do |i| %>
+    <td><li class="option" data-value="<%= i[:id] %>"><span></span></li></td>
+    <% end %>
+  </tr>
+  <tr class="options" data-option-group="user_data_returning_user_q1e" data-callback="validateForm">
+    <th>The health report card provides useful information</th>
+    <% UserData::LIKERT.each do |i| %>
+    <td><li class="option" data-value="<%= i[:id] %>"><span></span></li></td>
+    <% end %>
+  </tr>
+</table>
+
+<%= form_tag returning_user_q1_url, { :id => "form", :autocomplete => "off" } do |f| %>
+  <%= hidden_field_tag 'user_data[returning_user_q1a]', '' %>
+  <%= hidden_field_tag 'user_data[returning_user_q1b]', '' %>
+  <%= hidden_field_tag 'user_data[returning_user_q1c]', '' %>
+  <%= hidden_field_tag 'user_data[returning_user_q1d]', '' %>
+  <%= hidden_field_tag 'user_data[returning_user_q1e]', '' %>
+<% end %>
+
+<script>
+
+function validateForm(val) {
+  //$('#user_data_returning_user_q1a').val()
+  $('#next').removeClass('disabled');
+}
+
+</script>
+
+<% content_for :footer_left do %>
+  <label class="nav exit" for="exit-modal">Exit</label>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
+<% end %>
+<% content_for :footer_center do %>
+  <%= progress_bar %>
+<% end %>
+<% content_for :footer_right do %>
+  <%= next_button "$('#form').submit();" %>
+<% end %>

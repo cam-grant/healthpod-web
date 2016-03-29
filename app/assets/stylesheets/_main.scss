@@ -614,3 +614,29 @@ table.hub {
     color: #999;
   }
 }
+
+table.likert {
+  border-collapse: collapse;
+  margin: 4rem auto 0 auto;
+
+  th {
+    font-weight: normal;
+    text-align: left;
+    padding-right: 3rem;
+  }
+
+  td {
+    text-align: center;
+  }
+
+  tr.scale td {
+    padding: 0 0 2rem 0;
+  }
+
+  tr+tr {
+    th, td {
+      border-top: $light-border;
+    }
+  }
+
+}

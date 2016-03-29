@@ -1,0 +1,30 @@
+<h1 class="center">Did you discuss any health issues identified on your<br/>health report card with any of the following people?</h1>
+
+<ul class="checkbox-options" style="text-align: left;margin: 6rem auto;width: 25rem;" data-field="user_data_returning_user_q2">
+  <li class="option" data-value="Doctor"><span></span>Doctor</li>
+  <li class="option" data-value="Nurse"><span></span>Nurse</li>
+  <li class="option" data-value="Friends"><span></span>Friends</li>
+  <li class="option" data-value="Family"><span></span>Family</li>
+  <li class="option" data-value="None of the above"><span></span>None of the above</li>
+</ul>
+
+<%= form_tag returning_user_q2_url, { :id => "form", :autocomplete => "off" } do |f| %>
+  <%= hidden_field_tag 'user_data[returning_user_q2]', '' %>
+<% end %>
+
+<script>
+$(document).ready(function() {
+  $('#next').removeClass('disabled');
+});
+</script>
+
+<% content_for :footer_left do %>
+  <label class="nav exit" for="exit-modal">Exit</label>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
+<% end %>
+<% content_for :footer_center do %>
+  <%= progress_bar %>
+<% end %>
+<% content_for :footer_right do %>
+  <%= next_button "$('#form').submit();" %>
+<% end %>

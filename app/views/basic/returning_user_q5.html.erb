@@ -1,0 +1,33 @@
+<h1 class="center">How could the Health Pod be improved?</h1>
+
+<%= form_tag returning_user_q5_url, { :id => "form", :autocomplete => "off" } do |f| %>
+
+  <div style="text-align: center; width: 75%; margin-left: auto; margin-right: auto;">
+      <%= text_field_tag 'user_data[returning_user_q5]', '', id: 'returning_user_q5',
+        placeholder: "", "data-osk-options": "disableReturn disableTab disableSymbols" %>
+  </div>
+
+<% end %>
+
+<script>
+$(document).ready(function() {
+  $('#next').removeClass('disabled');
+  field = $('#returning_user_q5');
+
+  field.onScreenKeyboard({ topPosition: '28%', leftPosition: '19%'});
+  field.click();
+  field.focus();
+
+});
+</script>
+
+<% content_for :footer_left do %>
+  <label class="nav exit" for="exit-modal">Exit</label>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
+<% end %>
+<% content_for :footer_center do %>
+  <%= progress_bar %>
+<% end %>
+<% content_for :footer_right do %>
+  <%= next_button "$('#form').submit();" %>
+<% end %>

@@ -133,6 +133,14 @@ class UserData < ActiveRecord::Base
   #   end
   # end
 
+  LIKERT = [
+    {id: 1, name: "Strongly disagree"},
+    {id: 2, name: "Disagree"},
+    {id: 3, name: "Neutral"},
+    {id: 4, name: "Agree"},
+    {id: 5, name: "Strongly agree"},
+  ]
+
   GENDERS = [
     {id: 1, name: "Male", value: nil},
     {id: 2, name: "Female", value: nil},

@@ -19,14 +19,15 @@ function initPage() {
 
   $('[data-option-group]').each(function(i, group) {
     group = $(group);
-    field = $('#' + group.attr('data-option-group'));
-    options = group.find('.option');
+    fieldId = group.attr('data-option-group');
+    field = $('#' + fieldId);
     callback = group.attr('data-callback');
+    options = group.find('.option');
 
     options.each(function(i, option) {
       option = $(option);
       option.click(function() {
-        options.each(function(i, o) { $(o).removeClass('selected'); })
+        options.each(function(j, o) { $(o).removeClass('selected'); })
         option.addClass('selected');
         val = option.attr('data-value');
         if (field) field.val(val);
