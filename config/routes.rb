@@ -11,29 +11,27 @@ Rails.application.routes.draw do
 
   get   'print' => 'welcome#print'
 
-  ####  Basic health check
-
   # Returning user
 
-  get   'returning-user' => 'basic#returning_user'
-  post  'returning-user' => 'basic#returning_user'
+  get   'returning-user' => 'welcome#returning_user'
+  post  'returning-user' => 'welcome#returning_user'
 
-  get   'returning-user-q1' => 'basic#returning_user_q1'
-  post  'returning-user-q1' => 'basic#returning_user_q1'
+  get   'returning-user-q1' => 'welcome#returning_user_q1'
+  post  'returning-user-q1' => 'welcome#returning_user_q1'
 
-  get   'returning-user-q2' => 'basic#returning_user_q2'
-  post  'returning-user-q2' => 'basic#returning_user_q2'
+  get   'returning-user-q2' => 'welcome#returning_user_q2'
+  post  'returning-user-q2' => 'welcome#returning_user_q2'
 
-  get   'returning-user-q3' => 'basic#returning_user_q3'
-  post  'returning-user-q3' => 'basic#returning_user_q3'
+  get   'returning-user-q3' => 'welcome#returning_user_q3'
+  post  'returning-user-q3' => 'welcome#returning_user_q3'
 
-  get   'returning-user-q4' => 'basic#returning_user_q4'
-  post  'returning-user-q4' => 'basic#returning_user_q4'
+  get   'returning-user-q4' => 'welcome#returning_user_q4'
+  post  'returning-user-q4' => 'welcome#returning_user_q4'
 
-  get   'returning-user-q5' => 'basic#returning_user_q5'
-  post  'returning-user-q5' => 'basic#returning_user_q5'
+  get   'returning-user-q5' => 'welcome#returning_user_q5'
+  post  'returning-user-q5' => 'welcome#returning_user_q5'
 
-  # Demographics
+  ####  Basic health check
 
   get   'full-name' => 'basic#full_name'
   post  'full-name' => 'basic#full_name'

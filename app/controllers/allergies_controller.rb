@@ -1,5 +1,0 @@
-class AllergiesController < ApplicationController
-
-
-
-end

@@ -1,4 +1,4 @@
-<h1 class="center">Have you used this Health Pod before?</h1>
+<h1 class="center">Did you visit the website shown on your health report card?</h1>
 
 <table class="two-col"style="margin-top: 10rem;">
   <tr>
@@ -11,13 +11,13 @@
   </tr>
 </table>
 
-<%= form_tag returning_user_path, { :id => "form", :autocomplete => "off" } do |f| %>
-  <%= hidden_field_tag 'user_data[returning_user]', '' %>
+<%= form_tag returning_user_q5_url, { :id => "form", :autocomplete => "off" } do |f| %>
+  <%= hidden_field_tag 'user_data[returning_user_q5]', '' %>
 <% end %>
 
 <script>
 function submit(val) {
-  $('#user_data_returning_user').val(val);
+  $('#user_data_returning_user_q5').val(val);
   $('#form').submit();
 }
 </script>
@@ -27,7 +27,6 @@ function submit(val) {
   <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
 <% end %>
 <% content_for :footer_center do %>
-  <%= progress_bar %>
 <% end %>
 <% content_for :footer_right do %>
   <span style="visibility: hidden;"><%= next_button "$('#form').submit();" %></span>

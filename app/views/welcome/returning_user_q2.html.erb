@@ -23,7 +23,6 @@ $(document).ready(function() {
   <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
 <% end %>
 <% content_for :footer_center do %>
-  <%= progress_bar %>
 <% end %>
 <% content_for :footer_right do %>
   <%= next_button "$('#form').submit();" %>

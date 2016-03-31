@@ -18,18 +18,17 @@
 function initPage() {
 
   $('[data-option-group]').each(function(i, group) {
-    group = $(group);
-    fieldId = group.attr('data-option-group');
-    field = $('#' + fieldId);
-    callback = group.attr('data-callback');
-    options = group.find('.option');
+    var group = $(group);
+    var field = $('#' + group.attr('data-option-group'));
+    var callback = group.attr('data-callback');
+    var options = group.find('.option');
 
     options.each(function(i, option) {
-      option = $(option);
+      var option = $(option);
       option.click(function() {
         options.each(function(j, o) { $(o).removeClass('selected'); })
         option.addClass('selected');
-        val = option.attr('data-value');
+        var val = option.attr('data-value');
         if (field) field.val(val);
         if (callback) {
           eval(callback + '("' + val + '")');
@@ -39,13 +38,13 @@ function initPage() {
   });
 
   $(".checkbox-options").each(function(i, group) {
-    group = $(group);
-    field = $('#' + group.attr('data-field'));
-    options = group.find('.option');
-    callback = group.attr('data-callback');
+    var group = $(group);
+    var field = $('#' + group.attr('data-field'));
+    var options = group.find('.option');
+    var callback = group.attr('data-callback');
 
     options.each(function(i, option) {
-      option = $(option);
+      var option = $(option);
       option.click(function() {
         if (option.hasClass('selected')) { option.removeClass('selected'); }
         else { option.addClass('selected') }
@@ -53,7 +52,7 @@ function initPage() {
         // Concatenate all selected values
         var values = new Array();
         options.each(function(i2, option2) {
-          option2 = $(option2);
+          var option2 = $(option2);
           if (option2.hasClass('selected')) {
             values.push(option2.attr('data-value'));
           }

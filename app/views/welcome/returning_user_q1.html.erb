@@ -10,13 +10,13 @@
     <td></td>
     <td>Agree</td>
   </tr>
-  <tr id="user_data_returning_user_q1a_group" class="options" data-option-group="user_data_returning_user_q1a" data-callback="validateForm">
+  <tr id="user_data_returning_user_q1a_group" class="options" data-color="green" data-option-group="user_data_returning_user_q1a" data-callback="validateForm">
     <th>The Health Pod is easy to use</th>
     <% UserData::LIKERT.each do |i| %>
     <td><li class="option" data-value="<%= i[:id] %>"><span></span></li></td>
     <% end %>
   </tr>
-  <tr id="user_data_returning_user_q1b_group" class="options" data-option-group="user_data_returning_user_q1b" data-callback="validateForm">
+  <tr id="user_data_returning_user_q1b_group" class="options" data-color="red" data-option-group="user_data_returning_user_q1b" data-callback="validateForm">
     <th>I would like to use the Health Pod frequently</th>
     <% UserData::LIKERT.each do |i| %>
     <td><li class="option" data-value="<%= i[:id] %>"><span></span></li></td>
@@ -64,7 +64,6 @@ function validateForm(val) {
   <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
 <% end %>
 <% content_for :footer_center do %>
-  <%= progress_bar %>
 <% end %>
 <% content_for :footer_right do %>
   <%= next_button "$('#form').submit();" %>

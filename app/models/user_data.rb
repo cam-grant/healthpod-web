@@ -12,6 +12,10 @@ class UserData < ActiveRecord::Base
     self.gender && self.gender == 2 ? true : false
   end
 
+  def returning_user_took_other_steps?
+    self.returning_user_q3 && self.returning_user_q3.include?("Other") ? true : false
+  end
+
   def has_other_allergies?
     self.allergies && self.allergies.include?("Other") ? true : false
   end
