@@ -1,6 +1,6 @@
 class UserData < ActiveRecord::Base
 
-  PHYSICAL_SURVEY_ESTIMATE = "30 seconds"
+  PHYSICAL_SURVEY_ESTIMATE = "1 minute"
   DIABETES_SURVEY_ESTIMATE = "1 minute"
   ALCOHOL_SURVEY_ESTIMATE = "30 seconds"
 
@@ -80,7 +80,7 @@ class UserData < ActiveRecord::Base
   end
 
   def alcohol_score_name
-    self.alcohol_score
+    (self.alcohol_score && self.alcohol_score >= 4) ? "Unsafe" : "Safe"
   end
 
   def calc_diabetes_score
