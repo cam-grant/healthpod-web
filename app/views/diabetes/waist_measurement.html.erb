@@ -1,10 +1,10 @@
 <h1 class="center">Your waist measurement</h1>
 
 <p style="text-align: center; font-size: 2rem;">
-  Waist measurement is taken below the ribs,<br />usually at the level of the navel, while standing.
+  Waist measurements are taken below the ribs while standing<br />(usually at the level of the belly button)
 </p>
 
-<div style="text-align: center; width: 28rem; margin: 3rem auto;">
+<div style="text-align: center; width: 28rem; margin: 3rem auto;display: none;">
   <ul class="options" data-option-group="user_data_diabetes_waist_measurement" data-callback="validateForm" style="text-align: left;">
     <% @user_data.waist_size_list.each do |t| %>
     <li class="option" data-value="<%= t[:id] %>">
