@@ -40,6 +40,14 @@ class UserData < ActiveRecord::Base
     self.alcohol_frequency && self.alcohol_frequency == 1
   end
 
+  def calc_basic_score
+    self.update_attributes basic_risk_score: 2
+  end
+
+  def basic_complete?
+    !self.basic_risk_score.blank?
+  end
+
   def calc_physical_score
     return unless self.physical_work_type && self.physical_activity_exercise
 
@@ -62,8 +70,12 @@ class UserData < ActiveRecord::Base
     end
 
     score = 4 if score > 4
-    self.update_attributes physical_complete: true, physical_score: score
+    self.update_attributes physical_score: score, physical_risk_score: 1
 
+  end
+
+  def physical_complete?
+    !self.physical_risk_score.blank?
   end
 
   def physical_score_name
@@ -76,7 +88,11 @@ class UserData < ActiveRecord::Base
     score += lookup(UserData::ALCOHOL_NUM_DRINKS, self.alcohol_num_drinks, :value, 0)
     score += lookup(UserData::ALCOHOL_FREQUENCY_SIX_OR_MORE, self.alcohol_frequency_six_or_more, :value, 0)
 
-    self.update_attributes alcohol_complete: true, alcohol_score: score
+    self.update_attributes alcohol_score: score, alcohol_risk_score: 1
+  end
+
+  def alcohol_complete?
+    !self.alcohol_risk_score.blank?
   end
 
   def alcohol_score_name
@@ -106,7 +122,11 @@ class UserData < ActiveRecord::Base
       score += waist_size_score(self.diabetes_waist_measurement, 102, 110)
     end
 
-    self.update_attributes diabetes_complete: true, diabetes_score: score
+    self.update_attributes diabetes_score: score, diabetes_risk_score: 2
+  end
+
+  def diabetes_complete?
+    !self.diabetes_risk_score.blank?
   end
 
   def waist_size_score(waist_size, lower_bound, upper_bound)

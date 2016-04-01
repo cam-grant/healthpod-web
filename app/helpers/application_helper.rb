@@ -32,4 +32,15 @@ module ApplicationHelper
     svg.html_safe
   end
 
+  def risk_image(risk)
+    case risk
+    when 1
+      return image_tag "low_risk.svg"
+    when 2
+      return image_tag "medium_risk.svg"
+    when 3
+      return image_tag "high_risk.svg"
+    end
+  end
+
 end

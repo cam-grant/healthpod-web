@@ -601,8 +601,8 @@ table.hub {
   }
 
   div.score {
-    margin: 2.5rem auto;
-    padding: 1.5rem;
+    margin: 2.5rem auto 2rem auto;
+    padding: 1.25rem;
     background-color: #fff;
     text-align: center;
     font-size: 3rem;
@@ -612,6 +612,17 @@ table.hub {
 
   p.estimate {
     color: #999;
+  }
+}
+
+div.risk-scale {
+  text-align: center;
+  span {
+    margin-right: 1rem;
+  }
+  img {
+    width: 20rem;
+    vertical-align: top;
   }
 }
 

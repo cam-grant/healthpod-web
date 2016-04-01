@@ -1,13 +1,15 @@
-<% available = @user_data.basic_complete ? "available" : "" %>
+<% available = @user_data.basic_complete? ? "available" : "" %>
 
 <table class="hub">
   <tr>
     <td>
       <div class="report-card basic complete">
         <h1>Basic health check</h1>
-        <% if @user_data.basic_complete %>
-          <%#= image_tag "check.svg", style: "height: 4.5rem; float: right" %>
+        <% if @user_data.basic_complete? %>
           <div class="score">BMI <%= @user_data.bmi %></div>
+          <div class="risk-scale">
+            <span>Risk level</span><%= risk_image @user_data.basic_risk_score %>
+          </div>
         <% else %>
         <div style="margin: 4rem auto; text-align: center;">
           <%= link_to "Start", full_name_url, class: "btn next" %>
@@ -16,17 +18,19 @@
       </div>
     </td>
     <td>
-      <% complete = @user_data.physical_complete ? "complete" : "" %>
+      <% complete = @user_data.physical_complete? ? "complete" : "" %>
       <div class="report-card physical <%= available %> <%= complete %>">
         <h1>Physical activity</h1>
-        <% if @user_data.basic_complete && !@user_data.physical_complete %>
+        <% if @user_data.basic_complete? && !@user_data.physical_complete? %>
           <div style="margin: 4rem auto; text-align: center;">
             <%= link_to "Start", physical_welcome_url, class: "btn btn-secondary" %>
             <p class="estimate">Takes about <%= UserData::PHYSICAL_SURVEY_ESTIMATE %></p>
           </div>
-        <% elsif @user_data.physical_complete %>
-           <%#= image_tag "check.svg", style: "height: 4.5rem; float: right" %>
+        <% elsif @user_data.physical_complete? %>
            <div class="score"><%= @user_data.physical_score_name %></div>
+           <div class="risk-scale">
+             <span>Risk level</span><%= risk_image @user_data.physical_risk_score %>
+           </div>
         <% end %>
       </div>
     </td>
@@ -34,34 +38,38 @@
   <tr>
     <td>
       <%
-        complete = @user_data.diabetes_complete ? "complete" : ""
-        diabetes_available = @user_data.basic_complete && !@user_data.has_diabetes? ? "available" : ""
+        complete = @user_data.diabetes_complete? ? "complete" : ""
+        diabetes_available = @user_data.basic_complete? && !@user_data.has_diabetes? ? "available" : ""
       %>
       <div class="report-card diabetes <%= diabetes_available %> <%= complete %>">
         <h1>Diabetes risk</h1>
-        <% if @user_data.basic_complete && !@user_data.diabetes_complete && !@user_data.has_diabetes? %>
+        <% if @user_data.basic_complete? && !@user_data.diabetes_complete? && !@user_data.has_diabetes? %>
           <div style="margin: 4rem auto; text-align: center;">
             <%= link_to "Start", diabetes_welcome_url, class: "btn btn-secondary" %>
             <p class="estimate">Takes about <%= UserData::DIABETES_SURVEY_ESTIMATE %></p>
           </div>
-        <% elsif @user_data.diabetes_complete %>
-           <%#= image_tag "check.svg", style: "height: 4.5rem; float: right" %>
+        <% elsif @user_data.diabetes_complete? %>
            <div class="score"><%= @user_data.diabetes_score_name %></div>
+           <div class="risk-scale">
+             <span>Risk level</span><%= risk_image @user_data.diabetes_risk_score %>
+           </div>
         <% end %>
       </div>
     </td>
     <td>
-      <% complete = @user_data.alcohol_complete ? "complete" : "" %>
+      <% complete = @user_data.alcohol_complete? ? "complete" : "" %>
       <div class="report-card alcohol <%= available %> <%= complete %>">
         <h1>Alcohol consumption</h1>
-        <% if @user_data.basic_complete && !@user_data.alcohol_complete %>
+        <% if @user_data.basic_complete? && !@user_data.alcohol_complete? %>
           <div style="margin: 4rem auto; text-align: center;">
             <%= link_to "Start", alcohol_welcome_url, class: "btn btn-secondary" %>
             <p class="estimate">Takes about <%= UserData::ALCOHOL_SURVEY_ESTIMATE %></p>
           </div>
-        <% elsif @user_data.alcohol_complete %>
-           <%#= image_tag "check.svg", style: "height: 4.5rem; float: right" %>
+        <% elsif @user_data.alcohol_complete? %>
            <div class="score"><%= @user_data.alcohol_score_name %></div>
+           <div class="risk-scale">
+             <span>Risk level</span><%= risk_image @user_data.alcohol_risk_score %>
+           </div>
         <% end %>
       </div>
     </td>
@@ -81,7 +89,7 @@ $(document).ready(function() {
 <% content_for :footer_center do %>
 <% end %>
 <% content_for :footer_right do %>
-  <% if @user_data.basic_complete %>
+  <% if @user_data.basic_complete? %>
     <!-- For more information and recommended next steps: &nbsp;&nbsp; -->
     <%= link_to "Print and Finish", print_url, class: "nav next" %>
   <% end %>

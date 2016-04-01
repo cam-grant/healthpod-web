@@ -4,12 +4,6 @@ class CreateUserData < ActiveRecord::Migration
       t.boolean :consent
       t.timestamps null: false
 
-      # Survey status
-      t.boolean :basic_complete
-      t.boolean :diabetes_complete
-      t.boolean :physical_complete
-      t.boolean :alcohol_complete
-
       # Returing user
       t.boolean :returning_user
       t.integer :returning_user_q1a # The Health Pod was easy to use.
@@ -17,10 +11,10 @@ class CreateUserData < ActiveRecord::Migration
       t.integer :returning_user_q1c # I felt very confident using the Health Pod.
       t.integer :returning_user_q1d # The Health Pod increased my awareness of my health.
       t.integer :returning_user_q1e # The health report card provided useful information.
-      t.string :returning_user_q2  # Did you discuss any health issues identified on your health report card with your GP, nurse, friends or family?
-      t.string :returning_user_q3  # Did you do any of the following after using the Health Pod?
-      t.string :returning_user_q4  # Other action taken after using the pod
-      t.boolean  :returning_user_q5  # Did you visit the website shown on your health report card?
+      t.string  :returning_user_q2  # Did you discuss any health issues identified on your health report card with your GP, nurse, friends or family?
+      t.string  :returning_user_q3  # Did you do any of the following after using the Health Pod?
+      t.string  :returning_user_q4  # Other action taken after using the pod
+      t.boolean :returning_user_q5  # Did you visit the website shown on your health report card?
 
       # Basic health
       t.string :full_name
@@ -34,7 +28,7 @@ class CreateUserData < ActiveRecord::Migration
 
       # Allergies
       t.string :allergies
-      t.string :other_allergies
+      t.string :other_allergiesx
 
       # BMI
       t.decimal :weight
@@ -42,11 +36,14 @@ class CreateUserData < ActiveRecord::Migration
       t.decimal :bmi
       t.datetime :bmi_recorded_at
 
+      t.integer :basic_risk_score
+
       # Alcohol
       t.integer :alcohol_frequency
       t.integer :alcohol_num_drinks
       t.integer :alcohol_frequency_six_or_more
       t.integer :alcohol_score
+      t.integer :alcohol_risk_score
 
       # Physical
       t.integer :physical_work_type
@@ -57,6 +54,7 @@ class CreateUserData < ActiveRecord::Migration
       t.integer :physical_activity_gardening
       t.integer :physical_walking_pace
       t.integer :physical_score
+      t.integer :physical_risk_score
 
       # Diabetes
       t.integer :diabetes_age_group
@@ -67,6 +65,7 @@ class CreateUserData < ActiveRecord::Migration
       t.boolean :diabetes_physical_activity
       t.integer :diabetes_waist_measurement
       t.integer :diabetes_score
+      t.integer :diabetes_risk_score
 
     end
   end

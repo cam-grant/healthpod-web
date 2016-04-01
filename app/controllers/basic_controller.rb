@@ -102,7 +102,7 @@ class BasicController < ApplicationController
   def has_diabetes
     if request.post?
       @user_data.update_attributes(user_data_params) unless params[:user_data].blank?
-      @user_data.update_attributes basic_complete: true
+      @user_data.calc_basic_score
       redirect_to hub_url
     end
   end

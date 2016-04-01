@@ -17,10 +17,10 @@ ActiveRecord::Schema.define(version: 20160128044057) do
     t.boolean  "consent"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.boolean  "basic_complete"
-    t.boolean  "diabetes_complete"
-    t.boolean  "physical_complete"
-    t.boolean  "alcohol_complete"
+    t.boolean  "basic_complete?"
+    t.boolean  "diabetes_complete?"
+    t.boolean  "physical_complete?"
+    t.boolean  "alcohol_complete?"
     t.boolean  "returning_user"
     t.integer  "returning_user_q1a"
     t.integer  "returning_user_q1b"
@@ -45,10 +45,12 @@ ActiveRecord::Schema.define(version: 20160128044057) do
     t.decimal  "height"
     t.decimal  "bmi"
     t.datetime "bmi_recorded_at"
+    t.integer  "basic_risk_score"
     t.integer  "alcohol_frequency"
     t.integer  "alcohol_num_drinks"
     t.integer  "alcohol_frequency_six_or_more"
     t.integer  "alcohol_score"
+    t.integer  "alcohol_risk_score"
     t.integer  "physical_work_type"
     t.integer  "physical_activity_exercise"
     t.integer  "physical_activity_cycling"
@@ -57,6 +59,7 @@ ActiveRecord::Schema.define(version: 20160128044057) do
     t.integer  "physical_activity_gardening"
     t.integer  "physical_walking_pace"
     t.integer  "physical_score"
+    t.integer  "physical_risk_score"
     t.integer  "diabetes_age_group"
     t.boolean  "diabetes_hereditary"
     t.boolean  "diabetes_high_blood_glucose"
@@ -65,6 +68,7 @@ ActiveRecord::Schema.define(version: 20160128044057) do
     t.boolean  "diabetes_physical_activity"
     t.integer  "diabetes_waist_measurement"
     t.integer  "diabetes_score"
+    t.integer  "diabetes_risk_score"
   end
 
 end

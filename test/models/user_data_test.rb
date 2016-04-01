@@ -38,7 +38,7 @@ class UserDataTest < ActiveSupport::TestCase
       u.save
       u.calc_alcohol_score
 
-      assert u.alcohol_complete
+      assert u.alcohol_complete?
       assert_not_nil u.alcohol_score
       assert u.alcohol_score == data[i][3], "Score mismatch on alcohol test #{i}. Expected #{data[i][3]} got #{u.alcohol_score}"
     end
@@ -129,7 +129,7 @@ class UserDataTest < ActiveSupport::TestCase
       u.save
       u.calc_diabetes_score
 
-      assert u.diabetes_complete
+      assert u.diabetes_complete?
       assert_not_nil u.diabetes_score
       assert u.diabetes_score == data[i][11], "\"#{data[i][12]}\", expected #{data[i][11]} got #{u.diabetes_score}"
     end
