@@ -1,12 +1,19 @@
 <h1 class="center">How many drinks do you have on a typical day?</h1>
 
-<div style="text-align: center; width: 22rem; margin: 6rem auto;">
-  <ul class="options" data-option-group="user_data_alcohol_num_drinks" data-callback="validateForm" style="text-align: left;">
-    <% UserData::ALCOHOL_NUM_DRINKS.each do |r| %>
-    <li class="option" data-value="<%= r[:id] %>"><span></span><%= r[:name] %></li>
-    <% end %>
-  </ul>
-</div>
+<table class="" style="margin: 6rem auto;">
+  <tr>
+    <td style="vertical-align: middle; text-align: right;padding-right: 6rem;">
+      <%= image_tag "drink_sizes.svg", style: "width: 42rem;" %>
+    </td>
+    <td>
+      <ul class="options" data-option-group="user_data_alcohol_num_drinks" data-callback="validateForm" style="text-align: left;">
+        <% UserData::ALCOHOL_NUM_DRINKS.each do |r| %>
+        <li class="option" data-value="<%= r[:id] %>"><span></span><%= r[:name] %></li>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
+</table>
 
 <%= form_tag alcohol_num_drinks_path, { :id => "form", :autocomplete => "off" } do |f| %>
   <%= hidden_field_tag 'user_data[alcohol_num_drinks]', '' %>
