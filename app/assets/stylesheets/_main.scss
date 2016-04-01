@@ -640,3 +640,26 @@ table.likert {
   }
 
 }
+
+table.waist-sizes {
+  border-collapse: collapse;
+  margin: 4rem auto 0 auto;
+
+  th, td {
+    padding: 1rem;
+    border-right: $light-border;
+  }
+
+  th {
+    font-weight: normal;
+    text-align: left;
+    padding-right: 3rem;
+  }
+
+  td {
+    text-align: center;
+    li.option span {
+      margin: 0px !important;
+    }
+  }
+}

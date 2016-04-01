@@ -1,17 +1,34 @@
 <h1 class="center">Your waist measurement</h1>
 
-<p style="text-align: center; font-size: 2rem;">
-  Waist measurements are taken below the ribs while standing<br />(usually at the level of the belly button)
-</p>
+<% sizes = @user_data.male? ? UserData::WAIST_SIZES_MEN : UserData::WAIST_SIZES_WOMEN %>
 
-<div style="text-align: center; width: 28rem; margin: 3rem auto;display: none;">
-  <ul class="options" data-option-group="user_data_diabetes_waist_measurement" data-callback="validateForm" style="text-align: left;">
-    <% @user_data.waist_size_list.each do |t| %>
-    <li class="option" data-value="<%= t[:id] %>">
-      <span></span><%= t[:name] %>
-    </li>
-    <% end %>
-  </ul>
+<div style="text-align: center; margin: 3rem auto;">
+  <table class="waist-sizes">
+    <tr class="options" data-option-group="user_data_diabetes_waist_measurement" data-callback="validateForm">
+      <td></td>
+      <% sizes.each do |s| %>
+      <td><li id="waist-size-<%= s[:cm] %>" class="option" data-value="<%= s[:cm] %>"><span></span></li></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th>Clothing size</th>
+      <% sizes.each do |s| %>
+      <td onclick="$('#waist-size-<%= s[:cm] %> span').trigger('click');"><%= s[:clothing] %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th>Waist size (cm)</th>
+      <% sizes.each do |s| %>
+      <td onclick="$('#waist-size-<%= s[:cm] %> span').trigger('click');"><%= s[:cm] %> cm</td>
+      <% end %>
+    </tr>
+    <tr>
+      <th>Waist size (inches)</th>
+      <% sizes.each do |s| %>
+      <td onclick="$('#waist-size-<%= s[:cm] %> span').trigger('click');"><%= s[:inches] %> &Prime;</td>
+      <% end %>
+    </tr>
+  </table>
 </div>
 
 <%= form_tag diabetes_waist_measurement_url, { :id => "form", :autocomplete => "off" } do |f| %>

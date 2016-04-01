@@ -99,6 +99,20 @@ class UserDataTest < ActiveSupport::TestCase
     # hereditary, male, aboriginal
     data << [1, 1, true, 1, 1, true, false, false, 1, 1, 1, 8]
 
+
+    data << [1, 1, false, 1, 1, false, false, false, 1, 1, nil, 3 + 0, "Male, waist_size < 102"]
+    data << [1, 1, false, 1, 1, false, false, false, 1, 1, 0, 3 + 0, "Male, waist_size < 102"]
+    data << [1, 1, false, 1, 1, false, false, false, 1, 1, 90, 3 + 0, "Male, waist_size < 102"]
+    data << [1, 1, false, 1, 1, false, false, false, 1, 1, 102, 3 + 4, "Male, waist_size > 102"]
+    data << [1, 1, false, 1, 1, false, false, false, 1, 1, 110, 3 + 4, "Male, waist_size > 102"]
+    data << [1, 1, false, 1, 1, false, false, false, 1, 1, 111, 3 + 7, "Male, waist_size > 110"]
+    data << [2, 1, false, 1, 1, false, false, false, 1, 1, 87, 0 + 0, "Female, waist_size < 88"]
+    data << [2, 1, false, 1, 1, false, false, false, 1, 1, 88, 0 + 4, "Female, waist_size > 88"]
+    data << [2, 1, false, 1, 1, false, false, false, 1, 1, 100, 0 + 4, "Female, waist_size > 88"]
+    data << [2, 1, false, 1, 1, false, false, false, 1, 1, 101, 0 + 7, "Female, waist_size > 100"]
+    data << [1, 1, true, 1, 1, false, false, false, 1, 1, 89, 3 + 2 + 0, "Male, Aboriginal, waist_size < 102"]
+    data << [2, 1, true, 1, 1, false, false, false, 1, 1, 79, 0 + 2 + 0, "Female, Aboriginal, waist_size < 80"]
+
     data.each_with_index do |item, i|
       u = UserData.new consent: true,
         gender: data[i][0],
@@ -117,7 +131,7 @@ class UserDataTest < ActiveSupport::TestCase
 
       assert u.diabetes_complete
       assert_not_nil u.diabetes_score
-      assert u.diabetes_score == data[i][11], "Score mismatch, test #{i}. Expected #{data[i][11]} got #{u.diabetes_score}"
+      assert u.diabetes_score == data[i][11], "\"#{data[i][12]}\", expected #{data[i][11]} got #{u.diabetes_score}"
     end
 
   end

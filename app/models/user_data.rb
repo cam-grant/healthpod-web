@@ -95,9 +95,30 @@ class UserData < ActiveRecord::Base
     score += 2 if self.smokes?
     score += 1 if (self.diabetes_fruit_and_veg && self.diabetes_fruit_and_veg == 2)
     score += 2 unless self.diabetes_physical_activity
-    score += lookup(self.waist_size_list, self.diabetes_waist_measurement, :value, 0)
+
+    if self.asian_or_aboriginal? && self.male?
+      score += waist_size_score(self.diabetes_waist_measurement, 90, 100)
+    elsif self.asian_or_aboriginal? && self.female?
+      score += waist_size_score(self.diabetes_waist_measurement, 80, 90)
+    elsif self.female?
+      score += waist_size_score(self.diabetes_waist_measurement, 88, 100)
+    else # male
+      score += waist_size_score(self.diabetes_waist_measurement, 102, 110)
+    end
 
     self.update_attributes diabetes_complete: true, diabetes_score: score
+  end
+
+  def waist_size_score(waist_size, lower_bound, upper_bound)
+    return 0 if waist_size.blank?
+    case
+    when waist_size < lower_bound
+      return 0
+    when waist_size.between?(lower_bound, upper_bound)
+      return 4
+    when waist_size > upper_bound
+      return 7
+    end
   end
 
   def diabetes_score_name
@@ -114,18 +135,6 @@ class UserData < ActiveRecord::Base
   def lookup(list, id, attr = :name, default = nil)
     items = list.select {|i| i[:id] == id}
     items && items[0] && items[0][attr] ? items[0][attr] : default
-  end
-
-  def waist_size_list
-    waist_sizes = UserData::WAIST_SIZES_MEN
-    if self.asian_or_aboriginal? && self.male?
-      waist_sizes = UserData::ASIAN_OR_ABORIGINAL_WAIST_SIZES_MEN
-    elsif self.asian_or_aboriginal? && self.female?
-      waist_sizes = UserData::ASIAN_OR_ABORIGINAL_WAIST_SIZES_WOMEN
-    elsif self.female?
-      waist_sizes = UserData::WAIST_SIZES_WOMEN
-    end
-    waist_sizes
   end
 
   # def to_csv
@@ -260,28 +269,24 @@ class UserData < ActiveRecord::Base
     {id: 2, name: "Not every day", value: 1}
   ]
 
-  ASIAN_OR_ABORIGINAL_WAIST_SIZES_MEN = [
-    {id: 1, name: "Less than 90cm", value: 0},
-    {id: 2, name: "90 - 100cm", value: 4},
-    {id: 3, name: "More than 100cm", value: 7}
-  ]
-
-  ASIAN_OR_ABORIGINAL_WAIST_SIZES_WOMEN = [
-    {id: 1, name: "Less than 80cm", value: 0},
-    {id: 2, name: "80 - 90cm", value: 4},
-    {id: 3, name: "More than 90cm", value: 7}
+  WAIST_SIZES_WOMEN = [
+    {clothing: 10, cm: 81, inches: "32"},
+    {clothing: 12, cm: 87, inches: "34"},
+    {clothing: 14, cm: 93, inches: "36 1/2"},
+    {clothing: 16, cm: 99, inches: "39"},
+    {clothing: 18, cm: 105, inches: "41 1/2"},
+    {clothing: 20, cm: 111, inches: "43 1/2"},
+    {clothing: 22, cm: 117, inches: "46"},
+    {clothing: 24, cm: 123, inches: "48 1/2"}
   ]
 
   WAIST_SIZES_MEN = [
-    {id: 1, name: "Less than 102cm", value: 0},
-    {id: 2, name: "102 - 110cm", value: 4},
-    {id: 3, name: "More than 110cm", value: 7}
-  ]
-
-  WAIST_SIZES_WOMEN = [
-    {id: 1, name: "Less than 88cm", value: 0},
-    {id: 2, name: "88 - 100cm", value: 4},
-    {id: 3, name: "More than 100cm", value: 7}
+    {clothing: "S", cm: 91, inches: "36"},
+    {clothing: "M", cm: 99, inches: "39"},
+    {clothing: "L", cm: 107, inches: "42"},
+    {clothing: "XL", cm: 115, inches: "45"},
+    {clothing: "XXL", cm: 123, inches: "48 1/2"},
+    {clothing: "XXXL", cm: 131, inches: "51 1/2"}
   ]
 
   SUBURBS = [
