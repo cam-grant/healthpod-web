@@ -1,0 +1,39 @@
+<h1 class="center">Your contact details</h1>
+
+<%= form_tag follow_up_path, { :id => "form", :autocomplete => "off" } do |f| %>
+
+  <div style="text-align: center; width: 75%; margin-left: auto; margin-right: auto;">
+      <%= text_field_tag 'user_data[follow_up_contact_details]', '', id: 'follow_up_contact_details',
+        placeholder: "Example: 0400 123 456 or jane@example.com", "data-osk-options": "disableReturn disableTab disableSymbols" %>
+  </div>
+
+<% end %>
+
+<script>
+$(document).ready(function() {
+  full_name = $('#follow_up_contact_details');
+
+  full_name.on('keyup', function() {
+    if (full_name.val().trim().length > 2) {
+      $('#next').removeClass('disabled');
+    } else {
+      $('#next').addClass('disabled');
+    }
+  });
+
+  full_name.onScreenKeyboard({ topPosition: '28%', leftPosition: '19%'});
+  full_name.click();
+  full_name.focus();
+
+});
+</script>
+
+<% content_for :footer_left do %>
+  <label class="nav exit" for="exit-modal">Exit</label>
+  <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
+<% end %>
+<% content_for :footer_center do %>
+<% end %>
+<% content_for :footer_right do %>
+  <%= next_button "$('#form').submit();", "#", "Finish" %>
+<% end %>

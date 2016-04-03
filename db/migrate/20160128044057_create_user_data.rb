@@ -67,6 +67,9 @@ class CreateUserData < ActiveRecord::Migration
       t.integer :diabetes_score
       t.integer :diabetes_risk_score
 
+      # Follow up contact details
+      t.string :follow_up_contact_details
+
     end
   end
 end

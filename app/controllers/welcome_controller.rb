@@ -81,4 +81,11 @@ class WelcomeController < ApplicationController
   def print
   end
 
+  def follow_up
+    if request.post?
+      @user_data.update_attributes(user_data_params) unless params[:user_data].blank?
+      render "welcome/follow_up_done"
+    end
+  end
+
 end

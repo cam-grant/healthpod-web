@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
   get   'print' => 'welcome#print'
 
+  get   'follow-up' => 'welcome#follow_up'
+  post  'follow-up' => 'welcome#follow_up'
+
   # Returning user
 
   get   'returning-user' => 'welcome#returning_user'

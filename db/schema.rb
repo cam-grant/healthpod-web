@@ -17,10 +17,6 @@ ActiveRecord::Schema.define(version: 20160128044057) do
     t.boolean  "consent"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.boolean  "basic_complete?"
-    t.boolean  "diabetes_complete?"
-    t.boolean  "physical_complete?"
-    t.boolean  "alcohol_complete?"
     t.boolean  "returning_user"
     t.integer  "returning_user_q1a"
     t.integer  "returning_user_q1b"
@@ -40,7 +36,7 @@ ActiveRecord::Schema.define(version: 20160128044057) do
     t.integer  "has_diabetes"
     t.integer  "smoking"
     t.string   "allergies"
-    t.string   "other_allergies"
+    t.string   "other_allergiesx"
     t.decimal  "weight"
     t.decimal  "height"
     t.decimal  "bmi"
@@ -69,6 +65,7 @@ ActiveRecord::Schema.define(version: 20160128044057) do
     t.integer  "diabetes_waist_measurement"
     t.integer  "diabetes_score"
     t.integer  "diabetes_risk_score"
+    t.string   "follow_up_contact_details"
   end
 
 end

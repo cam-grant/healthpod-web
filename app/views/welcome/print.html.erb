@@ -1,17 +1,38 @@
-<h1>Your report is printing...</h1>
-<p>Thank you for using the Health Pod.</p>
-<p>Please visit again and update your report.</p>
-<p>&nbsp;</p>
-<%= link_to "Exit", root_url, class: "nav exit" %>
+<table class="two-col border">
+  <tr>
+    <td>
+      <h1 class="center">Your report is printing</h1>
+      <div style="text-align: center;">
 
-<script>
-$(document).ready(function() {
-  $('#footer').hide();
-  $(document).click(function() { home() });
-  setTimeout(function() { home(); }, 5000);
+        <p>Thank you for using the Health Pod.</p>
+        <p>Please visit again to update your health report card.</p>
+        <%= image_tag "logo.svg", style: "height: 200px; margin-top: 6.5rem;" %>
+      </div>
+    </td>
+    <td>
+      <h1 class="center">Can you help us?</h1>
+      <div style="text-align: center;">
+        <p>Your feedback is very important to us.</p>
+        <p>Can we contact you to discuss your experience<br />with using the Health Pod?</p>
+      </div>
 
-  function home() {
-    window.location = '<%= root_url %>';
-  }
-});
-</script>
+      <table class="two-col" style="margin-top: 10rem;">
+        <tr>
+          <td style="text-align: right; border: none;">
+            <%= link_to "Yes", follow_up_url, class: "btn btn-secondary large" %>
+          </td>
+          <td style="border: none;">
+            <%= link_to "No", root_url, class: "btn btn-secondary large" %>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<% content_for :footer_left do %>
+<% end %>
+<% content_for :footer_center do %>
+<% end %>
+<% content_for :footer_right do %>
+<% end %>
