@@ -23,7 +23,6 @@ function submit(val) {
 </script>
 
 <% content_for :footer_left do %>
-  <label class="nav exit" for="exit-modal">Exit</label>
   <%= render :partial => 'partials/exit_modal', locals: { exit_url: hub_url } %>
 <% end %>
 <% content_for :footer_center do %>
@@ -32,3 +31,5 @@ function submit(val) {
 <% content_for :footer_right do %>
   <span style="visibility: hidden;"><%= next_button "$('#form').submit();" %></span>
 <% end %>
+
+<%= render :partial => 'partials/timeout_modal' %>

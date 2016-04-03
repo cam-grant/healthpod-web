@@ -15,10 +15,6 @@
 //= require turbolinks
 //= require_tree .
 
-function sessionTimeout() {
-  // setTimeout(function() { home(); }, 5000);
-}
-
 function initPage() {
 
   $('[data-option-group]').each(function(i, group) {
@@ -67,5 +63,5 @@ function initPage() {
       });
     });
   });
-  
+
 }

@@ -1,0 +1,61 @@
+<div id="timeout-model-content" style="display: none;">
+  <h1 class="center">Would you like to continue?</h1>
+  <p style="text-align: center;margin: 3rem auto;">
+    Your session will end in <span id="session_timeout_remaining"></span>
+  </p>
+  <table class="two-col" style="margin: width: 30rem;">
+    <tr>
+      <td><button type="button" class="btn btn-primary" onclick="continueSession();return false;">Continue</button></td>
+      <td style="text-align: right;"><button type="button" class="btn btn-secondary" onclick="exit();return false;">Exit</button></td>
+    </tr>
+  </table>
+</div>
+
+<%= render :partial => 'partials/modal' %>
+
+<script>
+
+TIME_TO_WARNING = 75000;
+TIME_AFTER_WARNING = 15000;
+var timeoutDialogContent;
+var timeoutId;
+var timeRemaining;
+
+$(document).ready(function() {
+  timeoutDialogContent = $("#timeout-model-content").detach();
+  resetSession();
+});
+
+function resetSession() {
+  clearTimeout(timeoutId);
+  timeRemaining = TIME_AFTER_WARNING;
+  setTimeout(function() { showTimeoutWarning(); }, TIME_TO_WARNING);
+}
+
+function showTimeoutWarning() {
+  showModal(timeoutDialogContent);
+  updateSecondsRemaining();
+}
+
+function updateSecondsRemaining() {
+  secondsRemaining = timeRemaining / 1000;
+  affix = (secondsRemaining == 1) ? 'second' : 'seconds';
+  $("#session_timeout_remaining").text(secondsRemaining + ' ' + affix);
+  timeRemaining -= 1000;
+  if (timeRemaining >= 0) {
+    timeoutId = setTimeout(function() { updateSecondsRemaining(); }, 1000);
+  } else {
+    exit();
+  }
+}
+
+function continueSession() {
+  resetSession();
+  $("#modal-toggle").trigger('click');
+}
+
+function exit() {
+  window.location = '<%= root_url %>';
+}
+
+</script>

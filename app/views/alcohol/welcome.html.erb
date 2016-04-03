@@ -14,8 +14,9 @@
   <% end %>
 <% end %>
 <% content_for :footer_center do %>
-  <%#= progress_bar(@percent_complete, @minutes_remaining) %>
 <% end %>
 <% content_for :footer_right do %>
   <%= link_to "Next", alcohol_frequency_path, class: "nav next" %>
 <% end %>
+
+<%= render :partial => 'partials/timeout_modal' %>

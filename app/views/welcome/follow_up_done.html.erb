@@ -17,3 +17,5 @@ $(document).ready(function() {
 <% content_for :footer_right do %>
   <%= next_button nil, root_url, "Finish" %>
 <% end %>
+
+<%= render :partial => 'partials/timeout_modal' %>

@@ -27,7 +27,6 @@ validateForm('');
 </script>
 
 <% content_for :footer_left do %>
-  <label class="nav exit" for="exit-modal">Exit</label>
   <%= render :partial => 'partials/exit_modal', locals: { exit_url: hub_url } %>
 <% end %>
 <% content_for :footer_center do %>
@@ -36,3 +35,5 @@ validateForm('');
 <% content_for :footer_right do %>
   <%= next_button "$('#form').submit();", "#", "Finish" %>
 <% end %>
+
+<%= render :partial => 'partials/timeout_modal' %>

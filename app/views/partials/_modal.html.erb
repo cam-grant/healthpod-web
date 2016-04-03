@@ -1,0 +1,42 @@
+<div class="modal">
+  <input id="modal-toggle" class="modal-state" type="checkbox" />
+  <div class="modal-fade-screen">
+    <div class="modal-inner">
+      <div id="modal-content" class="modal-content"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+$(function() {
+  $("#modal-toggle").on("change", function() {
+    if ($(this).is(":checked")) {
+      $("body").addClass("modal-open");
+    } else {
+      $("body").removeClass("modal-open");
+    }
+  });
+
+  // $(".modal-fade-screen, .modal-close").on("click", function() {
+  $(".modal-close").on("click", function() {
+    $(".modal-state:checked").prop("checked", false).change();
+  });
+
+  $(".modal-inner").on("click", function(e) {
+    e.stopPropagation();
+  });
+});
+
+function showModal(content) {
+  if($("body").hasClass("modal-open"))
+    $("#modal-toggle").trigger('click');
+
+  $("#modal-content").html('');
+  $("#modal-content").append(content);
+  content.show();
+
+  $("#modal-toggle").trigger('click');
+}
+
+</script>

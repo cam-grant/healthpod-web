@@ -20,7 +20,6 @@ $(document).ready(function() {
 </script>
 
 <% content_for :footer_left do %>
-  <label class="nav exit" for="exit-modal">Exit</label>
   <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
 <% end %>
 <% content_for :footer_center do %>
@@ -29,3 +28,5 @@ $(document).ready(function() {
 <% content_for :footer_right do %>
   <%= next_button "$('#form').submit();" %>
 <% end %>
+
+<%= render :partial => 'partials/timeout_modal' %>
