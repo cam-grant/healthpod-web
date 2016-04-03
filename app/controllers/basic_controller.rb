@@ -83,7 +83,7 @@ class BasicController < ApplicationController
       ReadBmiScalesJob.perform_now @user_data
     else
       # Simulate pause and data
-      sleep 2
+      sleep 5
       @user_data.update_attributes weight: 75.2, height: 175, bmi: 24.5, bmi_recorded_at: Time.now
     end
 
