@@ -28,7 +28,7 @@ class CreateUserData < ActiveRecord::Migration
 
       # Allergies
       t.string :allergies
-      t.string :other_allergiesx
+      t.string :other_allergies
 
       # BMI
       t.decimal :weight

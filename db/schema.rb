@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20160128044057) do
     t.integer  "has_diabetes"
     t.integer  "smoking"
     t.string   "allergies"
-    t.string   "other_allergiesx"
+    t.string   "other_allergies"
     t.decimal  "weight"
     t.decimal  "height"
     t.decimal  "bmi"
