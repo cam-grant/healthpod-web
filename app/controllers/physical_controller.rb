@@ -24,7 +24,7 @@ class PhysicalController < ApplicationController
   def activity_cycling
     if request.post?
       @user_data.update_attributes(user_data_params) unless params[:user_data].blank?
-      @user_data.calc_physical_score
+      session[:current_step] += 1
       redirect_to physical_activity_walking_url
     end
   end
