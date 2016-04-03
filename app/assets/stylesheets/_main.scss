@@ -674,3 +674,13 @@ table.waist-sizes {
     }
   }
 }
+
+#weight, #height {
+  font-size: 3rem;
+  font-weight: bolder;
+  padding: 3rem;
+  margin: 1rem auto;
+  border: solid 0.75rem $blue;
+  border-radius: 100rem;
+  text-align: center;
+}

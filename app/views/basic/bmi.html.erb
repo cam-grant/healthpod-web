@@ -1,19 +1,29 @@
 <h1 class="center">Height and weight</h1>
 
-<table class="two-col border" style="width: 75%; margin-left: auto; margin-right: auto;">
+<table id="instructions" class="two-col" style="width: 75%; margin: 6rem auto 0 auto;">
   <tr>
     <td style="text-align: center;vertical-align: middle;">
-      <br /><br /><br /><br /><br />
-      [Illustration]
-      <br /><br /><br /><br /><br /><br />
+      <%= image_tag "stand_up_straight.svg", style: "height: 350px;" %>
     </td>
     <td style="vertical-align: middle;">
-      <div id="instructions">
+      <div style="font-size: 2rem;">
         <p>1. Stand on the scales</p>
         <p>2. Stand up straight</p>
         <p>3. Listen for a "beep"</p>
       </div>
-      <div id="bmi"></div>
+    </td>
+  </tr>
+</table>
+
+<table id="results" class="two-col" style="width: 75%; margin: 6rem auto 0 auto;display: none;">
+  <tr>
+    <td style="text-align: center;vertical-align: middle;font-size: 2rem;">
+      Your weight
+      <div id="weight"></div>
+    </td>
+    <td style="text-align: center;vertical-align: middle;font-size: 2rem;">
+      Your height
+      <div id="height"></div>
     </td>
   </tr>
 </table>
@@ -37,10 +47,9 @@ $(document).ready(function() {
     url: ajax_url,
     success: function (data) {
         $('#instructions').hide();
-        html =  '<p>Your weight is ' + data.weight + ' Kg</p>'
-        html += '<p>Your height is ' + data.height + ' cm</p>'
-        // html += '<p>Your BMI is ' + data.bmi + '</p>'
-        $('#bmi').html(html).show();
+        $('#weight').text(data.weight);
+        $('#height').text(data.height);
+        $('#results').show();
         $('#next').removeClass('disabled').attr('href', next_url);
     },
     error: function () {
