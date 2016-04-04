@@ -28,7 +28,7 @@ class ReportCard
     top_row_y = 455
     bottom_row_y = 200
 
-    # BMI
+    # Basic/BMI
     render_card pdf, left_column_x, top_row_y,
       "Your BMI is",
       @user_data.bmi_risk_score,
@@ -37,34 +37,58 @@ class ReportCard
       @user_data.lookup(UserData::BMI_SCORES, @user_data.bmi_score, :what_now, "")
 
     # Physical
-    render_card pdf, right_column_x, top_row_y,
-      "Physically you are",
-      @user_data.physical_risk_score,
-      @user_data.lookup(UserData::PHYSICAL_SCORES, @user_data.physical_risk_score, :name, ""),
-      @user_data.lookup(UserData::PHYSICAL_SCORES, @user_data.physical_risk_score, :so_what, ""),
-      @user_data.lookup(UserData::PHYSICAL_SCORES, @user_data.physical_risk_score, :what_now, "")
+    if @user_data.physical_complete?
+      render_card pdf, right_column_x, top_row_y,
+        "Physically you are",
+        @user_data.physical_risk_score,
+        @user_data.lookup(UserData::PHYSICAL_SCORES, @user_data.physical_risk_score, :name, ""),
+        @user_data.lookup(UserData::PHYSICAL_SCORES, @user_data.physical_risk_score, :so_what, ""),
+        @user_data.lookup(UserData::PHYSICAL_SCORES, @user_data.physical_risk_score, :what_now, "")
+    else
+      render_incomplete_card pdf, right_column_x, top_row_y, "Check your physical activity on your next visit to the Health Pod"
+    end
 
     # Diabetes
-    render_card pdf, left_column_x, bottom_row_y,
-      "Your diabetes risk score is",
-      @user_data.diabetes_risk_score,
-      @user_data.diabetes_score.to_s,
-      @user_data.lookup(UserData::DIABETES_SCORES, @user_data.diabetes_risk_score, :so_what, ""),
-      @user_data.lookup(UserData::DIABETES_SCORES, @user_data.diabetes_risk_score, :what_now, "")
+    if @user_data.diabetes_complete?
+      render_card pdf, left_column_x, bottom_row_y,
+        "Your diabetes risk score is",
+        @user_data.diabetes_risk_score,
+        @user_data.diabetes_score.to_s,
+        @user_data.lookup(UserData::DIABETES_SCORES, @user_data.diabetes_risk_score, :so_what, ""),
+        @user_data.lookup(UserData::DIABETES_SCORES, @user_data.diabetes_risk_score, :what_now, "")
+    else
+      render_incomplete_card pdf, left_column_x, bottom_row_y, "Check your Type 2 diabetes risk on your next visit to the Health Pod"
+    end
 
     # Alcohol
-    render_card pdf, right_column_x, bottom_row_y,
-      "Your alcohol consumption is",
-      @user_data.alcohol_risk_score,
-      @user_data.lookup(UserData::ALCOHOL_SCORES, @user_data.alcohol_risk_score, :name, ""),
-      @user_data.lookup(UserData::ALCOHOL_SCORES, @user_data.alcohol_risk_score, :so_what, ""),
-      @user_data.lookup(UserData::ALCOHOL_SCORES, @user_data.alcohol_risk_score, :what_now, "")
+    if @user_data.alcohol_complete?
+      render_card pdf, right_column_x, bottom_row_y,
+        "Your alcohol consumption is",
+        @user_data.alcohol_risk_score,
+        @user_data.lookup(UserData::ALCOHOL_SCORES, @user_data.alcohol_risk_score, :name, ""),
+        @user_data.lookup(UserData::ALCOHOL_SCORES, @user_data.alcohol_risk_score, :so_what, ""),
+        @user_data.lookup(UserData::ALCOHOL_SCORES, @user_data.alcohol_risk_score, :what_now, "")
+    else
+      render_incomplete_card pdf, right_column_x, bottom_row_y, "Check your alcohol consumption on your next visit to the Health Pod"
+    end
 
     # Debug co-ordinates
     # pdf.stroke_axis
 
     # Done
     pdf.render_file @file_path
+  end
+
+  def render_incomplete_card(pdf, x, y, heading)
+    font_name = "Helvetica"
+    font_size = 9
+    font_color = "999999"
+    margin = 10
+
+    # Heading
+    pdf.fill_color font_color
+    pdf.font font_name, size: font_size
+    pdf.text_box heading, at: [x + margin, y - 80], width: 150, align: :center
   end
 
   def render_card(pdf, x, y, heading, score, score_name, so_what, what_now)
