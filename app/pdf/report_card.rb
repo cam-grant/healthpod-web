@@ -32,7 +32,7 @@ class ReportCard
     render_card pdf, left_column_x, top_row_y,
       "Your BMI is",
       @user_data.bmi_risk_score,
-      @user_data.bmi.to_s + " (#{@user_data.lookup(UserData::BMI_SCORES, @user_data.bmi_score, :name, "")})",
+      @user_data.bmi_score_name,
       @user_data.lookup(UserData::BMI_SCORES, @user_data.bmi_score, :so_what, ""),
       @user_data.lookup(UserData::BMI_SCORES, @user_data.bmi_score, :what_now, "")
 

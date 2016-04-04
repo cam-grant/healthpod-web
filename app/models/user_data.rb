@@ -41,7 +41,33 @@ class UserData < ActiveRecord::Base
   end
 
   def calc_basic_score
-    self.update_attributes bmi_score: 2, bmi_risk_score: 1
+
+    score = 1
+    risk_score = 1
+    # Underweight   Below 18.5       High
+    # Normal        18.5–24.9        Low                                                                                                                       Low
+    # Overweight    25.0–29.9        Medium                                                                                                                    Medium
+    # Obesity       30.0 and Above   High
+    case
+    when self.bmi < 18.5
+      score = 1
+      risk_score = 3
+    when self.bmi.between?(18.5, 24.9)
+      score = 2
+      risk_score = 1
+    when self.bmi.between?(25, 29.9)
+      score = 3
+      risk_score = 2
+    else # 30.0 and Above
+      score = 4
+      risk_score = 3
+    end
+
+    self.update_attributes bmi_score: score, bmi_risk_score: risk_score
+  end
+
+  def bmi_score_name
+    "#{self.bmi} (#{lookup(UserData::BMI_SCORES, self.bmi_score, :name, "")})"
   end
 
   def basic_complete?

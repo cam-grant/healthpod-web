@@ -2,6 +2,41 @@ require 'test_helper'
 
 class UserDataTest < ActiveSupport::TestCase
 
+  test "BMI score" do
+
+    # Underweight   Below 18.5       High
+    # Normal        18.5–24.9        Low                                                                                                                       Low
+    # Overweight    25.0–29.9        Medium                                                                                                                    Medium
+    # Obesity       30.0 and Above   High
+
+    data = []
+
+    # BMI, bmi_score, bmi_risk_score
+    data << [0, 1, 3]
+    data << [10, 1, 3]
+    data << [18.4, 1, 3]
+    data << [18.5, 2, 1]
+    data << [20, 2, 1]
+    data << [24.9, 2, 1]
+    data << [25, 3, 2]
+    data << [29.9, 3, 2]
+    data << [29.91, 4, 3]
+    data << [30, 4, 3]
+    data << [35, 4, 3]
+
+    data.each_with_index do |item, i|
+      u = UserData.new bmi: data[i][0]
+      u.save
+      u.calc_basic_score
+
+      assert u.basic_complete?
+      assert_not_nil u.bmi_score
+      assert u.bmi_score == data[i][1], "Score mismatch on BMI test #{i}. Expected #{data[i][1]} got #{u.bmi_score}"
+      assert u.bmi_risk_score == data[i][2], "Score mismatch on BMI risk test #{i}. Expected #{data[i][2]} got #{u.bmi_risk_score}"
+    end
+
+  end
+
   test "Alcohol score" do
 
     # t.integer :alcohol_frequency
