@@ -28,6 +28,22 @@
   </tr>
 </table>
 
+<div id="retry-bmi-model-content" style="display: none;">
+  <h1 class="center">Try measuring your<br/>height and weight again?</h1>
+  <div style="text-align: center;margin: 3rem auto 4rem auto;">
+    <p>There was a problem with measuring your height and weight.</p>
+    <p>Would you like to try again?</p>
+  </div>
+
+  <table class="two-col" style="width: 30rem;">
+    <tr>
+      <td><button type="button" class="btn btn-primary" onclick="retryReadBmiData();return false;">Retry</button></td>
+      <td style="text-align: right;"><button type="button" class="btn btn-secondary" onclick="gotoNext();return false;">Cancel</button></td>
+    </tr>
+  </table>
+</div>
+<%= render :partial => 'partials/modal' %>
+
 <% content_for :footer_left do %>
   <%= render :partial => 'partials/exit_modal', locals: { exit_url: root_url } %>
 <% end %>
@@ -39,10 +55,19 @@
 <% end %>
 
 <script>
-$(document).ready(function() {
-  ajax_url = '<%= bmi_read_url %>';
-  next_url = '<%= has_diabetes_url %>'
 
+var retryDialogContent;
+var retryCount = 1;
+var MAX_BMI_READ_RETRIES = <%= Rails.configuration.x.max_bmi_scale_retries %>
+var ajax_url = '<%= bmi_read_url %>';
+var next_url = '<%= has_diabetes_url %>';
+
+$(document).ready(function() {
+  retryDialogContent = $("#retry-bmi-model-content").detach();
+  readBmiData();
+});
+
+function readBmiData() {
   $.ajax({
     url: ajax_url,
     success: function (data) {
@@ -53,10 +78,25 @@ $(document).ready(function() {
         $('#next').removeClass('disabled').attr('href', next_url);
     },
     error: function () {
-      alert('Error');
+      if (retryCount < MAX_BMI_READ_RETRIES) {
+        showModal(retryDialogContent);
+      } else {
+        gotoNext();
+      }
     }
   });
-});
+}
+
+function retryReadBmiData() {
+  retryCount++;
+  hideModal();
+  readBmiData();
+}
+
+function gotoNext() {
+  window.location = next_url;
+}
+
 </script>
 
 <%= render :partial => 'partials/timeout_modal' %>

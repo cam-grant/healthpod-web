@@ -27,6 +27,7 @@ module Kiosk
     config.x.reports_folder = "/tmp"
     config.x.usb_serial_port = "/dev/tty.usbserial"
     config.x.usb_serial_port_timeout = 30 # Seconds
+    config.x.max_bmi_scale_retries = 2
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true

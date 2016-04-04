@@ -74,11 +74,13 @@ class BasicController < ApplicationController
   end
 
   def bmi
-    # Render "Stand on the scales..." page
+    # Renders "Stand on the scales..." page
+    # Page performs ajax call to BasicController#bmi_read
   end
 
   def bmi_read
-    if Rails.env.production?
+    if true # Rails.env.production?
+      sleep 2
       ReadBmiScalesJob.reset_scales
       ReadBmiScalesJob.perform_now @user_data
     else

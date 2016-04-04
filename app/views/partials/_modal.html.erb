@@ -39,4 +39,9 @@ function showModal(content) {
   $("#modal-toggle").trigger('click');
 }
 
+function hideModal() {
+  if($("body").hasClass("modal-open"))
+    $("#modal-toggle").trigger('click');
+}
+
 </script>
