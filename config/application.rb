@@ -25,6 +25,7 @@ module Kiosk
     config.x.session_timeout_warning = 30000 # Milliseconds
     config.x.printer_name = "Canon_iP110_series"
     config.x.reports_folder = "/tmp"
+    config.x.enable_bmi_scales = true
     config.x.usb_serial_port = "/dev/tty.usbserial"
     config.x.usb_serial_port_timeout = 30 # Seconds
     config.x.max_bmi_scale_retries = 2

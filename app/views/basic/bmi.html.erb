@@ -57,7 +57,7 @@
 <script>
 
 var retryDialogContent;
-var retryCount = 1;
+var retryCount = 0;
 var MAX_BMI_READ_RETRIES = <%= Rails.configuration.x.max_bmi_scale_retries %>
 var ajax_url = '<%= bmi_read_url %>';
 var next_url = '<%= has_diabetes_url %>';

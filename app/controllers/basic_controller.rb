@@ -79,14 +79,12 @@ class BasicController < ApplicationController
   end
 
   def bmi_read
-    if true # Rails.env.production?
-      sleep 2
+    if Rails.configuration.x.enable_bmi_scales
       ReadBmiScalesJob.reset_scales
       ReadBmiScalesJob.perform_now @user_data
     else
-      # Simulate pause and data
+      # Simulate pause while using scales...
       sleep 5
-      @user_data.update_attributes weight: 75.2, height: 175, bmi: 24.5, bmi_recorded_at: Time.now
     end
 
     if @user_data.bmi.blank?
