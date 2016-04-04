@@ -2,9 +2,9 @@ class ReadBmiScalesJob < ActiveJob::Base
 
   require 'serialport'
 
-  USB_SERIAL_PORT = "/dev/tty.usbserial"
+  USB_SERIAL_PORT = Rails.configuration.usb_serial_port # /dev/tty.usbserial
+  SERIAL_READ_TIMEOUT = Rails.configuration.usb_serial_port_timeout # Seconds
   SERIAL_DATA_EOF = "\n\n\n\n\n"
-  SERIAL_READ_TIMEOUT = 30 # Seconds
 
   queue_as :default
 

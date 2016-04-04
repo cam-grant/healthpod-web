@@ -15,8 +15,8 @@
 
 <script>
 
-TIME_TO_WARNING = 90000;
-TIME_AFTER_WARNING = 30000;
+TIME_TO_WARNING = <%= Rails.configuration.x.session_timeout %>;
+TIME_AFTER_WARNING = <%= Rails.configuration.x.session_timeout_warning %>;
 var timeoutDialogContent;
 var timeoutId;
 var timeRemaining;

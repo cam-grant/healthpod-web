@@ -20,6 +20,14 @@ module Kiosk
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    ###### Health Pod config ######
+    config.x.session_timeout = 90000 # Milliseconds
+    config.x.session_timeout_warning = 30000 # Milliseconds
+    config.x.printer_name = "Canon_iP110_series"
+    config.x.reports_folder = "/tmp"
+    config.x.usb_serial_port = "/dev/tty.usbserial"
+    config.x.usb_serial_port_timeout = 30 # Seconds
+
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 

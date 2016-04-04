@@ -81,9 +81,9 @@ class WelcomeController < ApplicationController
   def print
     report = ReportCard.new(@user_data)
     report.generate
-    result = system("lp -d \"Canon_iP110_series\" -o media=A5 #{report.file_path}")
+    result = system("lp -d \"#{Rails.configuration.x.printer_name}\" -o media=A5 #{report.file_path}")
     unless result
-      logger.error "Error printing health report card"
+      logger.error "Error printing health report card: #{result}"
     end
   end
 

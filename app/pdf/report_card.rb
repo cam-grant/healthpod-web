@@ -6,7 +6,7 @@ class ReportCard
 
   def initialize(user_data)
     @user_data = user_data
-    @file_path = "/tmp/health_report_#{@user_data.id}.pdf"
+    @file_path = File.join(Rails.configuration.x.reports_folder, "health_report_#{@user_data.id}.pdf")
   end
 
   def generate
