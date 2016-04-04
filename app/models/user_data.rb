@@ -41,11 +41,11 @@ class UserData < ActiveRecord::Base
   end
 
   def calc_basic_score
-    self.update_attributes basic_risk_score: 1
+    self.update_attributes bmi_score: 2, bmi_risk_score: 1
   end
 
   def basic_complete?
-    !self.basic_risk_score.blank?
+    !self.bmi_risk_score.blank?
   end
 
   def calc_physical_score
@@ -298,11 +298,72 @@ class UserData < ActiveRecord::Base
     {id: 4, name: "Fast pace (more than 6 km/h)"},
   ]
 
+  BMI_SCORES = [
+    {id: 1, name: "Underweight",
+      so_what: "You are underweight for your height. Unless you are naturally very slim, you may need to consider ways of gaining weight to bring your BMI to between 18.5 and 24.9.",
+      what_now: "To achieve and maintain a healthy weight, be physically active every day and choose a variety of healthy foods to meet your energy needs. If you're concerned about your weight we recommend you discuss this result with your GP."
+    },
+    {id: 2, name: "Healthy weight",
+      so_what: "Your BMI is currently within a healthy weight range. Being a healthy weight has important benefits, not only on how you feel, but also to help reduce your risk of heart disease, diabetes and a range of other conditions.",
+      what_now: "To maintain a healthy weight, be physically active every day and choose a variety of healthy foods to meet your energy needs."
+    },
+    {id: 3, name: "Overweight",
+      so_what: "Being overweight increases your risk of developing coronary heart disease, as well as other health conditions such as diabetes. ",
+      what_now: "To achieve and maintain a healthy weight be physically active every day and choose a variety of healthy foods to meet your energy needs. For further advice we recommend you discuss this result with your GP."
+    },
+    {id: 4, name: "Obese",
+      so_what: "As your BMI increases, your risk of developing coronary heart disease, diabetes and some cancers increases.",
+      what_now: "It is important that you take steps to reduce your weight. The good news is even losing small amounts of weight can benefit your health. We recommend you discuss this result with your GP."
+    }
+  ]
+
   PHYSICAL_SCORES = [
-    {id: 1, name: "Inactive"},
-    {id: 2, name: "Moderately inactive"},
-    {id: 3, name: "Moderately active"},
-    {id: 4, name: "Active"},
+    {id: 1, name: "Inactive",
+      so_what: "Maintaining regular physical activity can help prevent excess weight gain and prevent or manage a wide range of health problems and concerns.",
+      what_now: "Doing any physical activity is better than doing none no matter your age, weight, health problems or abilities. Start by doing some physical activity that is easily manageable and gradually build up. Discuss with your doctor if you have any concerns."
+    },
+    {id: 2, name: "Moderately inactive",
+      so_what: "Maintaining regular physical activity can help prevent excess weight gain and prevent or manage a wide range of health problems and concerns.",
+      what_now: "Try to be active on most, preferably all days of the week. Remember to minimise the amount of time spent in prolonged sitting. Break up long periods of sitting as often as possible."
+    },
+    {id: 3, name: "Moderately active",
+      so_what: "Maintaining regular physical activity can help prevent excess weight gain and prevent or manage a wide range of health problems and concerns.",
+      what_now: "Try to be active on most, preferably all days of the week. Remember to minimise the amount of time spent in prolonged sitting. Break up long periods of sitting as often as possible."
+    },
+    {id: 4, name: "Active",
+      so_what: "Maintaining regular physical activity can help prevent excess weight gain and prevent or manage a wide range of health problems and concerns.",
+      what_now: "Even though you are classified as active remember to minimise the amount of time spent in prolonged sitting. Break up long periods of sitting as often as possible."
+    }
+  ]
+
+  DIABETES_SCORES = [
+    {id: 1, name: "5 or less",
+      so_what: "Diabetes is a chronic condition marked by high levels of glucose in the blood. If it isn’t treated it can lead to a number of serious health problems.",
+      what_now: "Keep up the good work! Maintaining healthy habits is worth the effort. Managing your weight, exercising regularly and eating a balanced, healthy diet will help to maintain or reduce your risk of diabetes."
+    },
+    {id: 2, name: "6 - 11",
+      so_what: "Diabetes is a chronic condition marked by high levels of glucose in the blood. If it isn’t treated it can lead to a number of serious health problems.",
+      what_now: "There are a number of ways to help reduce the risk of type two diabetes. Managing your weight, exercising regularly and eating a balanced healthy diet are key to reducing your risk. We recommend you discuss this result with your GP."
+    },
+    {id: 3, name: "12 or more",
+      so_what: "Diabetes is a chronic condition marked by high levels of glucose in the blood. If it isn’t treated it can lead to a number of serious health problems.",
+      what_now: "We recommend you discuss this result with your GP. There are many services out there to help you make small changes to your health to have a big impact on reducing your risk of diabetes."
+    },
+  ]
+
+  ALCOHOL_SCORES = [
+    {id: 1, name: "Safe",
+      so_what: "Keeping an eye on what you drink can have a positive effect on your health and wellbeing.",
+      what_now: "Low alcohol consumption in line with recommendations is part of a balanced healthy diet. Keep up the good work!"
+    },
+    {id: 2, name: "Unsafe",
+      so_what: "Regular drinking to excess is likely to cause problems both in the short term and the long term. In the short term cutting back on alcohol can help improve your sleep patterns, reduce stress and avoid hangovers. In the long term cutting back on alcohol can help you reduce the risk of heart disease, diabetes and some cancers.",
+      what_now: "You should consider reducing your alcohol consumption. We recommend you discuss this result with your GP. Note there are no safe levels of drinking for pregnant women."
+    },
+    {id: 3, name: "Unsafe",
+      so_what: "Regular drinking to excess is likely to cause problems both in the short term and the long term. In the short term cutting back on alcohol can help improve your sleep patterns, reduce stress and avoid hangovers. In the long term cutting back on alcohol can help you reduce the risk of heart disease, diabetes and some cancers.",
+      what_now: "You should consider reducing your alcohol consumption. We recommend you discuss this result with your GP. Note there are no safe levels of drinking for pregnant women."
+    },
   ]
 
   AGE_GROUPS = [

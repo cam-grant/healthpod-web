@@ -8,7 +8,7 @@
         <% if @user_data.basic_complete? %>
           <div class="score">BMI <%= @user_data.bmi %></div>
           <div class="risk-scale">
-            <span>Risk level</span><%= risk_image @user_data.basic_risk_score %>
+            <span>Risk level</span><%= risk_image @user_data.bmi_risk_score %>
           </div>
         <% else %>
         <div style="margin: 4rem auto; text-align: center;">

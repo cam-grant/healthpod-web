@@ -79,6 +79,12 @@ class WelcomeController < ApplicationController
   end
 
   def print
+    report = ReportCard.new(@user_data)
+    report.generate
+    result = system("lp -d \"Canon_iP110_series\" -o media=A5 #{report.file_path}")
+    unless result
+      logger.error "Error printing health report card"
+    end
   end
 
   def follow_up

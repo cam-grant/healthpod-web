@@ -35,8 +35,8 @@ class CreateUserData < ActiveRecord::Migration
       t.decimal :height
       t.decimal :bmi
       t.datetime :bmi_recorded_at
-
-      t.integer :basic_risk_score
+      t.integer :bmi_score
+      t.integer :bmi_risk_score
 
       # Alcohol
       t.integer :alcohol_frequency
