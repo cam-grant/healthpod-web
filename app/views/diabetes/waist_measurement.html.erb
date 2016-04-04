@@ -1,6 +1,10 @@
+<% sizes = @user_data.female? ? UserData::WAIST_SIZES_WOMEN : UserData::WAIST_SIZES_MEN %>
+
 <h1 class="center">Your waist measurement</h1>
 
-<% sizes = @user_data.male? ? UserData::WAIST_SIZES_MEN : UserData::WAIST_SIZES_WOMEN %>
+<p style="margin: 3rem auto;text-align: center;">
+  Select the column which best matches your waist measurement
+</p>
 
 <div style="text-align: center; margin: 3rem auto;">
   <table class="waist-sizes">

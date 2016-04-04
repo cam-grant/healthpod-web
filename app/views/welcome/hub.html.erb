@@ -42,7 +42,7 @@
         diabetes_available = @user_data.basic_complete? && !@user_data.has_diabetes? ? "available" : ""
       %>
       <div class="report-card diabetes <%= diabetes_available %> <%= complete %>">
-        <h1>Diabetes risk</h1>
+        <h1>Type 2 diabetes risk</h1>
         <% if @user_data.basic_complete? && !@user_data.diabetes_complete? && !@user_data.has_diabetes? %>
           <div style="margin: 4rem auto; text-align: center;">
             <%= link_to "Start", diabetes_welcome_url, class: "btn btn-secondary" %>
