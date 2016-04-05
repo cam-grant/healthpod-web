@@ -58,7 +58,8 @@ $ brew install git
 ## Starting the web server
 ```
 $ cd ~/healthpod-web
-$ rake db:migrate RAILS_ENV=production
+$ RAILS_ENV=production rake assets:precompile
+$ RAILS_ENV=production rake db:migrate
 $ rails s -e production
 ```
 

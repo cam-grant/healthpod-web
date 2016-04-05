@@ -3,8 +3,8 @@
 <%= form_tag other_allergies_path, { :id => "form", :autocomplete => "off" } do |f| %>
 
   <div style="text-align: center; width: 75%; margin-left: auto; margin-right: auto;">
-      <%= text_field_tag 'user_data[other_allergies]', '', id: 'other_allergies',
-        placeholder: "Example: Pollen", "data-osk-options": "disableReturn disableTab " %>
+      <input type="text" id="other_allergies" name="user_data[other_allergies]" value=""
+        placeholder="Example: Pollen" data-osk-options="disableReturn disableTab">
   </div>
 
 <% end %>
