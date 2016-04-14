@@ -30,7 +30,7 @@ class ReadBmiScalesJob < ActiveJob::Base
   end
 
   def perform(user_data)
-    logger.info "Start ReadBmiScalesJob"
+    logger.info "ReadBmiScalesJob: Start job"
 
     # Encoding.default_external = Encoding::UTF_8
     # Encoding.default_internal = Encoding::UTF_8
@@ -43,7 +43,7 @@ class ReadBmiScalesJob < ActiveJob::Base
 
     begin
       sp = SerialPort.new USB_SERIAL_PORT
-      logger.info "Opened #{USB_SERIAL_PORT}"
+      logger.info "ReadBmiScalesJob: Opened #{USB_SERIAL_PORT}"
 
       while keep_reading do
         begin
@@ -55,12 +55,12 @@ class ReadBmiScalesJob < ActiveJob::Base
 
             # Done
             keep_reading = false
-            logger.info "User data updated"
+            logger.info "ReadBmiScalesJob: User data updated"
           end
 
         rescue IO::WaitReadable
           if (Time.now - start_time) > SERIAL_READ_TIMEOUT
-            logger.info "TO"
+            logger.info "ReadBmiScalesJob: Timeout after #{SERIAL_READ_TIMEOUT}"
             if sp
               begin
                 sp.close
@@ -87,6 +87,6 @@ class ReadBmiScalesJob < ActiveJob::Base
       logger.fatal e.to_s
     end
 
-    logger.info "End ReadBmiScalesJob"
+    logger.info "ReadBmiScalesJob: End job"
   end
 end

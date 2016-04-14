@@ -63,12 +63,20 @@ $ RAILS_ENV=production rake db:migrate
 $ rails s -e production
 ```
 
+# lunchd
+
+Copy au.com.ochre.healthpod.plist to ~/Library/LaunchAgents
+
+$ sudo chown healthpod ~/Library/LaunchDaemons/au.com.ochre.healthpod.plist
+
 
 ## Javascript and jQuery plug-ins
 
 https://github.com/davetayls/jquery.kinetic
 
 https://github.com/chriscook/on-screen-keyboard
+
+
 
 
 

@@ -89,6 +89,7 @@ function readBmiData() {
 
 function retryReadBmiData() {
   retryCount++;
+  resetSession();
   hideModal();
   readBmiData();
 }

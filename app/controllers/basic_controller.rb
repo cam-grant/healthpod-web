@@ -84,10 +84,10 @@ class BasicController < ApplicationController
       ReadBmiScalesJob.reset_scales
       ReadBmiScalesJob.perform_now @user_data
     else
-      # Simulate pause while using scales...
+      # Simulate pause while user uses scales...
       sleep 5
 
-      # Test data
+      # Set example data
       @user_data.weight = 75.6
       @user_data.height = 172
       @user_data.bmi = 24.5
