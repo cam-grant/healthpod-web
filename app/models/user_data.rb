@@ -218,7 +218,7 @@ class UserData < ActiveRecord::Base
     items && items[0] && items[0][attr] ? items[0][attr] : default
   end
 
-  CSV_HEADER = [
+  CSV_HEADER_FIELDS = [
     "ID",
     "Date",
     "Name",
@@ -260,8 +260,8 @@ class UserData < ActiveRecord::Base
     "Diabetes score"
   ]
 
-  def csv_data
-    [
+  def csv_data(all_attributes = false)
+    data = [
       id,
       created_at,
       full_name,
@@ -304,24 +304,94 @@ class UserData < ActiveRecord::Base
       diabetes_physical_activity,
       diabetes_waist_measurement,
       diabetes_score_name
-
     ]
+
+    if all_attributes
+      data.concat([
+        consent,
+        alcohol_score,
+        physical_score,
+        diabetes_score,
+        returning_user,
+        returning_user_q1a,
+        returning_user_q1b,
+        returning_user_q1c,
+        returning_user_q1d,
+        returning_user_q1e,
+        returning_user_q2,
+        returning_user_q3,
+        returning_user_q4,
+        returning_user_q5,
+        follow_up_contact_details
+      ])
+    end
+
+    data
   end
 
-  def self.date_range_to_csv(start_date, end_date, include_header = true)
+  def self.export_practice_data(start_date, end_date)
     records = UserData.where(created_at: start_date.beginning_of_day..end_date.end_of_day, consent: true)
+    file_name = "practice_data_#{Time.now.strftime('%F_%T').parameterize}.csv"
+    UserData.export_csv CSV_HEADER_FIELDS, records, file_name
+    file_name
+  end
 
-    CSV.generate(headers: include_header) do |csv|
-      csv << CSV_HEADER if include_header
+  def self.export_research_data
+    header_fields = CSV_HEADER_FIELDS
+    header_fields.concat([
+      "Consent",
+      "AUDIT (Alcohol) score",
+      "GPAQ (Physical) score",
+      "AUSDRISK (Diabetes) score",
+      "Returning user",
+      "Easy to use (1-5)",
+      "Would use frequently (1-5)",
+      "Felt confident using (1-5)",
+      "Increased awareness of health (1-5)",
+      "Report card useful (1-5)",
+      "Discussed health issues with",
+      "Actions after using Pod",
+      "Other actions",
+      "Visited website",
+      "Follow-up contact"
+    ])
+
+    records = UserData.all
+    file_name = "research_data_#{Time.now.strftime('%F_%T').parameterize}.csv"
+    UserData.export_csv header_fields, records, file_name, true
+    file_name
+  end
+
+  def self.export_csv(header_fields, records, file_name, all_attributes = false)
+
+    csv_data = CSV.generate(headers: true) do |csv|
+      csv << header_fields
       records.each do |record|
-        csv << record.csv_data
+        csv << record.csv_data(all_attributes)
       end
+    end
+
+    tmp_output_path = File.join("/tmp", file_name)
+    output_path = File.join(Rails.configuration.x.data_export_folder, file_name)
+
+    begin
+      system "mkdir #{Rails.configuration.x.data_export_folder}"
+      system "touch #{tmp_output_path}"
+      file = File.open(tmp_output_path, "w")
+      file.write csv_data
+      file.close
+      file = nil
+      system "cp #{tmp_output_path} #{output_path}"
+    rescue IOError => e
+      # Error...
+    ensure
+      file.close unless file.nil?
     end
   end
 
   def to_csv(include_header = true)
     CSV.generate(headers: include_header) do |csv|
-      csv << CSV_HEADER if include_header
+      csv <<  CSV_HEADER_FIELDS if include_header
       csv << self.csv_data
     end
   end

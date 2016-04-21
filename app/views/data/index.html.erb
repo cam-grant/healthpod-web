@@ -33,7 +33,7 @@
     <td style="width: 60%; padding-top: 2rem; padding-right: 14rem">
       <h2 class="first">Export practice data</h2>
       <p>
-        Export data abstract for the period:
+        Export patient data abstract for the period
       </p>
       <%= form_tag data_practice_path, { :id => "form", :autocomplete => "off" } do |f| %>
         <p>
@@ -52,7 +52,7 @@
 
       <h2>Export research data</h2>
       <p>
-        Export a copy of the entire database:
+        Export entire database
       </p>
       <%= form_tag data_research_path, { :id => "form", :autocomplete => "off" } do |f| %>
         <% if flash[:research] %>
