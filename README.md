@@ -7,12 +7,14 @@ The Health Pod consist of two applications:
 * A Ruby on Rails (http://rubyonrails.org) web application
 * An Electron (http://electron.atom.io) desktop app
 
+The desktop app loads the rails app (http://localhost:3000) in a Chromium shell and enters full screen mode.
+
 The web app is installed to:
 ```
 /Users/healthpod/healthpod-web/
 ```
 
-And the desktop app to:
+The desktop app to:
 ```
 /Users/healthpod/Desktop/
 ```
@@ -69,10 +71,10 @@ See config/application.config for app specific settings:
 # Hardware notes
 ## ACER Touchscreen
 
-* Resolution: 1080p (1920 x 1080)
-* Equivalent to approx. 2048 x 1152 on an Apple cinema display (for dev purposes)
+The web app's layout, font-sizes, etc. are specifically designed for the ACER Touchscreen's resolution of 1080p (1920 x 1080). 1080p is roughly equivalent to 2048 x 1152 on an Apple cinema display (for development purposes).
 
 ## Canon printer
 
-* Printer is a Canon PIXMA iP110
-* The spare black ink cartridges are labelled “35 Black (PGI-35 Black)” and the colour cartridges “36 Color (CLI-36 Color)”
+Printer is a Canon PIXMA iP110.
+
+Spare black ink cartridges are labelled “35 Black (PGI-35 Black)” and the colour cartridges “36 Color (CLI-36 Color)”
