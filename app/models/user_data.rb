@@ -309,6 +309,7 @@ class UserData < ActiveRecord::Base
     if all_attributes
       data.concat([
         consent,
+        (updated_at - created_at),
         alcohol_score,
         physical_score,
         diabetes_score,
@@ -337,9 +338,10 @@ class UserData < ActiveRecord::Base
   end
 
   def self.export_research_data
-    header_fields = CSV_HEADER_FIELDS
+    header_fields = CSV_HEADER_FIELDS.clone
     header_fields.concat([
       "Consent",
+      "Session duration (seconds)",
       "AUDIT (Alcohol) score",
       "GPAQ (Physical) score",
       "AUSDRISK (Diabetes) score",
