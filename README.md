@@ -2,7 +2,7 @@
 
 ## Applications
 
-The Health Pod consist of two applications:
+The Health Pod consists of two software applications:
 
 * A Ruby on Rails (http://rubyonrails.org) web application
 * An Electron (http://electron.atom.io) desktop app
