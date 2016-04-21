@@ -1,3 +1,5 @@
+require 'CSV'
+
 class UserData < ActiveRecord::Base
 
   PHYSICAL_SURVEY_ESTIMATE = "1 minute"
@@ -216,14 +218,113 @@ class UserData < ActiveRecord::Base
     items && items[0] && items[0][attr] ? items[0][attr] : default
   end
 
-  # def to_csv
-  #   attributes = %w{full_name dob}
-  #
-  #   CSV.generate(headers: true) do |csv|
-  #     csv << attributes
-  #     csv << attributes.map{ |attr| self.send(attr) }
-  #   end
-  # end
+  CSV_HEADER = [
+    "ID",
+    "Date",
+    "Name",
+    "Date of birth",
+    "Gender",
+    "Surburb",
+    "Country of birth",
+    "Aboriginal",
+    "Has diabetes",
+    "Smoking",
+    "Allergies",
+    "Other allergies",
+    "Weight",
+    "Height",
+    "BMI",
+    "BMI score",
+
+    "Alcohol frequency",
+    "Alcohol no. drinks",
+    "Alcohol frequency 6 or more",
+    "Alcohol score",
+
+    "Physical work type",
+    "Physical activity exercise",
+    "Physical activity cycling",
+    "Physical activity walking",
+    "Physical activity housework",
+    "Physical activity gardening",
+    "Physical walking pace",
+    "Physical score",
+
+    "Age group",
+    "Diabetes hereditary",
+    "Diagnosed with high blood glucose",
+    "Takes HBP medication",
+    "Daily fruit and veg",
+    "Daily physical activity",
+    "Waist measurement",
+    "Diabetes score"
+  ]
+
+  def csv_data
+    [
+      id,
+      created_at,
+      full_name,
+      date_of_birth,
+      lookup(UserData::GENDERS, gender, :name),
+      suburb,
+      lookup(UserData::REGIONS, country_of_birth, :name),
+      aboriginal,
+      lookup(UserData::DIABETES, has_diabetes, :name),
+      lookup(UserData::SMOKING, smoking, :name),
+      allergies,
+      other_allergies,
+      weight,
+      height,
+      bmi,
+      lookup(UserData::BMI_SCORES, bmi_score, :name),
+
+      # Alcohol
+      lookup(UserData::ALCOHOL_FREQUENCY, alcohol_frequency, :name),
+      lookup(UserData::ALCOHOL_NUM_DRINKS, alcohol_num_drinks, :name),
+      lookup(UserData::ALCOHOL_FREQUENCY_SIX_OR_MORE, alcohol_frequency_six_or_more, :name),
+      alcohol_score_name,
+
+      # Physical
+      lookup(UserData::PHYSICAL_WORK_TYPES, physical_work_type, :name),
+      lookup(UserData::PHYSICAL_AMOUNTS, physical_activity_exercise, :name),
+      lookup(UserData::PHYSICAL_AMOUNTS, physical_activity_cycling, :name),
+      lookup(UserData::PHYSICAL_AMOUNTS, physical_activity_walking, :name),
+      lookup(UserData::PHYSICAL_AMOUNTS, physical_activity_housework, :name),
+      lookup(UserData::PHYSICAL_AMOUNTS, physical_activity_gardening, :name),
+      lookup(UserData::PHYSICAL_WALKING_PACES, physical_walking_pace, :name),
+      physical_score_name,
+
+      # Diabetes
+      lookup(UserData::AGE_GROUPS, diabetes_age_group, :name),
+      diabetes_hereditary,
+      diabetes_high_blood_glucose,
+      diabetes_hbp_medication,
+      lookup(UserData::FRUIT_AND_VEG_CONSUMPTION, diabetes_fruit_and_veg, :name),
+      diabetes_physical_activity,
+      diabetes_waist_measurement,
+      diabetes_score_name
+
+    ]
+  end
+
+  def self.date_range_to_csv(start_date, end_date, include_header = true)
+    records = UserData.where(created_at: start_date.beginning_of_day..end_date.end_of_day, consent: true)
+
+    CSV.generate(headers: include_header) do |csv|
+      csv << CSV_HEADER if include_header
+      records.each do |record|
+        csv << record.csv_data
+      end
+    end
+  end
+
+  def to_csv(include_header = true)
+    CSV.generate(headers: include_header) do |csv|
+      csv << CSV_HEADER if include_header
+      csv << self.csv_data
+    end
+  end
 
   LIKERT = [
     {id: 1, name: "Strongly disagree"},

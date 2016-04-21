@@ -91,6 +91,8 @@ class BasicController < ApplicationController
       @user_data.weight = 75.6
       @user_data.height = 172
       @user_data.bmi = 24.5
+      @user_data.bmi_recorded_at = Time.now
+      @user_data.save
     end
 
     if @user_data.bmi.blank?

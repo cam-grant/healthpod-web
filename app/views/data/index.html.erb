@@ -1,0 +1,67 @@
+<style media="screen">
+  select {
+    appearance: none;
+    font-size: 2rem;
+  }
+  p, span {
+    font-size: 1rem;
+  }
+  input[type=submit] {
+    font-size: 1.2rem;
+    padding: 1rem;
+  }
+  label {
+    display: inline-block;
+    width: 4rem;
+  }
+
+  div.alert {
+    background-color: green;
+    color: #fff;
+    padding: 1rem;
+    font-size: 1.2rem;
+    margin: 0 0 1rem 0;
+  }
+
+</style>
+
+<table class="two-col" style="width: 100%; margin-top: 4rem;">
+  <tr>
+    <td class="right" style="width: 40%; vertical-align: top;">
+      <%= image_tag "logo.svg", style: "height: 150px;" %>
+    </td>
+    <td style="width: 60%; padding-top: 2rem; padding-right: 14rem">
+      <h2 class="first">Export practice data</h2>
+      <p>
+        Export data abstract for the period:
+      </p>
+      <%= form_tag data_practice_path, { :id => "form", :autocomplete => "off" } do |f| %>
+        <p>
+          <label>From</label> <%= select_date @start_date, prefix: :start_date %>
+        </p>
+        <p>
+          <label>To</label> <%= select_date @end_date, prefix: :end_date %>
+        </p>
+        <% if flash[:practice] %>
+          <div class="alert">
+            <%= flash[:practice].html_safe %>
+          </div>
+        <% end %>
+        <%= submit_tag "Export practice data", class: "btn btn-secondary" %>
+      <% end %>
+
+      <h2>Export research data</h2>
+      <p>
+        Export a copy of the entire database:
+      </p>
+      <%= form_tag data_research_path, { :id => "form", :autocomplete => "off" } do |f| %>
+        <% if flash[:research] %>
+          <div class="alert">
+            <%= flash[:research].html_safe %>
+          </div>
+        <% end %>
+        <%= submit_tag "Export research data", class: "btn btn-secondary" %>
+      <% end %>
+    </td>
+  </tr>
+</table>
