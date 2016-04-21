@@ -85,7 +85,7 @@ class BasicController < ApplicationController
       ReadBmiScalesJob.perform_now @user_data
     else
       # Simulate pause while user uses scales...
-      sleep 5
+      sleep 3
 
       # Set example data
       @user_data.weight = 75.6
@@ -94,6 +94,9 @@ class BasicController < ApplicationController
     end
 
     if @user_data.bmi.blank?
+      render :status => 400
+    elsif @user_data.height >= 198 # cm
+      # BMI scales sometimes return bad height reading of 198cm - fail in this case...
       render :status => 400
     else
       session[:current_step] += 1
