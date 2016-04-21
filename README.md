@@ -1,94 +1,47 @@
-# Health pod software installation guide
+# Health Pod software configuration guide
+## Ruby, Rails and Gems
 
-## Install Ruby and libraries
+* Ruby 2.3.0
+* Rails 4.2.5
 
-Install Homebrew
-```
-$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-Choose install yes if prompted to install Xcode command line tools.
+Additional gems:
 
-Update Homebrew
-```
-$ brew update
-```
-Install rbenv
-```
-$ brew install rbenv
-```
-Add ~/.rbenv/bin to your $PATH for access to the rbenv command-line utility.
-```
-$ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
-```
-Add rbenv init to your shell to enable shims and autocompletion.
-```
-$ echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
-```
-Restart your shell so that PATH changes take effect. Opening a new terminal tab will usually do it.
+* serialport 1.3.1 - serial port comms with the BMI scales
+* prawn 2.1.0 - PDF health report generation
 
-Install ruby 2.3.0
-```
-$ rbenv install 2.3.0
-```
-Set global version of Ruby to 2.3.0
-```
-$ rbenv global 2.3.0
-```
-Update RubyGems (you may need to use sudo)
-```
-$ gem update --system
-```
-Install Bundler
-```
-$ gem install bundler
-```
-Install Rails
-```
-$ gem install rails
-```
-Install shims for all Ruby executables
-```
-$ rbenv rehash
-```
-Install git
-```
-$ brew install git
-```
+## launchd
 
-## Starting the web server
-```
-$ cd ~/healthpod-web
-$ RAILS_ENV=production rake assets:precompile
-$ RAILS_ENV=production rake db:migrate
-$ rails s -e production
-```
+Webrick server is automatically started via launchd
 
-# lunchd
-
-Copy au.com.ochre.healthpod.plist to ~/Library/LaunchAgents
-
-$ sudo chown healthpod ~/Library/LaunchDaemons/au.com.ochre.healthpod.plist
-
+* See au.com.ochre.healthpod.plist under ~/Library/LaunchAgents
 
 ## Javascript and jQuery plug-ins
 
-https://github.com/davetayls/jquery.kinetic
+* jQuery
+* Touch scrolling for jQuery: https://github.com/davetayls/jquery.kinetic
+* Touch keyboard for jQuery: https://github.com/chriscook/on-screen-keyboard
 
-https://github.com/chriscook/on-screen-keyboard
+## Application configuration
 
+See config/application.config for the following settings:
 
+* session_timeout = 90000 # Milliseconds
+* session_timeout_warning = 30000 # Milliseconds
+* printer_name = "Canon_iP110_series"
+* reports_folder = "/tmp"
+* data_export_folder = "~/Desktop/HealthPodData/"
+* enable_bmi_scales = true
+* usb_serial_port = "/dev/tty.usbserial"
+* usb_serial_port_timeout = 30 # Seconds
+* max_bmi_scale_retries = 2
 
+# Hardware
+## ACER Touchscreen
 
+* Resolution: 1080p (1920 x 1080)
+* Equivalent to approx. 2048 x 1152 on an Apple cinema display (for dev purposes)
 
-## Rails commands
+## Canon printer
 
-rake db:drop RAILS_ENV=production
-rake db:create RAILS_ENV=production
-rake db:migrate RAILS_ENV=production
-
-rails s -e production
-
-# ACER Touchscreen
-
-Resolution: 1080p (1920 x 1080).
-Equivalent to approx. 2048 x 1152 on an Apple cinema display.
+* Printer is a Canon PIXMA iP110
+* The spare black ink cartridges are labelled “35 Black (PGI-35 Black)” and the colour cartridges “36 Color (CLI-36 Color)”
