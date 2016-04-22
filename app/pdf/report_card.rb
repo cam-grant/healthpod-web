@@ -41,7 +41,7 @@ class ReportCard
       render_card pdf, right_column_x, top_row_y,
         "Physically you are",
         @user_data.physical_risk_score,
-        @user_data.lookup(UserData::PHYSICAL_SCORES, @user_data.physical_risk_score, :name, ""),
+        @user_data.physical_score_name,
         @user_data.lookup(UserData::PHYSICAL_SCORES, @user_data.physical_risk_score, :so_what, ""),
         @user_data.lookup(UserData::PHYSICAL_SCORES, @user_data.physical_risk_score, :what_now, "")
     else
@@ -65,7 +65,7 @@ class ReportCard
       render_card pdf, right_column_x, bottom_row_y,
         "Your alcohol consumption is",
         @user_data.alcohol_risk_score,
-        @user_data.lookup(UserData::ALCOHOL_SCORES, @user_data.alcohol_risk_score, :name, ""),
+        @user_data.alcohol_score_name,
         @user_data.lookup(UserData::ALCOHOL_SCORES, @user_data.alcohol_risk_score, :so_what, ""),
         @user_data.lookup(UserData::ALCOHOL_SCORES, @user_data.alcohol_risk_score, :what_now, "")
     else
