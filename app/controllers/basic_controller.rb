@@ -96,16 +96,16 @@ class BasicController < ApplicationController
     end
 
     if @user_data.bmi.blank?
-      render :status => 400
+      render json: {}, status: 400
     elsif @user_data.height >= 198 # cm
       # BMI scales sometimes return bad height reading of 198cm - fail in this case...
-      render :status => 400
+      render json: {}, status: 400
     else
       session[:current_step] += 1
-      render :json => {
-        :weight => @user_data.weight,
-        :height => @user_data.height,
-        :bmi => @user_data.bmi
+      render json: {
+        weight: @user_data.weight,
+        height: @user_data.height,
+        bmi: @user_data.bmi
       }
     end
   end
