@@ -97,8 +97,8 @@ class BasicController < ApplicationController
 
     if @user_data.bmi.blank?
       render json: {}, status: 400
-    elsif @user_data.height >= 198 # cm
-      # BMI scales sometimes return bad height reading of 198cm - fail in this case...
+    elsif !@user_data.height.between?(100, 198) # cm
+      # BMI scales sometimes return bad height reading of 198cm - also fail if less than 100cm
       render json: {}, status: 400
     else
       session[:current_step] += 1
