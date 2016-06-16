@@ -277,34 +277,52 @@ class UserData < ActiveRecord::Base
       weight,
       height,
       bmi,
-      lookup(UserData::BMI_SCORES, bmi_score, :name),
-
-      # Alcohol
-      lookup(UserData::ALCOHOL_FREQUENCY, alcohol_frequency, :name),
-      lookup(UserData::ALCOHOL_NUM_DRINKS, alcohol_num_drinks, :name),
-      lookup(UserData::ALCOHOL_FREQUENCY_SIX_OR_MORE, alcohol_frequency_six_or_more, :name),
-      alcohol_score_name,
-
-      # Physical
-      lookup(UserData::PHYSICAL_WORK_TYPES, physical_work_type, :name),
-      lookup(UserData::PHYSICAL_AMOUNTS, physical_activity_exercise, :name),
-      lookup(UserData::PHYSICAL_AMOUNTS, physical_activity_cycling, :name),
-      lookup(UserData::PHYSICAL_AMOUNTS, physical_activity_walking, :name),
-      lookup(UserData::PHYSICAL_AMOUNTS, physical_activity_housework, :name),
-      lookup(UserData::PHYSICAL_AMOUNTS, physical_activity_gardening, :name),
-      lookup(UserData::PHYSICAL_WALKING_PACES, physical_walking_pace, :name),
-      physical_score_name,
-
-      # Diabetes
-      lookup(UserData::AGE_GROUPS, diabetes_age_group, :name),
-      diabetes_hereditary,
-      diabetes_high_blood_glucose,
-      diabetes_hbp_medication,
-      lookup(UserData::FRUIT_AND_VEG_CONSUMPTION, diabetes_fruit_and_veg, :name),
-      diabetes_physical_activity,
-      diabetes_waist_measurement,
-      diabetes_score_name
+      lookup(UserData::BMI_SCORES, bmi_score, :name)
     ]
+
+    # Alcohol
+    if alcohol_complete?
+      data.concat([
+        lookup(UserData::ALCOHOL_FREQUENCY, alcohol_frequency, :name),
+        lookup(UserData::ALCOHOL_NUM_DRINKS, alcohol_num_drinks, :name),
+        lookup(UserData::ALCOHOL_FREQUENCY_SIX_OR_MORE, alcohol_frequency_six_or_more, :name),
+        alcohol_score_name
+      ])
+    else
+      data.concat([nil, nil, nil, nil])
+    end
+
+    # Physical
+    if physical_complete?
+      data.concat([
+        lookup(UserData::PHYSICAL_WORK_TYPES, physical_work_type, :name),
+        lookup(UserData::PHYSICAL_AMOUNTS, physical_activity_exercise, :name),
+        lookup(UserData::PHYSICAL_AMOUNTS, physical_activity_cycling, :name),
+        lookup(UserData::PHYSICAL_AMOUNTS, physical_activity_walking, :name),
+        lookup(UserData::PHYSICAL_AMOUNTS, physical_activity_housework, :name),
+        lookup(UserData::PHYSICAL_AMOUNTS, physical_activity_gardening, :name),
+        lookup(UserData::PHYSICAL_WALKING_PACES, physical_walking_pace, :name),
+        physical_score_name
+      ])
+    else
+      data.concat([nil, nil, nil, nil, nil, nil, nil, nil])
+    end
+
+    # Diabetes
+    if diabetes_complete?
+      data.concat([
+        lookup(UserData::AGE_GROUPS, diabetes_age_group, :name),
+        diabetes_hereditary,
+        diabetes_high_blood_glucose,
+        diabetes_hbp_medication,
+        lookup(UserData::FRUIT_AND_VEG_CONSUMPTION, diabetes_fruit_and_veg, :name),
+        diabetes_physical_activity,
+        diabetes_waist_measurement,
+        diabetes_score_name
+      ])
+    else
+      data.concat([nil, nil, nil, nil, nil, nil, nil, nil])
+    end
 
     if all_attributes
       data.concat([

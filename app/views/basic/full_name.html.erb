@@ -4,7 +4,7 @@
 
   <div style="text-align: center; width: 75%; margin-left: auto; margin-right: auto;">
       <input type="text" id="full_name" name="user_data[full_name]" value=""
-        placeholder="Example: Jane Citizen" data-osk-options="disableReturn disableTab disableSymbols">
+        placeholder="Full name, example: Jane Citizen" data-osk-options="disableReturn disableTab disableSymbols">
   </div>
 
 <% end %>
@@ -14,7 +14,8 @@ $(document).ready(function() {
   full_name = $('#full_name');
 
   full_name.on('keyup', function() {
-    if (full_name.val().trim().length > 2) {
+    var s = full_name.val().trim();
+    if (s && (s.length > 6) && (s.indexOf(' ') >= 0)) {
       $('#next').removeClass('disabled');
     } else {
       $('#next').addClass('disabled');
