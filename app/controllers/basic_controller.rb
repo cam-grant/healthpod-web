@@ -74,8 +74,10 @@ class BasicController < ApplicationController
   end
 
   def bmi
-    # Renders "Stand on the scales..." page
-    # Page performs ajax call to BasicController#bmi_read
+    if request.post?
+      @user_data.update_bmi params[:user_data][:height], params[:user_data][:weight]
+      redirect_to has_diabetes_url
+    end
   end
 
   def bmi_read
@@ -85,7 +87,7 @@ class BasicController < ApplicationController
       ReadBmiScalesJob.perform_now @user_data
     else
       # Simulate pause while user uses scales...
-      sleep 3
+      sleep 2
 
       # Set example data
       @user_data.weight = 75.6

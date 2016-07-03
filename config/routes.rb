@@ -61,6 +61,7 @@ Rails.application.routes.draw do
   post  'other-allergies' => 'basic#other_allergies'
 
   get   'bmi' => 'basic#bmi'
+  post  'bmi' => 'basic#bmi'
   get   'bmi-read' => 'basic#bmi_read'
 
   get   'has_diabetes' => 'basic#has_diabetes'

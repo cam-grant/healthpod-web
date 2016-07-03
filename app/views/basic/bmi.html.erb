@@ -15,18 +15,30 @@
   </tr>
 </table>
 
-<table id="results" class="two-col" style="width: 50%; margin: 6rem auto 0 auto;display: none;">
-  <tr>
-    <td style="text-align: center;vertical-align: middle;font-size: 2rem;">
-      Your weight
-      <div id="weight"></div>
-    </td>
-    <td style="text-align: center;vertical-align: middle;font-size: 2rem;">
-      Your height
-      <div id="height"></div>
-    </td>
-  </tr>
-</table>
+<div id="results" style="display: none;">
+  <% arrow_fill = "#bbb" %>
+  <table class="datepicker">
+    <tr>
+      <td id="btn-height-add"><%= svg_use "#icon-arrow-up", style: "fill: #{arrow_fill}; width: 5rem;" %></td>
+      <td id="btn-weight-add"><%= svg_use "#icon-arrow-up", style: "fill: #{arrow_fill}; width: 5rem;" %></td>
+    </tr>
+    <tr>
+      <td>Your height<div id="height" style="margin-right: 1rem;"></div></td>
+      <td>Your weight<div id="weight"></div></td>
+    </tr>
+    <tr>
+      <td id="btn-height-minus"><%= svg_use "#icon-arrow-down", style: "fill: #{arrow_fill}; width: 5rem;" %></td>
+      <td id="btn-weight-minus"><%= svg_use "#icon-arrow-down", style: "fill: #{arrow_fill}; width: 5rem;" %></td>
+    </tr>
+  </table>
+</div>
+
+<p style="text-align: center">Adjust your height and weight using the arrows if necessary</p>
+
+<%= form_tag bmi_path, { :id => "form", :autocomplete => "off" } do |f| %>
+  <%= hidden_field_tag 'user_data[height]', '' %>
+  <%= hidden_field_tag 'user_data[weight]', '' %>
+<% end %>
 
 <div id="retry-bmi-model-content" style="display: none;">
   <h1 class="center">Try measuring your<br/>height and weight again?</h1>
@@ -51,18 +63,33 @@
   <%= progress_bar %>
 <% end %>
 <% content_for :footer_right do %>
-  <%= next_button nil, has_diabetes_url, "Next" %>
+  <%= next_button "submit_values()" %>
 <% end %>
 
 <script>
 
+var height, weight;
 var retryDialogContent;
 var retryCount = 0;
 var MAX_BMI_READ_RETRIES = <%= Rails.configuration.x.max_bmi_scale_retries %>
 var ajax_url = '<%= bmi_read_url %>';
 var next_url = '<%= has_diabetes_url %>';
 
+var REPEAT_SPEED = 333;
+var repeatCallback= 0;
+
 $(document).ready(function() {
+
+  $('#btn-height-add').mousedown(function() { addHeight(); render(); repeatCallback = setInterval(function(){ addHeight(); render(); }, REPEAT_SPEED); return false; })
+  $('#btn-height-minus').mousedown(function() {  minusHeight(); render(); repeatCallback = setInterval(function(){ minusHeight(); render(); }, REPEAT_SPEED); return false; })
+  $('#btn-weight-add').mousedown(function() { addWeight(); render(); repeatCallback = setInterval(function(){ addWeight(); render(); }, REPEAT_SPEED); return false; })
+  $('#btn-weight-minus').mousedown(function() {  minusWeight(); render(); repeatCallback = setInterval(function(){ minusWeight(); render(); }, REPEAT_SPEED); return false; })
+
+  $(document).mouseup(function(){
+    clearInterval(repeatCallback);
+    return false;
+  });
+
   retryDialogContent = $("#retry-bmi-model-content").detach();
   readBmiData();
 });
@@ -71,9 +98,10 @@ function readBmiData() {
   $.ajax({
     url: ajax_url,
     success: function (data) {
+        height = parseFloat(data.height);
+        weight = parseFloat(data.weight);
         $('#instructions').hide();
-        $('#weight').text(data.weight + ' kg');
-        $('#height').text(data.height + ' cm');
+        render();
         $('#results').show();
         $('#next').removeClass('disabled').attr('href', next_url);
     },
@@ -96,6 +124,37 @@ function retryReadBmiData() {
 
 function gotoNext() {
   window.location = next_url;
+}
+
+function render() {
+  $('#weight').text(weight + ' kg');
+  $('#height').text(height + ' cm');
+}
+
+function addHeight() {
+  height += 1;
+  render();
+}
+
+function minusHeight() {
+  height -= 1;
+  render();
+}
+
+function addWeight() {
+  weight += 0.5;
+  render();
+}
+
+function minusWeight() {
+  weight -= 0.5;
+  render();
+}
+
+function submit_values() {
+  $('#user_data_height').val(height);
+  $('#user_data_weight').val(weight);
+  $('#form').submit();
 }
 
 </script>

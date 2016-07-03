@@ -6,6 +6,15 @@ class UserData < ActiveRecord::Base
   DIABETES_SURVEY_ESTIMATE = "1 minute"
   ALCOHOL_SURVEY_ESTIMATE = "30 seconds"
 
+  def update_bmi(height, weight)
+    height = height.to_f
+    weight = weight.to_f
+    self.height = height
+    self.weight = weight
+    self.bmi = (((weight / height) / height) * 10000).round.to_i
+    self.save
+  end
+
   def male?
     self.gender && self.gender == 1 ? true : false
   end
