@@ -11,7 +11,7 @@ class UserData < ActiveRecord::Base
     weight = weight.to_f
     self.height = height
     self.weight = weight
-    self.bmi = (((weight / height) / height) * 10000).round.to_i
+    self.bmi = (((weight / height) / height) * 10000).round(1)
     self.save
   end
 
